@@ -45,7 +45,11 @@ function api(method, url, body) {
 (async () => {
   const base = "https://api.github.com/repos/" + REPO;
   const abs = path.resolve(file);
-  const content = fs.readFileSync(abs).toString("base64");
+  // 关键：GitHub Contents API 按 base64 解码后默认按 UTF-8 解释，
+  // 若源文件含非 ASCII 又不显式声明，会被按 latin-1 存，中文全变乱码。
+  // 所以这里显式告诉 API 内容是 UTF-8 文本。
+  const raw = fs.readFileSync(abs, "utf8");
+  const content = Buffer.from(raw, "utf8").toString("base64");
 
   // 已存在则需要带 sha
   const cur = await api("GET", base + "/contents/" + file + "?ref=" + BRANCH);
