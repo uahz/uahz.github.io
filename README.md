@@ -18,7 +18,11 @@
 │  ├─ js/projects.js     项目数据源（增删项目只改这里）
 │  ├─ js/main.js         粒子引擎 + 全部交互
 │  └─ img/favicon.svg
-├─ scripts/verify-site.cjs   验收脚本（306 项断言）
+├─ scripts/
+│  ├─ verify-site.cjs       结构验收（306 项断言）
+│  ├─ check-live.cjs        线上抽检（内容 / 筛选项 / demo 链接可用性）
+│  ├─ verify-live-bytes.cjs 线上与本地字节级一致性比对
+│  └─ push-via-api.cjs      git 不可用时的 REST API 推送通道
 └─ README.md
 ```
 
@@ -86,18 +90,32 @@ python -m http.server 8900
 ## 验收
 
 ```bash
-node scripts/verify-site.cjs
+node scripts/verify-site.cjs      # 本地结构：10 组 306 项断言
+node scripts/check-live.cjs       # 线上抽检：内容 / 筛选项 / demo 链接可达性
+node scripts/verify-live-bytes.cjs # 线上与本地字节级一致性
 ```
 
-10 组共 **306 项断言**：项目数据完整性（19 个项目逐个校验字段）、两页导航互通、
+`verify-site.cjs` 覆盖：项目数据完整性（19 个项目逐个校验字段）、两页导航互通、
 首页必备区块、筛选结构、卡片渲染函数、动效存在性、视觉统一性、无障碍与安全、语法与标签配平。
+
+`verify-live-bytes.cjs` 会抓取线上文件与本地逐字节比对，同时检测中文是否被存成乱码
+（U+FFFD 替换字符），改完文件推送后跑一次就知道有没有传坏。
 
 ## 部署
 
-本仓库即 `uahz.github.io`，GitHub Pages 会自动发布在 <https://uahz.github.io/>。
+本仓库即 `uahz.github.io`，GitHub Pages 自动发布在 <https://uahz.github.io/>。
 
-推送到默认分支即可生效。若 Pages 未开启：仓库 Settings → Pages → Source 选
-`main` 分支 `/ (root)`。
+推送到默认分支即生效，通常 1–2 分钟完成构建。若 Pages 未开启：
+仓库 Settings → Pages → Source 选 `main` / `/ (root)`。
+
+**网络受限时改用 API 推送**（git over HTTPS 被代理阻断时）：
+
+```bash
+export SK=ghp_xxx
+node scripts/push-via-api.cjs index.html "commit message"
+```
+
+该脚本显式以 UTF-8 读取文件，避免中文被按 latin-1 存成乱码。
 
 ## 已知边界
 
