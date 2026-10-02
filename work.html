@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全部项目 · uahz</title>
+<meta name="description" content="uahz 的 19 个开源项目：对话式剧情游戏、生成艺术、网页应用、桌面工具与 WorkBuddy Skill。每项含简介、技术栈与访问链接。">
+<meta name="theme-color" content="#07090C">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="all">
+
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="bar" aria-hidden="true"><div class="bar__fill"></div></div>
+<canvas id="flow" aria-hidden="true"></canvas>
+<div class="spot" aria-hidden="true"></div>
+
+<!-- ============ Header ============ -->
+<header class="head">
+  <div class="w head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mk" aria-hidden="true">u</span>
+      <span>uahz<span class="brand__cur">.</span></span>
+    </a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="打开导航">
+      <i></i><i></i><i></i>
+    </button>
+    <nav class="nav" id="nav" aria-label="主导航">
+      <a class="nav__l" href="index.html" data-nav="home">首页</a>
+      <a class="nav__l" href="index.html#work" data-nav="work">项目</a>
+      <a class="nav__l" href="index.html#skills" data-nav="skills">技能</a>
+      <a class="nav__l" href="index.html#about" data-nav="about">关于</a>
+      <a class="nav__l" href="work.html" data-nav="all">全部 19 个</a>
+      <a class="nav__gh" href="https://github.com/uahz" target="_blank" rel="noopener">
+        GitHub
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ 页头 ============ -->
+  <section class="sec" style="padding-bottom:38px">
+    <div class="w">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow rv">Portfolio</span>
+        <h1 class="sec-title rv" style="font-size:clamp(34px,5.4vw,58px);transition-delay:.08s" data-split>全部 19 个项目</h1>
+        <p class="sec-desc rv" style="transition-delay:.18s">
+          全是 GitHub 上的公开仓库。可以按类型筛，也可以直接点
+          <a href="https://github.com/uahz?tab=repositories" target="_blank" rel="noopener">仓库总览</a>。
+          点标题进源码，点「在线体验」直接玩。
+        </p>
+        <div class="tags rv" style="margin-top:26px;transition-delay:.26s">
+          <span class="tag">游戏 6</span>
+          <span class="tag">网页应用 3</span>
+          <span class="tag">桌面工具 6</span>
+          <span class="tag">生成艺术 1</span>
+          <span class="tag">Skill 2</span>
+          <span class="tag">Star 4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 筛选 + 列表 ============ -->
+  <section class="sec" style="padding-top:0">
+    <div class="w">
+
+      <div class="filters rv" data-filters role="group" aria-label="按类型筛选项目">
+        <button class="fbtn" type="button" data-f="all" aria-pressed="true">全部</button>
+        <button class="fbtn" type="button" data-f="game" aria-pressed="false">游戏</button>
+        <button class="fbtn" type="button" data-f="web" aria-pressed="false">网页应用</button>
+        <button class="fbtn" type="button" data-f="tool" aria-pressed="false">桌面工具</button>
+        <button class="fbtn" type="button" data-f="art" aria-pressed="false">生成艺术</button>
+        <button class="fbtn" type="button" data-f="skill" aria-pressed="false">Skill</button>
+        <span class="fcount" data-count>显示 19 / 19 个项目</span>
+      </div>
+
+      <div class="grid" data-grid="all"></div>
+
+      <p class="empty" data-empty hidden>
+        <span class="empty__em" aria-hidden="true">◌</span><br>这个分类下暂时没有项目，换一个试试。
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============ 底部 ============ -->
+  <section class="sec sec--line">
+    <div class="w" style="text-align:center">
+      <div class="rv">
+        <span class="eyebrow" style="justify-content:center">Next</span>
+        <h2 class="sec-title">想看我的思路？</h2>
+        <p class="sec-desc" style="margin-left:auto;margin-right:auto">
+          首页写了技术偏好和做项目的方法。想直接找我说事，走联系页最快。
+        </p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+          <a class="btn btn--p" href="index.html">
+            <span>回到首页</span><span class="btn__ar" aria-hidden="true">→</span>
+            <span class="btn__a" aria-hidden="true"></span>
+          </a>
+          <a class="btn btn--g" href="index.html#contact">
+            <span>联系方式</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="foot">
+  <div class="w">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <span class="brand__mk" aria-hidden="true">u</span>
+        <span>uahz</span>
+      </div>
+      <nav class="foot__nav" aria-label="页脚导航">
+        <a href="index.html">首页</a>
+        <a href="work.html">全部项目</a>
+        <a href="index.html#work">精选</a>
+        <a href="index.html#skills">技能</a>
+        <a href="index.html#about">关于</a>
+        <a href="index.html#contact">联系</a>
+      </nav>
+    </div>
+    <div class="foot__bot">
+      <span>© 2026 uahz · 静默生长</span>
+      <span>Canvas + Perlin 噪声粒子流场 · 无框架依赖</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/projects.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

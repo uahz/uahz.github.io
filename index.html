@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>uahz · 个人项目站</title>
+<meta name="description" content="uahz 的个人项目站：19 个开源项目 —— 对话式剧情游戏、生成艺术、桌面工具与 WorkBuddy Skill。">
+<meta name="theme-color" content="#07090C">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="bar" aria-hidden="true"><div class="bar__fill"></div></div>
+<canvas id="flow" aria-hidden="true"></canvas>
+<div class="spot" aria-hidden="true"></div>
+
+<!-- ============ Header ============ -->
+<header class="head">
+  <div class="w head__in">
+    <a class="brand" href="index.html">
+      <span class="brand__mk" aria-hidden="true">u</span>
+      <span>uahz<span class="brand__cur">.</span></span>
+    </a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="打开导航">
+      <i></i><i></i><i></i>
+    </button>
+    <nav class="nav" id="nav" aria-label="主导航">
+      <a class="nav__l" href="index.html" data-nav="home">首页</a>
+      <a class="nav__l" href="index.html#work" data-nav="work">项目</a>
+      <a class="nav__l" href="index.html#skills" data-nav="skills">技能</a>
+      <a class="nav__l" href="index.html#about" data-nav="about">关于</a>
+      <a class="nav__l" href="work.html" data-nav="all">全部 19 个</a>
+      <a class="nav__gh" href="https://github.com/uahz" target="_blank" rel="noopener">
+        GitHub
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="w hero__in">
+      <div>
+        <span class="hero__pill rv"><b></b>19 个项目已开源 · 持续更新</span>
+
+        <h1 class="hero__t" data-split>把想法<span class="g">做成能跑的东西</span></h1>
+
+        <p class="hero__d rv" style="transition-delay:.2s">
+          我是 uahz。做对话式剧情游戏、生成艺术、桌面小工具，也把工作流封成了 Skill。
+          偏好单文件、零依赖、能离线跑的程序 —— 大部分项目一个文件就是全部。
+        </p>
+
+        <div class="hero__cta rv" style="transition-delay:.32s">
+          <a class="btn btn--p" href="work.html">
+            <span>浏览全部项目</span><span class="btn__ar" aria-hidden="true">→</span>
+            <span class="btn__a" aria-hidden="true"></span>
+          </a>
+          <a class="btn btn--g" href="https://github.com/uahz" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.3 1.19-3.1-.12-.3-.52-1.48.11-3.08 0 0 .97-.31 3.18 1.19a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.6.23 2.78.11 3.08.74.8 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+            <span>GitHub 主页</span>
+          </a>
+        </div>
+
+        <div class="stats hero__stats rv" style="transition-delay:.42s">
+          <div class="stat"><span class="stat__n" data-count="19">0</span><span class="stat__l">开源项目</span></div>
+          <div class="stat"><span class="stat__n" data-count="10">0</span><span class="stat__l">可直接玩</span></div>
+          <div class="stat"><span class="stat__n" data-count="6" data-suffix=" 类">0</span><span class="stat__l">项目类型</span></div>
+          <div class="stat"><span class="stat__n" data-count="0" data-suffix="">0</span><span class="stat__l">框架依赖</span></div>
+        </div>
+      </div>
+
+      <aside class="hero__side">
+        <div class="mini rv" style="transition-delay:.5s">
+          <span class="mini__orb" aria-hidden="true"></span>
+          <div class="mini__k">Currently</div>
+          <div class="mini__v">在写<span>对话式剧情游戏</span></div>
+          <div class="mini__d">分支树 + 变量状态机，目标 12 种结局</div>
+        </div>
+        <div class="mini rv" style="transition-delay:.6s">
+          <span class="mini__orb" aria-hidden="true"></span>
+          <div class="mini__k">Stack</div>
+          <div class="mini__v">Python · <span>Canvas</span> · Web Audio</div>
+          <div class="mini__d">能不用框架就不用，省掉构建链</div>
+        </div>
+        <div class="mini rv" style="transition-delay:.7s">
+          <span class="mini__orb" aria-hidden="true"></span>
+          <div class="mini__k">Rule</div>
+          <div class="mini__v">单文件 · <span>零依赖</span> · 离线可用</div>
+          <div class="mini__d">拷走就能跑，不留环境要求</div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="hint" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="hint__ln"></span>
+    </div>
+  </section>
+
+  <!-- ============ 终端 / 打字机 ============ -->
+  <section class="sec sec--line">
+    <div class="w">
+      <div class="about">
+        <div class="rv">
+          <span class="eyebrow">How I work</span>
+          <h2 class="sec-title">先跑起来，再谈优雅</h2>
+          <div class="typer" id="typer" style="margin-top:26px;"></div>
+          <p class="sec-desc" style="margin-top:20px">
+            写工具的顺序永远是：能跑 → 能用 → 不难看。很多项目做完第一版就丢在仓库里不管了，
+            这不是不负责，是先让它存在于世界上。
+          </p>
+        </div>
+
+        <div class="term rv-s">
+          <div class="term__bar">
+            <span class="term__dot term__dot--r"></span>
+            <span class="term__dot term__dot--y"></span>
+            <span class="term__dot term__dot--g"></span>
+            <span class="term__t">uahz — projects</span>
+          </div>
+          <div class="term__b" data-term>
+            <div><span class="p">$</span> <span class="g">cat</span> README.md <span class="c"># 我的项目都在这</span></div>
+            <div><span class="c">─────────────────────────────────────────</span></div>
+            <div><span class="v">游戏</span>    对话式剧情 · 生成艺术 · H5 小游戏</div>
+            <div><span class="v">工具</span>    Token 仪表盘 · 屏幕时间 · 万能解析器</div>
+            <div><span class="v">Skill</span>   直播运营 · 短视频配乐</div>
+            <div><span class="c">─────────────────────────────────────────</span></div>
+            <div><span class="g">$</span> <span class="y">du -sh .</span></div>
+            <div><span class="g">特点</span>    零框架依赖 · 单文件优先 · 离线可用</div>
+            <div><span class="p">$</span> <span class="g">echo</span> <span class="v">"先让它跑起来"</span> <span class="c"># 剩下的以后再说</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 精选项目 ============ -->
+  <section class="sec" id="work">
+    <div class="w">
+      <div class="sec-head">
+        <div class="sec-head__row">
+          <div>
+            <span class="eyebrow rv">Featured</span>
+            <h2 class="sec-title rv" style="transition-delay:.08s">精选项目</h2>
+            <p class="sec-desc rv" style="transition-delay:.16s">
+              最能说明我做事方式的四个。完整的 19 个在
+              <a href="work.html">项目页</a>，按类型筛。
+            </p>
+          </div>
+          <a class="btn btn--g rv" href="work.html" style="transition-delay:.22s">
+            <span>全部 19 个</span><span class="btn__ar" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid--2" data-grid="featured"></div>
+    </div>
+  </section>
+
+  <!-- ============ 技能 ============ -->
+  <section class="sec sec--line" id="skills">
+    <div class="w">
+      <div class="sec-head">
+        <span class="eyebrow rv">Skills</span>
+        <h2 class="sec-title rv" style="transition-delay:.08s">能干什么</h2>
+        <p class="sec-desc rv" style="transition-delay:.16s">
+          不是虚标的百分比，是这些年在项目里真正用熟的部分。
+        </p>
+      </div>
+
+      <div class="skills">
+        <div class="skill rv">
+          <div class="skill__n">游戏与交互</div>
+          <div class="skill__tags">
+            <span class="tag">Canvas 渲染</span><span class="tag">物理模拟</span>
+            <span class="tag">Web Audio</span><span class="tag">剧情状态机</span>
+          </div>
+          <div class="skill__pct">主力</div>
+        </div>
+        <div class="skill rv" style="transition-delay:.08s">
+          <div class="skill__n">生成艺术</div>
+          <div class="skill__tags">
+            <span class="tag">Perlin 噪声</span><span class="tag">粒子系统</span>
+            <span class="tag">流场</span><span class="tag">性能自适应</span>
+          </div>
+          <div class="skill__pct">主力</div>
+        </div>
+        <div class="skill rv" style="transition-delay:.16s">
+          <div class="skill__n">Python 桌面</div>
+          <div class="skill__tags">
+            <span class="tag">PyQt6 / PySide6</span><span class="tag">SQLite</span>
+            <span class="tag">Windows 打包</span><span class="tag">数据可视化</span>
+          </div>
+          <div class="skill__pct">熟练</div>
+        </div>
+        <div class="skill rv" style="transition-delay:.24s">
+          <div class="skill__n">前端工程</div>
+          <div class="skill__tags">
+            <span class="tag">HTML / CSS</span><span class="tag">原生 JS</span>
+            <span class="tag">PWA</span><span class="tag">单文件架构</span>
+          </div>
+          <div class="skill__pct">熟练</div>
+        </div>
+        <div class="skill rv" style="transition-delay:.32s">
+          <div class="skill__n">工作流封装</div>
+          <div class="skill__tags">
+            <span class="tag">WorkBuddy Skill</span><span class="tag">文本分析</span>
+            <span class="tag">脚本生成</span><span class="tag">SOP 沉淀</span>
+          </div>
+          <div class="skill__pct">在用</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 关于 ============ -->
+  <section class="sec sec--line" id="about">
+    <div class="w about">
+      <div class="rv">
+        <span class="eyebrow">About</span>
+        <h2 class="sec-title">关于我</h2>
+        <div class="tl" style="margin-top:34px">
+          <div class="tl__i">
+            <span class="tl__dot" aria-hidden="true"></span>
+            <div class="tl__when">2026 · 现在</div>
+            <div>
+              <div class="tl__role">独立开发</div>
+              <div class="tl__org">github.com/uahz</div>
+              <p class="tl__note">做游戏与生成艺术方向的作品，顺手把重复的工作流封成 Skill。</p>
+            </div>
+          </div>
+          <div class="tl__i">
+            <span class="tl__dot" aria-hidden="true"></span>
+            <div class="tl__when">玩法取向</div>
+            <div>
+              <div class="tl__role">先做能玩的东西</div>
+              <div class="tl__org">Prototype First</div>
+              <p class="tl__note">项目多是「想到就做一个」，完成度优先于规模。</p>
+            </div>
+          </div>
+          <div class="tl__i">
+            <span class="tl__dot" aria-hidden="true"></span>
+            <div class="tl__when">技术偏好</div>
+            <div>
+              <div class="tl__role">单文件 · 零依赖</div>
+              <div class="tl__org">Portable by Default</div>
+              <p class="tl__note">拷走就能跑的东西，才算真正交付了。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv" style="transition-delay:.12s">
+        <p class="about__p">
+          2025 年 10 月注册 GitHub，第一个仓库是给自己写的时间胶囊工具。
+          当时只是想把「未来的自己」这件事做成能跑的东西，没想到一路写到了现在。
+        </p>
+        <p class="about__p">
+          我的项目有个共同点：几乎都是单文件或极小依赖。Perlin 粒子流场 4.6KB，
+          猫咪叠叠乐 10KB，时间胶囊 11KB —— 不是炫技，是「你拷走它，它就能跑」。
+        </p>
+        <p class="about__p">
+          也做过不那么小的：现实人生模拟器有 PyQt6 桌面版和网页版两套实现，
+          风起旧厂街写了 9 种结局的分支对话树。做这类项目时我更关心状态机设计 ——
+          变量互相咬合的那种成就感很难形容。
+        </p>
+
+        <div class="quote">
+          工具的价值不在功能多，在「你打开它的那一刻不需要思考」。
+          我做的所有东西都在往这个方向减。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 联系 ============ -->
+  <section class="sec sec--line" id="contact">
+    <div class="w">
+      <div class="sec-head">
+        <span class="eyebrow rv">Contact</span>
+        <h2 class="sec-title rv" style="transition-delay:.08s">联系与共建</h2>
+        <p class="sec-desc rv" style="transition-delay:.16s">
+          发现 bug、想一起做点什么、或者只是想聊聊 —— 都欢迎。Issue 和邮件都行。
+        </p>
+      </div>
+
+      <div class="ct-grid">
+        <div class="rv">
+          <ul class="ct-list">
+            <li class="ct">
+              <span class="ct__ic" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </span>
+              <div><div class="ct__l">Email</div><a class="ct__v" href="mailto:uahz@qq.com">uahz@qq.com</a></div>
+            </li>
+            <li class="ct">
+              <span class="ct__ic" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </span>
+              <div><div class="ct__l">GitHub</div><a class="ct__v" href="https://github.com/uahz" target="_blank" rel="noopener">github.com/uahz</a></div>
+            </li>
+            <li class="ct">
+              <span class="ct__ic" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+              </span>
+              <div><div class="ct__l">Issues</div><a class="ct__v" href="https://github.com/uahz?tab=repositories" target="_blank" rel="noopener">各仓库提 Issue</a></div>
+            </li>
+            <li class="ct">
+              <span class="ct__ic" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <div><div class="ct__l">Projects</div><span class="ct__v">19 个，全部开源</span></div>
+            </li>
+          </ul>
+        </div>
+
+        <form class="form rv" id="ct-form" style="transition-delay:.12s" novalidate>
+          <div class="form__row">
+            <label>称呼
+              <input type="text" name="name" placeholder="怎么称呼你" required>
+            </label>
+            <label>邮箱
+              <input type="email" name="email" placeholder="you@example.com" required>
+            </label>
+          </div>
+          <label>想聊什么
+            <textarea name="message" rows="5" placeholder="项目背景、时间、想法都行" required></textarea>
+          </label>
+          <button class="btn btn--p" type="submit">
+            <span>发送</span><span class="btn__ar" aria-hidden="true">→</span>
+            <span class="btn__a" aria-hidden="true"></span>
+          </button>
+          <p class="form__msg">纯静态站点，提交后仅在本地显示回执，不会真的发邮件。</p>
+          <p class="form__st" data-status role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="foot">
+  <div class="w">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <span class="brand__mk" aria-hidden="true">u</span>
+        <span>uahz</span>
+      </div>
+      <nav class="foot__nav" aria-label="页脚导航">
+        <a href="index.html">首页</a>
+        <a href="work.html">全部项目</a>
+        <a href="index.html#work">精选</a>
+        <a href="index.html#skills">技能</a>
+        <a href="index.html#about">关于</a>
+        <a href="index.html#contact">联系</a>
+      </nav>
+    </div>
+    <div class="foot__bot">
+      <span>© 2026 uahz · 静默生长</span>
+      <span>Canvas + Perlin 噪声粒子流场 · 无框架依赖</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/projects.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
