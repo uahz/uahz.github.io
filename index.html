@@ -1162,6 +1162,32 @@ html[data-theme="dark"] .theme__moon{display:none}
   .glass { border: 1px solid CanvasText; background: Canvas; backdrop-filter: none; }
 }
 
+/* ══════════ 玻璃边缘光照（兜底） ══════════
+   Glasswork 原版 box-shadow 把 rgb(r g b / calc()) 混在一句话里，
+   实测整条声明被浏览器丢弃（computed 为 none），玻璃就只剩一层淡色，
+   看起来像个扁的灰圆片。这里用 rgba() 写一条等效的：左上受光、右下薄影、
+   一圈极淡内描边表达厚度，再压一层柔和外阴影。 */
+.glass{
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.62),
+    inset 1px 0 0 rgba(255,255,255,.28),
+    inset -1px 0 0 rgba(255,255,255,.16),
+    inset 0 -1.5px 0 rgba(0,0,0,.05),
+    inset 0 0 0 .5px rgba(255,255,255,.26),
+    0 1px 2px rgba(0,0,0,.05),
+    0 6px 20px rgba(0,0,0,.07);
+}
+html[data-theme="dark"] .glass{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 1px 0 0 rgba(255,255,255,.07),
+    inset -1px 0 0 rgba(255,255,255,.04),
+    inset 0 -1px 0 rgba(0,0,0,.32),
+    inset 0 0 0 .5px rgba(255,255,255,.07),
+    0 1px 2px rgba(0,0,0,.3),
+    0 6px 18px rgba(0,0,0,.35);
+}
+
 </style>
 <script>
 /* Glasswork — rim lens (MIT, github.com/kubai087/glasswork)
