@@ -25,8 +25,8 @@
   --c-bg:#FAFAFA;
   --c-surface:#FFFFFF;
   --c-text:#1D1D1F;
-  --c-text-2:#86868B;
-  --c-text-3:#AEAEB2;
+  --c-text-2:#7C7C82;
+  --c-text-3:#A6A6AC;
   --c-line:rgba(29,29,31,.10);
   --c-line-soft:rgba(29,29,31,.06);
   --c-on-primary:#FFFFFF;   /* 主色之上的文字色 */
@@ -61,18 +61,20 @@
   --c-glass-sheen:rgba(255,255,255,.5);
   --c-glass-sheen-2:rgba(255,255,255,.16);
   /* hover 专用：阴影比常规更深一档，边框明显但不用主色（避免廉价） */
-  --sh-hover:0 4px 10px rgba(29,29,31,.06), 0 22px 48px rgba(29,29,31,.11);
+  --sh-hover:0 4px 12px rgba(29,29,31,.05), 0 28px 64px rgba(29,29,31,.13);
   --c-line-hover:rgba(29,29,31,.18);
-  --c-cover-filter-hover:brightness(1.04) saturate(1.04);
+  --c-cover-filter-hover:brightness(1.05) saturate(1.05);
+  --c-card-glow:rgba(255,255,255,.10);
+  --c-surface-hover:#FFFFFF;
 
   /* —— 阴影：低透明度、柔和，拒绝厚重黑影 —— */
-  --sh-1:0 1px 2px rgba(29,29,31,.04), 0 4px 14px rgba(29,29,31,.045);
-  --sh-2:0 2px 6px rgba(29,29,31,.05), 0 14px 40px rgba(29,29,31,.075);
+  --sh-1:0 1px 2px rgba(29,29,31,.035), 0 6px 20px rgba(29,29,31,.05);
+  --sh-2:0 2px 8px rgba(29,29,31,.045), 0 18px 48px rgba(29,29,31,.085);
   --sh-3:0 8px 24px rgba(29,29,31,.09), 0 32px 72px rgba(29,29,31,.13);
 
   /* —— 圆角：统一 12px —— */
   --r-sm:8px;
-  --r:12px;
+  --r:14px;
   --r-lg:20px;
   --r-pill:999px;
 
@@ -83,11 +85,18 @@
        → HarmonyOS Sans SC（鸿蒙黑体，形态接近）
        → Microsoft YaHei（雅黑，最后兜底）
      字重统一在 h1–h4 上写 700，即苹方的 Bold。 */
-  --font-display:"PingFang SC","PingFang HK","Noto Sans SC",
-                 "HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
-  --font-body:"PingFang SC","PingFang HK","Noto Sans SC",
-              "HarmonyOS Sans SC","Microsoft YaHei",
-              -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  /* —— 字体：SF Pro 优先（Apple 设计资源那套）——
+     SF Pro 只含拉丁字符，不含中文 —— Apple 自己的中文界面也是
+     「SF Pro 数字/英文 + 苹方 中文」的组合，所以栈里中文字体排在 SF 之后。
+     Apple 设备：-apple-system 直接映射到 SF Pro；
+     Windows：SF Pro 不存在，回退到 Segoe UI Variable（形态最接近）再退思源黑体。
+     若要 Windows 也显示真 SF Pro，只能内嵌字体文件，详见 README 的许可说明。 */
+  --font-display:"SF Pro Display","SF Pro Text","SF Pro",-apple-system,
+                 BlinkMacSystemFont,"Segoe UI Variable Display","Segoe UI",
+                 "PingFang SC","PingFang HK","Noto Sans SC","Microsoft YaHei",sans-serif;
+  --font-body:"SF Pro Text","SF Pro Display","SF Pro",-apple-system,
+              BlinkMacSystemFont,"Segoe UI Variable Text","Segoe UI",
+              "PingFang SC","PingFang HK","Noto Sans SC","Microsoft YaHei",sans-serif;
   --font-mono:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 
   /* —— 字号阶梯：层级严格区分 —— */
@@ -116,6 +125,9 @@
      而 .22,.61,.36,1 是 0.27→0.23→0.17，前 20% 就走完一半，观感「猛一下」。
      位移类动效统一用它。 */
   --ease-soft:cubic-bezier(.25,.46,.45,.94);
+  /* 位移专用：起步更缓、中段推进、结尾长距离收住。
+     实测增量 0.04→0.20→0.24→0.20→0.12→0.07→0.03，没有起手猛冲。 */
+  --ease-glide:cubic-bezier(.33,.1,.2,1);
   --ease-reveal:var(--ease-soft);
   --t-reveal:.8s;
   --t-fast:.22s;
@@ -179,7 +191,9 @@ html[data-theme="dark"]{
   --c-glass-sheen-2:rgba(255,255,255,.05);
   --sh-hover:0 4px 12px rgba(0,0,0,.5), 0 26px 56px rgba(0,0,0,.6);
   --c-line-hover:rgba(255,255,255,.22);
-  --c-cover-filter-hover:brightness(.98) saturate(1.1);
+  --c-cover-filter-hover:brightness(1.02) saturate(1.12);
+  --c-card-glow:rgba(255,255,255,.05);
+  --c-surface-hover:#1A1A1F;
 }
 
 /* 切主题时大面积色块渐变过渡，硬切会闪眼；
@@ -230,9 +244,9 @@ body::after{
 h1,h2,h3,h4{
   font-family:var(--font-display);
   margin:0;
-  font-weight:700;          /* 苹方 Bold */
-  line-height:1.16;
-  letter-spacing:-.03em;    /* 粗体字面偏宽，收紧一点才不散 */
+  font-weight:700;
+  line-height:1.12;         /* SF Pro 的 x-height 更大，行高收到 1.12 才紧凑 */
+  letter-spacing:-.035em;   /* SF Pro Display 在大字号下需要更紧的字距 */
   color:var(--c-text);
 }
 p{margin:0}
@@ -454,9 +468,10 @@ html[data-theme="dark"] .theme__moon{display:none}
 }
 /* hover：浮起 8px（原来 4px 太含蓄）+ 阴影加重 + 边框提亮 */
 .card:hover{
-  transform:translateY(-8px);
+  transform:translateY(-6px);
   box-shadow:var(--sh-hover);
   border-color:var(--c-line-hover);
+  background:var(--c-surface-hover);
 }
 .card:focus-visible{outline:2px solid var(--c-primary);outline-offset:3px}
 .card__media{
@@ -468,15 +483,28 @@ html[data-theme="dark"] .theme__moon{display:none}
 .card__media img{
   width:100%;height:100%;object-fit:cover;
   filter:var(--c-cover-filter);
-  /* 1.2s + easeOutQuad：位移均匀减速，不会「猛一下放大再卡住」。
-     缩放幅度压到 1.035 —— 1.06 在 690px 宽封面上等于 41px 位移，太窜。 */
-  transition:transform 1.2s var(--ease-soft),filter .55s var(--ease-soft);
+  /* 缩放中心由 JS 按鼠标位置写入 --mx/--my。
+     中心固定在正中时，鼠标在卡片边缘也会「从中间膨胀」，那才是生硬感的来源。
+     跟随鼠标后，画面从指针处长出来，观感自然得多。 */
+  transform-origin:var(--mx,50%) var(--my,50%);
+  transition:transform 1.05s var(--ease-glide),filter .6s var(--ease-soft);
   will-change:transform;
+  backface-visibility:hidden;
 }
 .card:hover .card__media img{
-  transform:scale(1.035);
+  transform:scale(1.045);
   filter:var(--c-cover-filter-hover);
 }
+
+/* 提亮遮罩：hover 时封面整体亮一档 —— 这是「高亮突出」的主信号，
+   比单纯放大更明显，也更不伤构图（不裁切）。用 ::before，::after 留给玻璃反光。 */
+.card__media::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:var(--c-card-glow);
+  opacity:0;
+  transition:opacity .6s var(--ease-soft);
+}
+.card:hover .card__media::before{opacity:1}
 .card__badge{
   position:absolute;top:.85rem;left:.85rem;
   padding:.24rem .6rem;border-radius:var(--r-pill);
@@ -2084,10 +2112,37 @@ window.glassworkLensDefaults = LENS_DEFAULTS;
     gallery.appendChild(card);
   });
 
+  var cards = Array.prototype.slice.call(gallery.querySelectorAll(".card"));
+
+  /* ══════════ hover 缩放中心跟随指针 ══════════
+     只有一个中心点的缩放，鼠标在卡片边缘时也会从中间膨胀 —— 那是生硬感的来源。
+     这里把指针位置写进 --mx/--my，transform-origin 就跟过去了。
+     用 pointermove + rAF 节流，避免每帧都触发样式计算。 */
+  cards.forEach(function (card) {
+    var media = card.querySelector(".card__media");
+    if (!media) return;
+    var raf = 0, mx = 50, my = 50;
+    card.addEventListener("pointerenter", function (e) {
+      var r = card.getBoundingClientRect();
+      mx = ((e.clientX - r.left) / r.width) * 100;
+      my = ((e.clientY - r.top) / r.height) * 100;
+      media.style.setProperty("--mx", mx.toFixed(1) + "%");
+      media.style.setProperty("--my", my.toFixed(1) + "%");
+    });
+    card.addEventListener("pointermove", function (e) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        var r = card.getBoundingClientRect();
+        media.style.setProperty("--mx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
+        media.style.setProperty("--my", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
+      });
+    });
+  });
+
   /* ══════════ 分类筛选 ══════════ */
   var filters = document.getElementById("filters");
   var filterCount = document.getElementById("filterCount");
-  var cards = Array.prototype.slice.call(gallery.querySelectorAll(".card"));
 
   if(filters){
     filters.addEventListener("click", function(e){
