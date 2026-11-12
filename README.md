@@ -49,15 +49,59 @@
 - 封面是浅色底，深色下 `filter:brightness(.9) contrast(1.03) saturate(1.06)` 轻压一档，
   融入页面但不影响辨识
 
-### 关于「苹方粗体」
+### 字体：SF Pro 优先
 
-`--font-display` 第一位是 `"PingFang SC"`，所以 **macOS / iOS 上就是原生苹方 Bold**。
-Windows 没有苹方（Apple 系统字体，不可分发），按字体栈回退到 **Noto Sans SC Bold**
-—— 思源黑体，和苹方同属现代几何无衬线，字重 700 是真实 Bold 而非合成粗体。
+```
+--font-display: "SF Pro Display", "SF Pro Text", "SF Pro", -apple-system,
+                BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI",
+                "PingFang SC", "PingFang HK", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+```
 
-已用 CDP `CSS.getPlatformFontsForNode` 实测：Windows 上实际渲染字体为
-`Noto Sans SC`，字重 700。如果要在 Windows 上也显示苹方本身，
-只能内嵌字体文件（约 3–5 MB），会破坏「零外部依赖」，因此没有采用。
+**两个必须知道的事实：**
+
+1. **SF Pro 不含中文字符。** 它是 Apple 的拉丁字体，Apple 自己的中文界面也是
+   「SF Pro 数字/英文 + 苹方 中文」的组合。所以中文永远会落到栈里后面的中文字体上，
+   这不是配置错误，是字体本身的覆盖范围。
+2. **SF Pro 不能合法地在网页上分发。** Apple 的字体许可限于「为 Apple 平台设计界面」，
+   不允许打包进网站给任意设备下载。所以这里只做**字体栈优先**：
+   - macOS / iOS → `-apple-system` 直接映射到原生 SF Pro，字体是真实的
+   - Windows → 没有 SF Pro，回退到 Segoe UI Variable（形态最接近的现代无衬线），
+     再退到思源黑体
+   - 若要让 Windows 也显示真 SF Pro，只能内嵌字体文件（约 3–5MB），
+     既有许可风险也破坏「零外部依赖」，因此没有采用
+
+标题字重 700，行高 1.12、字距 -.035em —— 按 SF Pro Display 的度量调的，
+比默认值紧凑，这是「高级感」的主要来源之一。
+
+### 液态玻璃（Glasswork）
+
+材质来自 [kubai087/glasswork](https://github.com/kubai087/glasswork)（MIT），
+是 Lumno 新标签页那套液态玻璃：四层声明（色调 / 模糊提亮 / 边缘镜片 / 边缘光照+墨色），
+边缘折射由 `lens.js` 的 SVG 位移贴图写进 `--glass-lens`。
+
+接入时改了两处：
+- `lens.js` 原为 ESM，去 `export` 包成 IIFE 挂 `window.liquidGlass`
+  （`file://` 下 ES module 会被 CORS 拦）
+- `glass.css` 的 `border-radius` 改为读 `--glass-radius`，让各组件保留自己的圆角
+
+**前提**：玻璃放在纯色上只会发灰（它的 INSTALL.md 明确写了）。所以背景改成了
+mesh 渐变 —— 四块大半径色域，让边缘折射有内容可折。
+
+**应用表面**：筛选胶囊、主题钮、合作方式卡、详情页次链接。
+作品卡片不加：封面图占满表面，玻璃只作用在图片下面。
+
+**一个兜底**：原版 `box-shadow` 把 `rgb(r g b / calc())` 混在一条声明里，
+实测整条被浏览器丢弃（computed = none），玻璃只剩一层淡色。已用 `rgba()` 语法
+补了一条等效的边缘光照。若上游修复，这段兜底可以删掉。
+
+## hover
+
+- 缩放 **1.045 / 1.05s / `cubic-bezier(.33,.1,.2,1)`**
+- **缩放中心跟随指针**：JS 把指针位置写进 `--mx/--my`，`transform-origin` 跟过去。
+  中心固定是「生硬」的根源 —— 鼠标在卡片边缘时画面却从正中膨胀
+- **提亮遮罩**：`::before` 铺一层极淡白，hover 时 opacity 0→1。这是「高亮突出」的主信号，
+  比放大更明显，也不裁切构图
+- 卡片上浮 6px + 阴影扩散 + 背景提亮 + 边框加深
 
 ## 源码结构
 
