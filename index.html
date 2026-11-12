@@ -35,12 +35,14 @@
   --c-surface-2:#F4F4F6;
 
   /* —— 以下全部为「可被深色主题覆盖」的衍生色 —— */
-  /* 背景三层色温：右上冷蓝 → 左上极淡暖橙 → 底部冷蓝回升。
-     暖色只有 3% 量级，作用是「色温对比」而不是「看到橙色」。 */
-  --c-body-glow-1:rgba(22,93,255,.075);
-  --c-body-glow-2:rgba(198,118,72,.032);
-  --c-body-glow-3:rgba(22,93,255,.05);
-  --c-body-veil:rgba(255,255,255,.55);
+  /* mesh 渐变：四块大半径色域（冷蓝 / 青灰 / 暖沙 / 中性紫灰），
+     互相重叠成一张「有内容的背景」。玻璃的边缘折射只有在背景有色差时
+     才看得出来 —— 纯色上玻璃只会发灰（Glasswork 的 INSTALL.md 明确提过）。 */
+  --c-body-glow-1:rgba(64,110,255,.155);
+  --c-body-glow-2:rgba(52,168,168,.125);
+  --c-body-glow-3:rgba(226,148,88,.13);
+  --c-body-glow-4:rgba(130,118,190,.085);
+  --c-body-veil:rgba(255,255,255,.24);
   --c-nav-bg:rgba(250,250,250,.72);
   --c-nav-bg-solid:rgba(250,250,250,.96);
   --c-hairline:rgba(29,29,31,.02);
@@ -51,6 +53,13 @@
   --c-btn-shadow-hover:rgba(22,93,255,.22);
   --c-badge-bg:rgba(255,255,255,.86);
   --c-cover-filter:none;
+  /* 玻璃断面与反光：浅色下用白亮高光 + 灰暗底边 */
+  --c-glass-edge-top:rgba(255,255,255,.9);
+  --c-glass-edge-top-hover:rgba(255,255,255,1);
+  --c-glass-edge-bottom:rgba(29,29,31,.05);
+  --c-glass-edge-side:rgba(255,255,255,.5);
+  --c-glass-sheen:rgba(255,255,255,.5);
+  --c-glass-sheen-2:rgba(255,255,255,.16);
   /* hover 专用：阴影比常规更深一档，边框明显但不用主色（避免廉价） */
   --sh-hover:0 4px 10px rgba(29,29,31,.06), 0 22px 48px rgba(29,29,31,.11);
   --c-line-hover:rgba(29,29,31,.18);
@@ -145,10 +154,11 @@ html[data-theme="dark"]{
   --sh-2:0 2px 6px rgba(0,0,0,.55), 0 14px 40px rgba(0,0,0,.45);
   --sh-3:0 8px 24px rgba(0,0,0,.6), 0 32px 72px rgba(0,0,0,.55);
 
-  --c-body-glow-1:rgba(76,141,255,.115);
-  --c-body-glow-2:rgba(44,96,168,.075);
-  --c-body-glow-3:rgba(76,141,255,.07);
-  --c-body-veil:rgba(120,160,255,.035);
+  --c-body-glow-1:rgba(56,104,255,.26);
+  --c-body-glow-2:rgba(30,140,150,.17);
+  --c-body-glow-3:rgba(170,92,48,.14);
+  --c-body-glow-4:rgba(78,86,150,.18);
+  --c-body-veil:rgba(120,160,255,.05);
   --c-nav-bg:rgba(12,12,14,.72);
   --c-nav-bg-solid:rgba(12,12,14,.97);
   --c-hairline:rgba(255,255,255,.035);
@@ -160,6 +170,13 @@ html[data-theme="dark"]{
   --c-badge-bg:rgba(22,22,26,.82);
   /* 封面是浅色底，深色页面上轻压一档：融入但不影响辨识 */
   --c-cover-filter:brightness(.9) contrast(1.03) saturate(1.06);
+  /* 深色下玻璃高光要压低，否则一圈白边像贴纸 */
+  --c-glass-edge-top:rgba(255,255,255,.10);
+  --c-glass-edge-top-hover:rgba(255,255,255,.18);
+  --c-glass-edge-bottom:rgba(0,0,0,.4);
+  --c-glass-edge-side:rgba(255,255,255,.06);
+  --c-glass-sheen:rgba(255,255,255,.12);
+  --c-glass-sheen-2:rgba(255,255,255,.05);
   --sh-hover:0 4px 12px rgba(0,0,0,.5), 0 26px 56px rgba(0,0,0,.6);
   --c-line-hover:rgba(255,255,255,.22);
   --c-cover-filter-hover:brightness(.98) saturate(1.1);
@@ -195,10 +212,11 @@ body{
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(1100px 640px at 84% -8%,var(--c-body-glow-1),transparent 58%),
-    radial-gradient(820px 560px at -6% 16%,var(--c-body-glow-2),transparent 56%),
-    radial-gradient(980px 660px at 46% 112%,var(--c-body-glow-3),transparent 60%),
-    linear-gradient(178deg,var(--c-body-veil) 0%,transparent 32%);
+    radial-gradient(1050px 660px at 14% 4%,var(--c-body-glow-1),transparent 60%),
+    radial-gradient(880px 620px at 92% 26%,var(--c-body-glow-2),transparent 58%),
+    radial-gradient(940px 700px at 74% 96%,var(--c-body-glow-3),transparent 60%),
+    radial-gradient(760px 580px at 20% 78%,var(--c-body-glow-4),transparent 58%),
+    linear-gradient(178deg,var(--c-body-veil) 0%,transparent 30%);
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
@@ -885,7 +903,666 @@ html[data-theme="dark"] .theme__moon{display:none}
   .filter__count{width:100%;margin-left:0;margin-top:.5rem}
 }
 
+/* ══════════════════════════════════════════════════════════════
+   Glasswork — Lumno 的液态玻璃材质
+   来源: https://github.com/kubai087/glasswork  (MIT)
+   只改了一处：border-radius 改为读 --glass-radius，
+   让各个组件保留自己的圆角（胶囊 999px / 卡片 12px / 圆钮 50%）。
+   材质由四层声明构成：background(色调) / backdrop-filter(模糊+提亮+边缘镜片)
+   / box-shadow(边缘高光+斜面+阴影) / color(墨色)。
+   边缘折射由 lens.js 写入 --glass-lens 变量。
+   ══════════════════════════════════════════════════════════════ */
+
+/*
+ * Lumno's liquid glass, as on its New Tab page (lumno-extension:
+ * src/newtab/glass-style.css). A surface becomes glass with four
+ * declarations: background (the tint), backdrop-filter (blur and tone, then
+ * the rim lens from lens.js), box-shadow (rim light, bevel and shadow) and
+ * color (the ink).
+ *
+ * Two materials, chosen per surface by data-kind:
+ * - light: clear glass with dark ink. A thin white wash, the scene behind
+ *   lightly blurred and its colors deepened (saturate) and lifted
+ *   (brightness above 1, which screens toward white), so the glass takes
+ *   its color from behind instead of turning milky.
+ * - dark: smoky glass with light ink, for the dark theme and for dark
+ *   patches of wallpaper under the light theme. Brightness below 1 dims
+ *   the scene like a multiply with black instead of muddying it.
+ *
+ * The playground sets the materials' numbers on the stage (--l-* and
+ * --d-*); each surface sets what it read off the wallpaper under it:
+ * --density (0 thin, 1 dense), --keep (the share of the saturation boost
+ * to keep) and --floor (the least tint its text needs). Sizes are in --u,
+ * one Lumno pixel at the stage's scale.
+ */
+
+@property --m-tint { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --m-k { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --m-thin { syntax: '<number>'; inherits: true; initial-value: 0.06; }
+@property --m-dense { syntax: '<number>'; inherits: true; initial-value: 0.22; }
+@property --m-blur { syntax: '<number>'; inherits: true; initial-value: 2; }
+@property --m-sat { syntax: '<number>'; inherits: true; initial-value: 1.8; }
+@property --m-bri { syntax: '<number>'; inherits: true; initial-value: 1.06; }
+@property --m-con { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --m-catch { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --m-bevel { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --m-shadow { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --density { syntax: '<number>'; inherits: true; initial-value: 0.35; }
+@property --keep { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --floor { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: rgba(0, 0, 0, 0.86); }
+@property --ink-2 { syntax: '<color>'; inherits: true; initial-value: rgba(60, 60, 67, 0.7); }
+@property --ink-solid { syntax: '<color>'; inherits: true; initial-value: #000000; }
+@property --ink-a { syntax: '<number>'; inherits: true; initial-value: 0.86; }
+@property --well { syntax: '<color>'; inherits: true; initial-value: rgba(0, 0, 0, 0.15); }
+@property --row-hover { syntax: '<color>'; inherits: true; initial-value: rgba(0, 0, 0, 0.045); }
+@property --row-active { syntax: '<color>'; inherits: true; initial-value: rgba(0, 0, 0, 0.09); }
+
+/* ---------- The two materials ---------- */
+
+.glass {
+  --m-tint: var(--l-tint, #ffffff);
+  --m-k: var(--l-k, 1);
+  --m-thin: var(--l-thin, 0.06);
+  --m-dense: var(--l-dense, 0.22);
+  --m-blur: var(--l-blur, 2);
+  --m-sat: var(--l-sat, 1.8);
+  --m-bri: var(--l-bri, 1.06);
+  --m-con: var(--l-con, 1);
+  --m-catch: var(--l-catch, 1);
+  --m-bevel: var(--l-bevel, 1);
+  --m-shadow: var(--l-shadow, 1);
+  /* Dark ink: one color in fixed steps, multiplied into the glass so it
+     picks up the glass's color and keeps its contrast. */
+  --ink: rgba(0, 0, 0, 0.86);
+  --ink-2: rgba(60, 60, 67, 0.7);
+  --ink-solid: #000000;
+  --ink-a: 0.86;
+  --well: rgba(0, 0, 0, 0.15);
+  --row-hover: rgba(0, 0, 0, 0.06);
+  --row-active: rgba(0, 0, 0, 0.1);
+  --blend: multiply;
+}
+
+/* A capsule (its radius at least half its height) keeps round ends: a
+   superellipse on a radius that is already half the box flattens them.
+   The page marks capsules as they are sized (data-pill). */
+.glass[data-pill] { corner-shape: round; }
+
+.glass[data-kind="dark"] {
+  --m-tint: var(--d-tint, #1e1e22);
+  --m-k: var(--d-k, 1);
+  --m-thin: var(--d-thin, 0.16);
+  --m-dense: var(--d-dense, 0.38);
+  --m-blur: var(--d-blur, 2);
+  --m-sat: var(--d-sat, 1.6);
+  --m-bri: var(--d-bri, 0.8);
+  --m-con: var(--d-con, 1);
+  --m-catch: var(--d-catch, 1);
+  --m-bevel: var(--d-bevel, 1);
+  --m-shadow: var(--d-shadow, 1);
+  /* Light ink adds light rather than covering. */
+  --ink: rgba(255, 255, 255, 0.94);
+  --ink-2: rgba(235, 235, 245, 0.64);
+  --ink-solid: #ffffff;
+  --ink-a: 0.94;
+  --well: rgba(255, 255, 255, 0.22);
+  --row-hover: rgba(255, 255, 255, 0.08);
+  --row-active: rgba(255, 255, 255, 0.14);
+  --blend: plus-lighter;
+}
+
+/* ---------- The four declarations ---------- */
+
+.glass {
+  /* The tint opacity setting (--m-k, 0-1.5) scales the tint. Below 1 the
+     tone in the filter and the bevel thin with it (--veil-k), so at 0 only
+     the blur, the rim and the shadow are left: clear glass. The tint never
+     goes below the least opacity the surface's text needs (--floor). */
+  --veil-k: min(1, var(--m-k));
+  --tint-a: min(0.95, max(var(--floor), calc((var(--m-thin) + (var(--m-dense) - var(--m-thin)) * var(--density)) * var(--m-k))));
+  --filter:
+    blur(calc(var(--m-blur) * var(--u, 1px)))
+    saturate(var(--m-sat))
+    contrast(calc(1 + (var(--m-con) - 1) * var(--veil-k)))
+    brightness(calc(1 + (var(--m-bri) - 1) * var(--veil-k)))
+    saturate(var(--keep));
+
+  border-radius: var(--glass-radius, 12px);
+  /* Continuous corners, where the browser draws them (Chromium 139+);
+     elsewhere the plain border-radius stays. */
+  corner-shape: superellipse(var(--corner-k, 1));
+  color: var(--ink);
+  background: color-mix(in srgb, var(--m-tint) calc(var(--tint-a) * 100%), transparent);
+  -webkit-backdrop-filter: var(--filter);
+  backdrop-filter: var(--filter) var(--glass-lens,);
+  isolation: isolate;
+  /* Toggled for a moment to make Safari redraw the glass (playground.js). */
+  will-change: var(--redraw, auto);
+}
+
+/* Light glass: light caught where the rim faces it, on the top left and
+   fainter on the bottom right, over a faint even line that keeps the
+   outline; a firmer hairline and a soft shadow; and the bevel, soft bands
+   just inside the edge, so the plate reads as a thick slab. The bands stay
+   within a few pixels of the edge: a box shadow only mixes plain white and
+   black, so a wide band washes the scene's color out. */
+.glass {
+  box-shadow:
+    inset calc(1.5 * var(--u)) calc(1.5 * var(--u)) var(--u) calc(-1 * var(--u)) rgb(255 255 255 / calc(1 * var(--m-catch))),
+    inset calc(-1.5 * var(--u)) calc(-1.5 * var(--u)) var(--u) calc(-1 * var(--u)) rgb(255 255 255 / calc(0.6 * var(--m-catch))),
+    inset 0 0 0 calc(0.5 * var(--u)) rgb(255 255 255 / calc(0.3 * var(--m-catch))),
+    0 0 0 calc(0.5 * var(--u)) rgb(0 0 0 / calc(0.12 * var(--m-shadow))),
+    0 calc(4 * var(--u)) calc(16 * var(--u)) rgb(0 0 0 / calc(0.1 * var(--m-shadow))),
+    inset 0 calc(6 * var(--u)) calc(8 * var(--u)) calc(-6 * var(--u)) rgb(255 255 255 / calc(0.5 * var(--veil-k) * var(--m-bevel))),
+    inset calc(4 * var(--u)) 0 calc(8 * var(--u)) calc(-6 * var(--u)) rgb(255 255 255 / calc(0.22 * var(--veil-k) * var(--m-bevel))),
+    inset calc(-4 * var(--u)) 0 calc(8 * var(--u)) calc(-6 * var(--u)) rgb(255 255 255 / calc(0.12 * var(--veil-k) * var(--m-bevel))),
+    inset 0 calc(-6 * var(--u)) calc(8 * var(--u)) calc(-6 * var(--u)) rgb(0 0 0 / calc(0.06 * var(--veil-k) * var(--m-bevel)));
+}
+
+/* Dark glass: the same light, dimmer, with a darker outline and shadow.
+   The bottom shade stays faint: over a light wallpaper dark glass is a mid
+   tone, which black only muddies. */
+.glass[data-kind="dark"] {
+  box-shadow:
+    inset var(--u) var(--u) calc(0.5 * var(--u)) calc(-0.5 * var(--u)) rgb(255 255 255 / calc(0.46 * var(--m-catch))),
+    inset calc(-1 * var(--u)) calc(-1 * var(--u)) calc(0.5 * var(--u)) calc(-0.5 * var(--u)) rgb(255 255 255 / calc(0.18 * var(--m-catch))),
+    inset 0 0 0 calc(0.5 * var(--u)) rgb(255 255 255 / calc(0.06 * var(--m-catch))),
+    0 0 0 calc(0.5 * var(--u)) rgb(0 0 0 / calc(0.28 * var(--m-shadow))),
+    0 calc(4 * var(--u)) calc(14 * var(--u)) rgb(0 0 0 / calc(0.22 * var(--m-shadow))),
+    inset 0 calc(6 * var(--u)) calc(8 * var(--u)) calc(-6 * var(--u)) rgb(255 255 255 / calc(0.18 * var(--veil-k) * var(--m-bevel))),
+    inset calc(4 * var(--u)) 0 calc(8 * var(--u)) calc(-6 * var(--u)) rgb(255 255 255 / calc(0.07 * var(--veil-k) * var(--m-bevel))),
+    inset calc(-4 * var(--u)) 0 calc(8 * var(--u)) calc(-6 * var(--u)) rgb(255 255 255 / calc(0.04 * var(--veil-k) * var(--m-bevel))),
+    inset 0 calc(-6 * var(--u)) calc(8 * var(--u)) calc(-6 * var(--u)) rgb(0 0 0 / calc(0.08 * var(--veil-k) * var(--m-bevel)));
+}
+
+/* Text and icons on the glass blend with it. Icons are drawn opaque and
+   faded whole: a translucent color darkens where strokes overlap. Only
+   plain text and icons blend: Safari on iOS can leave a whole surface
+   undrawn when its blurred element holds a blended element that also
+   clips (the progress bar), and the slider's thumb would lose its white. */
+.glass .ink,
+.glass .ink-2 {
+  mix-blend-mode: var(--blend);
+}
+
+.glass .ink-2 { color: var(--ink-2); }
+
+/* WebKit (Safari 27 and every browser on iOS) now draws corner-shape, but
+   on a phone it fails to draw a backdrop filter clipped to a superellipse:
+   the player, the one surface that isn't a capsule, stayed blank until it
+   was dragged and then painted in patches. There the glass keeps plain
+   round corners; what isn't glass (the album art) keeps its continuous
+   ones. */
+[data-engine="webkit"] .glass { corner-shape: round; }
+
+/* Where the backdrop is drawn in WebGL (refract.js), the surfaces only add
+   their tint, rim light and ink over it. */
+.glass[data-refract-off] {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.glass svg.ink,
+.glass .ink svg { color: var(--ink-solid); opacity: var(--ink-a); }
+
+/* Switching theme or ink glides between the materials. While a setting is
+   being dragged nothing eases, so the glass follows the slider. */
+.glass {
+  transition:
+    --m-tint 620ms ease, --m-k 620ms ease, --m-thin 620ms ease, --m-dense 620ms ease,
+    --m-blur 620ms ease, --m-sat 620ms ease, --m-bri 620ms ease, --m-con 620ms ease,
+    --m-catch 620ms ease, --m-bevel 620ms ease, --m-shadow 620ms ease,
+    --density 500ms ease, --keep 500ms ease, --floor 500ms ease,
+    --ink 620ms ease, --ink-2 620ms ease, --ink-solid 620ms ease, --ink-a 620ms ease,
+    --well 620ms ease, --row-hover 620ms ease, --row-active 620ms ease,
+    box-shadow 620ms ease;
+}
+
+
+
+/* Without transparency, or with forced colors: a solid surface in the same
+   tint. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: color-mix(in srgb, var(--m-tint) 96%, transparent);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .glass { border: 1px solid CanvasText; background: Canvas; backdrop-filter: none; }
+}
+
 </style>
+<script>
+/* Glasswork — rim lens (MIT, github.com/kubai087/glasswork)
+   原文件是 ESM 模块，这里去掉 export 包成 IIFE 挂到 window，
+   以便内联进单文件页面（file:// 下 ES module 会被 CORS 拦截）。 */
+(function(){
+"use strict";
+/*
+ * The rim lens of Lumno's liquid glass, as a standalone module.
+ *
+ *   import { liquidGlass } from './lens.js';
+ *   const lens = liquidGlass(element, { rim: 40, edge: 1.1, power: 2.6, dispersion: 0.15 });
+ *   lens.update({ rim: 32 });   // change any option later
+ *   lens.destroy();
+ *
+ * The wallpaper behind a surface's rim bends inward, the way the edge of a
+ * thick glass slab refracts, and splits slightly into its colors there. An
+ * SVG displacement map drives the bend through `backdrop-filter: url(#…)`,
+ * which only Chromium draws; everywhere else nothing happens and the
+ * CSS-only glass stays. The element must put `var(--glass-lens,)` last in
+ * its backdrop-filter:
+ *
+ *   backdrop-filter: blur(2px) saturate(180%) var(--glass-lens,);
+ *
+ * Ported from lumno-extension (src/domain/liquid-glass-lens.ts and
+ * src/newtab/dom/liquid-glass.ts). The map is a nine-slice lens: only the
+ * rim bends, and a rim depends on the corner's radius and shape and the
+ * rim's width alone, so a lens is four corner tiles and four one-pixel edge
+ * strips (stretched along the sides) over a flat middle. The tiles are built
+ * and decoded once per rim and shared by every surface; a surface that
+ * resizes only moves its tiles.
+ */
+
+const LENS_DEFAULTS = {
+  // The widest the rim gets, in CSS pixels. Small surfaces narrow it to a
+  // third and a half of their short side, so they keep a flat middle.
+  rim: 40,
+  // How far inward the very edge samples the scene, in rim widths.
+  edge: 1.1,
+  // How fast the bend falls off across the rim: (1 - d / rim) ^ power.
+  power: 2.6,
+  // Red bends this much further and blue this much less; 0 for one pass.
+  dispersion: 0.15,
+  // The corner's radius in pixels and its superellipse exponent (2 is a
+  // circle, 2^k is CSS superellipse(k)); read from the element when null.
+  radius: null,
+  corner: null,
+  // Turns the lens off without destroying it.
+  enabled: true,
+  // The custom property the filter goes in.
+  property: '--glass-lens',
+};
+
+// A circular corner's exponent (CSS corner-shape: round).
+const ROUND_CORNER = 2;
+
+// Too small a surface has no flat middle to look through.
+const LENS_MIN_PX = 32;
+
+// While the rim keeps changing (a slider being dragged, a window being
+// resized), the lens already there bends to the new width and the new
+// tiles are built once it has been still this long.
+const SETTLE_MS = 140;
+
+const SVG = 'http://www.w3.org/2000/svg';
+
+// Only Chromium draws url() in backdrop-filter. Firefox parses it and draws
+// nothing; Safari (and every browser on iOS) draws none of it either.
+function isLensSupported() {
+  if (typeof CSS === 'undefined' || !CSS.supports?.('backdrop-filter', 'url(#a)')) return false;
+  const ua = navigator.userAgent;
+  return /Chrome\//.test(ua) && !/Firefox\//.test(ua);
+}
+
+// The superellipse exponent of a computed CSS corner-shape. round is a
+// circle and squircle is superellipse(2); anything else reads as round.
+function cornerExponent(shape) {
+  const value = String(shape || '').trim();
+  if (value === 'squircle') return 4;
+  const match = /^superellipse\(\s*([^)\s]+)\s*\)$/.exec(value);
+  const k = match ? Number(match[1]) : Number.NaN;
+  return Number.isFinite(k) && k >= 0 ? 2 ** k : ROUND_CORNER;
+}
+
+// ---------- The map ----------
+
+// How much of the rim's bend a point keeps, `depth` of the way across it.
+function rimStrength(depth, power) {
+  return depth >= 1 ? 0 : (1 - Math.max(0, depth)) ** power;
+}
+
+// The rim's contours run from the outline (depth 0) to the rim's inner edge
+// (depth 1), each the outline inset by that share of the rim. A corner
+// tighter than the rim widens its inner contours toward one as wide as the
+// rim, so the bend turns the corner smoothly instead of snapping along the
+// diagonal (a seam the color split would light).
+function contourRadius(depth, radius, bezel) {
+  if (radius >= bezel) return radius - depth * bezel;
+  return (1 - depth) * (radius + (bezel - radius) * depth * (2 - depth));
+}
+
+function isWithinContour(x, y, depth, radius, bezel, corner) {
+  const inset = depth * bezel;
+  if (x < inset || y < inset) return false;
+  const curve = contourRadius(depth, radius, bezel);
+  const center = inset + curve;
+  if (x >= center || y >= center) return true;
+  return ((center - x) / curve) ** corner + ((center - y) / curve) ** corner <= 1;
+}
+
+// The inward bend at a point `x` and `y` from a corner's two edges.
+function bendNearCorner(x, y, radius, bezel, corner, power) {
+  if (isWithinContour(x, y, 1, radius, bezel, corner)) return [0, 0];
+  let depth = 0;
+  if (isWithinContour(x, y, 0, radius, bezel, corner)) {
+    // The contours are nested, so the depth a point lies at is found by halving.
+    let low = 0;
+    let high = 1;
+    // 14 halvings place a point within 1/16000 of the rim: finer than a pixel.
+    for (let step = 0; step < 14; step += 1) {
+      const middle = (low + high) / 2;
+      if (isWithinContour(x, y, middle, radius, bezel, corner)) low = middle;
+      else high = middle;
+    }
+    depth = low;
+  }
+  const strength = rimStrength(depth, power);
+  const curve = contourRadius(depth, radius, bezel);
+  const center = depth * bezel + curve;
+  if (x < center && y < center && curve > 0) {
+    // Across the corner's curve: along its normal.
+    const nx = Math.max(0, (center - x) / curve) ** (corner - 1);
+    const ny = Math.max(0, (center - y) / curve) ** (corner - 1);
+    const length = Math.hypot(nx, ny) || 1;
+    return [(nx / length) * strength, (ny / length) * strength];
+  }
+  return x < y ? [strength, 0] : [0, strength];
+}
+
+// Inward offset at a point: unit direction times strength (1 at the rim's
+// outer edge, 0 in the flat middle).
+function rimDisplacement(x, y, width, height, { bezel, radius, corner = ROUND_CORNER, power = LENS_DEFAULTS.power }) {
+  const rim = Math.min(bezel, height / 2, width / 2);
+  const r = Math.max(0, Math.min(radius, width / 2, height / 2));
+  const [inwardX, inwardY] = bendNearCorner(Math.min(x, width - x), Math.min(y, height - y), r, rim, corner, power);
+  if (inwardX === 0 && inwardY === 0) return [0, 0];
+  return [x < width / 2 ? inwardX : -inwardX, y < height / 2 ? inwardY : -inwardY];
+}
+
+// Where each tile sits on a surface of this size: corners (top left, top
+// right, bottom left, bottom right) then edges (top, bottom, left, right).
+function lensLayout(width, height, size) {
+  const across = Math.max(1, width - size * 2);
+  const down = Math.max(1, height - size * 2);
+  return [
+    [0, 0, size, size],
+    [width - size, 0, size, size],
+    [0, height - size, size, size],
+    [width - size, height - size, size, size],
+    [size, 0, across, size],
+    [size, height - size, across, size],
+    [0, size, size, down],
+    [width - size, size, size, down],
+  ];
+}
+
+// The tiles' pixels, read off a probe surface one pixel wider than two
+// tiles. Red is the sideways bend and green the vertical one, 128 none.
+function tilePixels(radius, bezel, corner, power) {
+  const size = Math.max(1, Math.ceil(Math.max(radius, bezel)));
+  const probe = size * 2 + 1;
+  const geometry = { bezel, radius, corner, power };
+  return {
+    size,
+    tiles: lensLayout(probe, probe, size).map(([left, top, w, h]) => {
+      const data = new Uint8ClampedArray(w * h * 4);
+      for (let y = 0; y < h; y += 1) {
+        for (let x = 0; x < w; x += 1) {
+          const [dx, dy] = rimDisplacement(left + x + 0.5, top + y + 0.5, probe, probe, geometry);
+          const i = (y * w + x) * 4;
+          data[i] = Math.round(128 + dx * 127);
+          data[i + 1] = Math.round(128 + dy * 127);
+          data[i + 2] = 128;
+          data[i + 3] = 255;
+        }
+      }
+      return { width: w, height: h, data };
+    }),
+  };
+}
+
+// Tiles for one rim, as decoded PNG data URLs: a filter whose images are
+// still decoding draws without its blur, so no surface points at one early.
+const tileCache = new Map();
+const TILE_CACHE_MAX = 48;
+
+function lensTiles(radius, bezel, corner, power) {
+  const key = `${radius}:${bezel}:${corner.toFixed(3)}:${power.toFixed(3)}`;
+  let entry = tileCache.get(key);
+  if (entry) {
+    // Most recently used last.
+    tileCache.delete(key);
+    tileCache.set(key, entry);
+    return entry;
+  }
+  const { size, tiles } = tilePixels(radius, bezel, corner, power);
+  // Encoded with toBlob, which compresses off the main thread, and kept as
+  // object URLs for as long as the page lives (a rim's tiles are small).
+  entry = Promise.all(tiles.map((tile) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = tile.width;
+    canvas.height = tile.height;
+    const context = canvas.getContext('2d');
+    const image = context.createImageData(tile.width, tile.height);
+    image.data.set(tile.data);
+    context.putImageData(image, 0, 0);
+    return new Promise((resolve) => canvas.toBlob(resolve, 'image/png')).then(async (blob) => {
+      const url = blob ? URL.createObjectURL(blob) : canvas.toDataURL('image/png');
+      const decoded = new Image();
+      decoded.src = url;
+      await decoded.decode().catch(() => {});
+      return url;
+    });
+  })).then((urls) => ({ size, urls }));
+  tileCache.set(key, entry);
+  while (tileCache.size > TILE_CACHE_MAX) tileCache.delete(tileCache.keys().next().value);
+  return entry;
+}
+
+// ---------- The filter ----------
+
+function node(tag, attrs, parent) {
+  const el = document.createElementNS(SVG, tag);
+  for (const [name, value] of Object.entries(attrs)) el.setAttribute(name, value);
+  parent?.append(el);
+  return el;
+}
+
+let filterCount = 0;
+
+// The lens tiles over a flat flood make the map; the backdrop is displaced
+// by it once, or once per color channel by its own share of the bend, the
+// three added back together (screen on single channels is a sum). Each
+// filter gets an <svg> of its own: adding one to an <svg> that holds others
+// can make Chrome reload all their images, and a backdrop naming a filter
+// whose images are reloading drops its blur.
+function buildFilter(width, height, tiles, split) {
+  const id = `liquid-glass-lens-${++filterCount}`;
+  const host = node('svg', {
+    'aria-hidden': 'true', width: 0, height: 0,
+    style: 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none',
+  });
+  const filter = node('filter', {
+    id, filterUnits: 'userSpaceOnUse', 'color-interpolation-filters': 'sRGB', x: 0, y: 0, width, height,
+  }, host);
+  node('feFlood', { 'flood-color': 'rgb(128,128,128)', result: 'flat' }, filter);
+  const rects = lensLayout(width, height, tiles.size);
+  const pieces = rects.map(([x, y, w, h], index) => node('feImage', {
+    href: tiles.urls[index], preserveAspectRatio: 'none', x, y, width: w, height: h, result: `t${index}`,
+  }, filter));
+  const merge = node('feMerge', { result: 'map' }, filter);
+  node('feMergeNode', { in: 'flat' }, merge);
+  rects.forEach((_, index) => node('feMergeNode', { in: `t${index}` }, merge));
+  const passes = [];
+  const pass = () => {
+    passes.push({
+      el: node('feDisplacementMap', { in: 'SourceGraphic', in2: 'map', xChannelSelector: 'R', yChannelSelector: 'G', scale: 0 }, filter),
+    });
+  };
+  if (split) {
+    ['r', 'g', 'b'].forEach((name, channel) => {
+      pass();
+      // Keeps this channel and alpha: a 1 on the 4x5 matrix's diagonal.
+      const keep = Array.from({ length: 20 }, (_, cell) => Number(cell === channel * 6 || cell === 18)).join(' ');
+      node('feColorMatrix', { type: 'matrix', values: keep, result: name }, filter);
+    });
+    node('feBlend', { in: 'r', in2: 'g', mode: 'screen' }, filter);
+    node('feBlend', { in2: 'b', mode: 'screen' }, filter);
+  } else {
+    pass();
+  }
+  document.body.append(host);
+  return { id, host, filter, pieces, passes, tiles };
+}
+
+function placeFilter(lens, width, height) {
+  lens.filter.setAttribute('width', width);
+  lens.filter.setAttribute('height', height);
+  lensLayout(width, height, lens.tiles.size).forEach(([x, y, w, h], index) => {
+    const piece = lens.pieces[index];
+    piece.setAttribute('x', x);
+    piece.setAttribute('y', y);
+    piece.setAttribute('width', w);
+    piece.setAttribute('height', h);
+  });
+}
+
+// ---------- A surface ----------
+
+/*
+ * Gives `el` a rim lens in its --glass-lens property and keeps it fitted as
+ * the element resizes. Returns { supported, bezel, update(options),
+ * refresh(), destroy() }.
+ */
+function liquidGlass(el, options = {}) {
+  let opts = { ...LENS_DEFAULTS, ...options };
+  const supported = isLensSupported();
+  let current = null; // { key, lens, width, height }
+  let token = 0;
+  let frame = 0;
+  let lastChange = 0;
+  let settle = 0;
+  let observer = null;
+  const api = {
+    supported,
+    bezel: 0,
+    update(next = {}) {
+      opts = { ...opts, ...next };
+      schedule();
+    },
+    refresh: () => schedule(),
+    destroy,
+  };
+  if (!supported) {
+    // Nothing to draw: every call is a no-op.
+    api.update = () => {};
+    api.refresh = () => {};
+    api.destroy = () => {};
+    return api;
+  }
+
+  function clear() {
+    token += 1;
+    el.style.removeProperty(opts.property);
+    current?.lens.host.remove();
+    current = null;
+  }
+
+  function setScale(lens, bezel) {
+    const scale = 2 * opts.edge * bezel;
+    const split = lens.passes.length > 1;
+    lens.passes.forEach((p, channel) => {
+      const share = split ? 1 + (1 - channel) * opts.dispersion : 1;
+      p.el.setAttribute('scale', (scale * share).toFixed(1));
+    });
+  }
+
+  async function fit() {
+    frame = 0;
+    const width = Math.round(el.offsetWidth);
+    const height = Math.round(el.offsetHeight);
+    if (!opts.enabled || width < LENS_MIN_PX || height < LENS_MIN_PX) {
+      clear();
+      return;
+    }
+    const style = getComputedStyle(el);
+    const cssRadius = Number.parseFloat(style.borderTopLeftRadius) || 0;
+    const radius = Math.round(Math.min(opts.radius ?? cssRadius, width / 2, height / 2));
+    const corner = opts.corner ?? cornerExponent(style.getPropertyValue('corner-top-left-shape'));
+    const bezel = Math.round(Math.max(4, Math.min(opts.rim, Math.min(width, height) / 3.5)));
+    const split = opts.dispersion > 0;
+    const key = `${radius}:${bezel}:${corner.toFixed(3)}:${opts.power.toFixed(3)}:${split}`;
+    api.bezel = bezel;
+    if (current?.key === key) {
+      if (current.width !== width || current.height !== height) {
+        placeFilter(current.lens, width, height);
+        current.width = width;
+        current.height = height;
+      }
+      setScale(current.lens, bezel);
+      return;
+    }
+    const now = performance.now();
+    const settling = current && now - lastChange < SETTLE_MS;
+    lastChange = now;
+    if (settling) {
+      if (current.width !== width || current.height !== height) {
+        placeFilter(current.lens, width, height);
+        current.width = width;
+        current.height = height;
+      }
+      setScale(current.lens, bezel);
+      clearTimeout(settle);
+      settle = setTimeout(schedule, SETTLE_MS);
+      return;
+    }
+    // New tiles can take a few frames; until then the lens in use covers
+    // the new size, so no part of the surface goes without it.
+    if (current && (current.width !== width || current.height !== height)) {
+      placeFilter(current.lens, width, height);
+      current.width = width;
+      current.height = height;
+      setScale(current.lens, bezel);
+    }
+    const mine = ++token;
+    const tiles = await lensTiles(radius, bezel, corner, opts.power);
+    if (mine !== token) return;
+    const lens = buildFilter(width, height, tiles, split);
+    setScale(lens, bezel);
+    const previous = current;
+    current = { key, lens, width, height };
+    el.style.setProperty(opts.property, `url(#${lens.id})`);
+    // Let the new filter draw before the old one goes.
+    if (previous) requestAnimationFrame(() => requestAnimationFrame(() => previous.lens.host.remove()));
+  }
+
+  function schedule() {
+    if (!frame) frame = requestAnimationFrame(fit);
+  }
+
+  observer = new ResizeObserver(schedule);
+  observer.observe(el);
+
+  function destroy() {
+    observer.disconnect();
+    cancelAnimationFrame(frame);
+    clearTimeout(settle);
+    clear();
+  }
+
+  schedule();
+  return api;
+}
+
+window.liquidGlass = liquidGlass;
+window.glassworkLensDefaults = LENS_DEFAULTS;
+})();
+
+</script>
 <script>
 /**
  * 主题切换：浅色 / 深色。
@@ -915,6 +1592,35 @@ html[data-theme="dark"] .theme__moon{display:none}
     if (meta) meta.setAttribute("content", mode === "dark" ? "#0C0C0E" : "#FAFAFA");
     if (persist) {
       try { localStorage.setItem(KEY, mode); } catch (e) {}
+    }
+    syncGlassKind(mode);
+  }
+
+  /* 玻璃有两套材质（light / dark），靠 data-kind 切换。
+     主题一变就要同步，否则深色背景上会浮着浅色玻璃。 */
+  function syncGlassKind(mode) {
+    var els = document.querySelectorAll(".glass");
+    for (var i = 0; i < els.length; i++) {
+      els[i].setAttribute("data-kind", mode === "dark" ? "dark" : "light");
+    }
+  }
+
+  /* 边缘折射：Glasswork 的 lens.js 把 SVG 位移贴图写进 --glass-lens。
+     只有 Chromium 的 backdrop-filter 支持 url() 滤镜，其他浏览器保持纯 CSS 玻璃。 */
+  function initGlassLens() {
+    if (typeof window.liquidGlass !== "function") return;
+    var els = document.querySelectorAll(".glass");
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.getAttribute("data-lens") === "on") continue;
+      el.setAttribute("data-lens", "on");
+      try {
+        // rim 比默认宽、色散更明显 —— 我们的背景是低对比 mesh 渐变，
+        // 用 40/0.15 这套照片壁纸的参数几乎看不出折射。
+        window.liquidGlass(el, { rim: 56, edge: 1.15, power: 2.2, dispersion: 0.24 });
+      } catch (e) {
+        el.setAttribute("data-lens", "off");
+      }
     }
   }
 
@@ -952,10 +1658,23 @@ html[data-theme="dark"] .theme__moon{display:none}
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bind);
-  } else {
+  // iOS / Safari 上 backdrop-filter 与超椭圆圆角同时出现会画不出内容，
+  // glass.css 里 [data-engine="webkit"] .glass 会退回普通圆角。
+  if (/^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent) ||
+      /iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    document.documentElement.setAttribute("data-engine", "webkit");
+  }
+
+  function boot() {
     bind();
+    syncGlassKind(root.getAttribute("data-theme") || "light");
+    initGlassLens();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
   }
 })();
 
@@ -976,7 +1695,7 @@ html[data-theme="dark"] .theme__moon{display:none}
         <a class="nav__link" href="#about">关于</a>
         <a class="nav__link" href="#contact">联系</a>
       </nav>
-      <button class="theme" id="themeToggle" type="button" aria-label="切换深浅主题">
+      <button class="theme glass" id="themeToggle" type="button" aria-label="切换深浅主题">
         <svg class="theme__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
@@ -1054,13 +1773,13 @@ html[data-theme="dark"] .theme__moon{display:none}
       </div>
 
       <div class="filters reveal" id="filters" role="group" aria-label="按类型筛选作品">
-        <button class="filter is-active" type="button" data-cat="all">全部</button>
-        <button class="filter" type="button" data-cat="tool">桌面工具</button>
-        <button class="filter" type="button" data-cat="web">网页应用</button>
-        <button class="filter" type="button" data-cat="game">游戏</button>
-        <button class="filter" type="button" data-cat="mobile">移动端</button>
-        <button class="filter" type="button" data-cat="art">生成艺术</button>
-        <button class="filter" type="button" data-cat="skill">Skill</button>
+        <button class="filter is-active glass" type="button" data-cat="all">全部</button>
+        <button class="filter glass" type="button" data-cat="tool">桌面工具</button>
+        <button class="filter glass" type="button" data-cat="web">网页应用</button>
+        <button class="filter glass" type="button" data-cat="game">游戏</button>
+        <button class="filter glass" type="button" data-cat="mobile">移动端</button>
+        <button class="filter glass" type="button" data-cat="art">生成艺术</button>
+        <button class="filter glass" type="button" data-cat="skill">Skill</button>
         <span class="filter__count" id="filterCount">19 / 19</span>
       </div>
 
@@ -1241,7 +1960,7 @@ html[data-theme="dark"] .theme__moon{display:none}
         </div>
       </div>
       <div class="reveal" style="--delay:120ms">
-        <div class="contact__note">
+        <div class="contact__note glass">
           <p class="contact__note-label">合作方式</p>
           <ul class="contact__note-list">
             <li>完整项目交付 —— 从需求拆解到上线</li>
