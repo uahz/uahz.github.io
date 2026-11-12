@@ -97,10 +97,11 @@ python -m http.server 8900
 
 ```bash
 node scripts/verify-site.cjs       # 本地结构：10 组 306 项断言
-node scripts/browser-check.cjs     # 浏览器实测：22 项（渲染 / 筛选 / 跳转 / 运行时异常）
-node scripts/check-links.cjs       # 外链存活：28 个链接，仓库被删会报错
-node scripts/check-live.cjs        # 线上抽检：内容 / 筛选项 / demo 链接可达性
-node scripts/verify-live-bytes.cjs # 线上与本地字节级一致性
+node scripts/browser-check.cjs       # 浏览器实测：22 项（渲染 / 筛选 / 跳转 / 运行时异常）
+node scripts/check-links.cjs         # 外链存活：28 个链接，仓库被删会报错
+node scripts/check-not-base64.cjs    # ★ 线上内容完整性：确认 Pages 返回的不是 base64 文本
+node scripts/check-live.cjs          # 线上抽检：内容 / 筛选项 / demo 链接可达性
+node scripts/verify-live-bytes.cjs   # 线上与本地字节级一致性
 ```
 
 `browser-check.cjs` 用 CDP 驱动 Edge（不装 playwright），覆盖真实渲染、筛选交互、
@@ -108,6 +109,17 @@ node scripts/verify-live-bytes.cjs # 线上与本地字节级一致性
 
 **注意**：headless Edge 默认 `prefers-reduced-motion: reduce`，粒子等动效会被正确关闭。
 脚本里已用 `Emulation.setEmulatedMedia` 模拟普通用户环境，否则测不到动效。
+
+### ★ 每次部署后必须跑 `check-not-base64.cjs`
+
+**踩过的坑**：Git Data API 的 `git/trees` 里 `content` 字段要的是**纯文本内容**，
+不是 base64（只有 Contents API 才要 base64）。若误传 base64，GitHub 会把那串字符
+当文件内容原样存下 —— **API 返回 200、Pages 显示 built、curl 状态码 200 全部正常**，
+但浏览器打开是一整段 base64 乱码。只验状态码永远发现不了。
+
+`deploy.cjs` 已修正为 `buf.toString("utf8")`。部署脚本本身也要当心：
+在字符串上调用 `.toString("base64")` 是 no-op（会返回字符串本身），
+看着像编码其实没编码，别写成那样误导人。
 
 ## 同步 GitHub 变更
 
