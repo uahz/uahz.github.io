@@ -1,1 +1,69 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIiIi5oyJ6KGM5Y+35pu/5o2iIG1haW4uanMg5Lit55qEIHNwbGl0VGV4dCDlh73mlbDvvIjpgb/lhY0gRWRpdCDlt6XlhbfnmoTkuI3lj6/op4HlrZfnrKbljLnphY3pl67popjvvIkiIiIKaW1wb3J0IGlvCmltcG9ydCBvcwoKUCA9IG9zLnBhdGguam9pbihvcy5wYXRoLmRpcm5hbWUob3MucGF0aC5hYnNwYXRoKF9fZmlsZV9fKSksICIuLiIsICJhc3NldHMiLCAianMiLCAibWFpbi5qcyIpCgpORVcgPSAnJycgIGZ1bmN0aW9uIHNwbGl0VGV4dCgpIHsKICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoIltkYXRhLXNwbGl0XSIpLmZvckVhY2goZnVuY3Rpb24gKHJvb3QpIHsKICAgICAgLy8g5ouG5LmL5YmN5YWI6K6w5L2P5YaF6YOo5ZOq5Lqb5a2Q5YWD57Sg5bimIGNsYXNzCiAgICAgIHZhciBpbm5lciA9IFtdOwogICAgICByb290LnF1ZXJ5U2VsZWN0b3JBbGwoIioiKS5mb3JFYWNoKGZ1bmN0aW9uIChlbCkgewogICAgICAgIGlmIChlbC5jbGFzc05hbWUpIGlubmVyLnB1c2goeyBlbDogZWwsIGNsczogZWwuY2xhc3NOYW1lIH0pOwogICAgICB9KTsKCiAgICAgIC8vIOWPquWvuSByb290IOeahOebtOaOpeaWh+acrOiKgueCueWBmuaLhuWIhu+8jOS/neeVmeWtkOWFg+e0oOe7k+aehAogICAgICBBcnJheS5wcm90b3R5cGUuc2xpY2UuY2FsbChyb290LmNoaWxkTm9kZXMpLmZvckVhY2goZnVuY3Rpb24gKG5vZGUpIHsKICAgICAgICBpZiAobm9kZS5ub2RlVHlwZSAhPT0gMykgcmV0dXJuOwogICAgICAgIHZhciB0eHQgPSBub2RlLnRleHRDb250ZW50OwogICAgICAgIGlmICghdHh0LnRyaW0oKSkgcmV0dXJuOwogICAgICAgIHZhciBmcmFnID0gZG9jdW1lbnQuY3JlYXRlRG9jdW1lbnRGcmFnbWVudCgpOwogICAgICAgIHR4dC5zcGxpdCgiIikuZm9yRWFjaChmdW5jdGlvbiAoY2gpIHsKICAgICAgICAgIHZhciBzID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic3BhbiIpOwogICAgICAgICAgcy50ZXh0Q29udGVudCA9IGNoID09PSAiICIgPyAiICIgOiBjaDsKICAgICAgICAgIGZyYWcuYXBwZW5kQ2hpbGQocyk7CiAgICAgICAgfSk7CiAgICAgICAgcm9vdC5yZXBsYWNlQ2hpbGQoZnJhZywgbm9kZSk7CiAgICAgIH0pOwoKICAgICAgLy8g6K6p5YaF5bGC5YWD57Sg77yI5aaC5riQ5Y+YIHNwYW7vvInph4znmoTlrZfkuZ/lj4LkuI7pgJDlrZfliqjnlLsKICAgICAgaW5uZXIuZm9yRWFjaChmdW5jdGlvbiAocmVjKSB7CiAgICAgICAgdmFyIHR4dCA9IHJlYy5lbC50ZXh0Q29udGVudDsKICAgICAgICByZWMuZWwudGV4dENvbnRlbnQgPSAiIjsKICAgICAgICB0eHQuc3BsaXQoIiIpLmZvckVhY2goZnVuY3Rpb24gKGNoKSB7CiAgICAgICAgICB2YXIgcyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNwYW4iKTsKICAgICAgICAgIHMudGV4dENvbnRlbnQgPSBjaCA9PT0gIiAiID8gIiAiIDogY2g7CiAgICAgICAgICByZWMuZWwuYXBwZW5kQ2hpbGQocyk7CiAgICAgICAgfSk7CiAgICAgIH0pOwogICAgfSk7CiAgfScnJwoKd2l0aCBpby5vcGVuKFAsICJyIiwgZW5jb2Rpbmc9InV0Zi04IiwgbmV3bGluZT0iIikgYXMgZjoKICAgIGxpbmVzID0gZi5yZWFkbGluZXMoKQoKIyDlrprkvY0gZnVuY3Rpb24gc3BsaXRUZXh0KCkg5Yiw5YW26Zet5ZCI55qEICIgIH0iCnN0YXJ0ID0gTm9uZQpmb3IgaSwgbCBpbiBlbnVtZXJhdGUobGluZXMpOgogICAgaWYgbC5yc3RyaXAoIlxyXG4iKS5zdHJpcCgpID09ICJmdW5jdGlvbiBzcGxpdFRleHQoKSB7IjoKICAgICAgICBzdGFydCA9IGkKICAgICAgICBicmVhawppZiBzdGFydCBpcyBOb25lOgogICAgcmFpc2UgU3lzdGVtRXhpdCgi5pyq5om+5YiwIHNwbGl0VGV4dCIpCgplbmQgPSBOb25lCmZvciBqIGluIHJhbmdlKHN0YXJ0ICsgMSwgbGVuKGxpbmVzKSk6CiAgICBpZiBsaW5lc1tqXS5yc3RyaXAoIlxyXG4iKSA9PSAiICB9IjoKICAgICAgICBlbmQgPSBqCiAgICAgICAgYnJlYWsKaWYgZW5kIGlzIE5vbmU6CiAgICByYWlzZSBTeXN0ZW1FeGl0KCLmnKrmib7liLDlh73mlbDnu5PlsL4iKQoKcHJpbnQoIuabv+aNouesrCAlZC4uJWQg6KGMIiAlIChzdGFydCArIDEsIGVuZCArIDEpKQpwcmludCgi5Y6f5YaF5a656aaW6KGMOiIsIGxpbmVzW3N0YXJ0XS5yc3RyaXAoKSkKCm91dCA9IGxpbmVzWzpzdGFydF0gKyBbTkVXICsgIlxuIl0gKyBsaW5lc1tlbmQgKyAxOl0Kd2l0aCBpby5vcGVuKFAsICJ3IiwgZW5jb2Rpbmc9InV0Zi04IiwgbmV3bGluZT0iIikgYXMgZjoKICAgIGYud3JpdGVsaW5lcyhvdXQpCnByaW50KCLlhpnlhaXlrozmiJAiKQo=
+# -*- coding: utf-8 -*-
+"""按行号替换 main.js 中的 splitText 函数（避免 Edit 工具的不可见字符匹配问题）"""
+import io
+import os
+
+P = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "js", "main.js")
+
+NEW = '''  function splitText() {
+    document.querySelectorAll("[data-split]").forEach(function (root) {
+      // 拆之前先记住内部哪些子元素带 class
+      var inner = [];
+      root.querySelectorAll("*").forEach(function (el) {
+        if (el.className) inner.push({ el: el, cls: el.className });
+      });
+
+      // 只对 root 的直接文本节点做拆分，保留子元素结构
+      Array.prototype.slice.call(root.childNodes).forEach(function (node) {
+        if (node.nodeType !== 3) return;
+        var txt = node.textContent;
+        if (!txt.trim()) return;
+        var frag = document.createDocumentFragment();
+        txt.split("").forEach(function (ch) {
+          var s = document.createElement("span");
+          s.textContent = ch === " " ? " " : ch;
+          frag.appendChild(s);
+        });
+        root.replaceChild(frag, node);
+      });
+
+      // 让内层元素（如渐变 span）里的字也参与逐字动画
+      inner.forEach(function (rec) {
+        var txt = rec.el.textContent;
+        rec.el.textContent = "";
+        txt.split("").forEach(function (ch) {
+          var s = document.createElement("span");
+          s.textContent = ch === " " ? " " : ch;
+          rec.el.appendChild(s);
+        });
+      });
+    });
+  }'''
+
+with io.open(P, "r", encoding="utf-8", newline="") as f:
+    lines = f.readlines()
+
+# 定位 function splitText() 到其闭合的 "  }"
+start = None
+for i, l in enumerate(lines):
+    if l.rstrip("\r\n").strip() == "function splitText() {":
+        start = i
+        break
+if start is None:
+    raise SystemExit("未找到 splitText")
+
+end = None
+for j in range(start + 1, len(lines)):
+    if lines[j].rstrip("\r\n") == "  }":
+        end = j
+        break
+if end is None:
+    raise SystemExit("未找到函数结尾")
+
+print("替换第 %d..%d 行" % (start + 1, end + 1))
+print("原内容首行:", lines[start].rstrip())
+
+out = lines[:start] + [NEW + "\n"] + lines[end + 1:]
+with io.open(P, "w", encoding="utf-8", newline="") as f:
+    f.writelines(out)
+print("写入完成")

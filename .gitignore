@@ -1,1 +1,8 @@
-LkRTX1N0b3JlClRodW1icy5kYgoqLmxvZwoKIyDmnKzlnLDkuLTml7bkuqfniakKLmdoLWxhdGVzdC5qc29uCi5naC1uZXcuanNvbgouc2hvdHMvCg==
+.DS_Store
+Thumbs.db
+*.log
+
+# 本地临时产物
+.gh-latest.json
+.gh-new.json
+.shots/

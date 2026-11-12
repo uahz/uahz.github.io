@@ -1,1 +1,16 @@
-LyoqIOWIl+WHuuavj+S4qumhueebrueahCBkZW1vIOmTvuaOpeexu+Wei++8iOWcqOe6v+ermeeCuSAvIOS7k+W6k++8iSAqLwpjb25zdCBmcyA9IHJlcXVpcmUoImZzIik7CmNvbnN0IHBhdGggPSByZXF1aXJlKCJwYXRoIik7CmNvbnN0IGQgPSBmcy5yZWFkRmlsZVN5bmMocGF0aC5qb2luKF9fZGlybmFtZSwgIi4uIiwgImFzc2V0cyIsICJqcyIsICJwcm9qZWN0cy5qcyIpLCAidXRmOCIpOwoKY29uc3QgcmUgPSAvaWQ6XHMqIihbXiJdKykiW1xzXFNdKj9kZW1vOlxzKiIoW14iXSspIi9nOwpsZXQgbTsKbGV0IG9ubGluZSA9IDAsIHJlcG8gPSAwOwpjb25zdCByb3dzID0gW107CndoaWxlICgobSA9IHJlLmV4ZWMoZCkpKSB7CiAgY29uc3QgaXNPbmxpbmUgPSBtWzJdLmluZGV4T2YoImdpdGh1Yi5jb20vIikgPT09IC0xOwogIGlzT25saW5lID8gb25saW5lKysgOiByZXBvKys7CiAgcm93cy5wdXNoKFtpc09ubGluZSA/ICLlnKjnur8iIDogIuS7k+W6kyIsIG1bMV0sIG1bMl1dKTsKfQpyb3dzLmZvckVhY2goKHIpID0+IGNvbnNvbGUubG9nKCIgICIgKyByWzBdICsgIiAgIiArIHJbMV0ucGFkRW5kKDI4KSArIHJbMl0pKTsKY29uc29sZS5sb2coIlxu5pyJ5Zyo57q/56uZ54K5OiAiICsgb25saW5lICsgIiAg5LuF5LuT5bqTOiAiICsgcmVwbyArICIgIOWQiOiuoTogIiArIChvbmxpbmUgKyByZXBvKSk7Cg==
+/** 列出每个项目的 demo 链接类型（在线站点 / 仓库） */
+const fs = require("fs");
+const path = require("path");
+const d = fs.readFileSync(path.join(__dirname, "..", "assets", "js", "projects.js"), "utf8");
+
+const re = /id:\s*"([^"]+)"[\s\S]*?demo:\s*"([^"]+)"/g;
+let m;
+let online = 0, repo = 0;
+const rows = [];
+while ((m = re.exec(d))) {
+  const isOnline = m[2].indexOf("github.com/") === -1;
+  isOnline ? online++ : repo++;
+  rows.push([isOnline ? "在线" : "仓库", m[1], m[2]]);
+}
+rows.forEach((r) => console.log("  " + r[0] + "  " + r[1].padEnd(28) + r[2]));
+console.log("\n有在线站点: " + online + "  仅仓库: " + repo + "  合计: " + (online + repo));

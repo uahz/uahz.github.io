@@ -1,1 +1,49 @@
-LyoqIOe6v+S4iuWGheWuueaKveajgO+8muehruiupOmDqOe9sueahOS6p+eJqeS4juacrOWcsOS4gOiHtCAqLwpjb25zdCBodHRwcyA9IHJlcXVpcmUoImh0dHBzIik7CgpmdW5jdGlvbiBnZXQodXJsKSB7CiAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXMsIHJlaikgPT4gewogICAgaHR0cHMuZ2V0KHVybCwgeyBoZWFkZXJzOiB7ICJVc2VyLUFnZW50IjogImNoZWNrIiB9IH0sIChyKSA9PiB7CiAgICAgIGxldCBzID0gIiI7CiAgICAgIHIub24oImRhdGEiLCAoZCkgPT4gKHMgKz0gZCkpOwogICAgICByLm9uKCJlbmQiLCAoKSA9PiByZXMocykpOwogICAgfSkub24oImVycm9yIiwgcmVqKTsKICB9KTsKfQoKKGFzeW5jICgpID0+IHsKICBjb25zdCBiYXNlID0gImh0dHBzOi8vdWFoei5naXRodWIuaW8iOwogIGNvbnNvbGUubG9nKCI9PT0gcHJvamVjdHMuanMg5pWw5o2u5oq95qOAID09PSIpOwogIGNvbnN0IGpzID0gYXdhaXQgZ2V0KGJhc2UgKyAiL2Fzc2V0cy9qcy9wcm9qZWN0cy5qcyIpOwogIGNvbnN0IGlkcyA9IFsuLi5qcy5tYXRjaEFsbCgvXlxzKmlkOlxzKiIoW14iXSspIi9nbSldLm1hcCgobSkgPT4gbVsxXSk7CiAgY29uc3QgYmFubmVkID0gWyJKY0pnYW1lIiwgImZpbGUtbWFyay1yZW1vdmVyIiwgIm15LXRpa3UtYXBpIl07CiAgY29uc29sZS5sb2coIiAg6aG555uu5pWwOiIsIGlkcy5sZW5ndGgpOwogIGNvbnNvbGUubG9nKCIgIOiiq+aOkumZpOeahCAzIOS4quaYr+WQpua3t+WFpToiLCBiYW5uZWQuZmlsdGVyKCh4KSA9PiBpZHMuaW5jbHVkZXMoeCkpLmpvaW4oIiwgIikgfHwgIuWQpiDinJMiKTsKICBjb25zb2xlLmxvZygiICDliY0gNSDkuKo6IiwgaWRzLnNsaWNlKDAsIDUpLmpvaW4oIiwgIikpOwogIGNvbnNvbGUubG9nKCIgIOacqyAzIOS4qjoiLCBpZHMuc2xpY2UoLTMpLmpvaW4oIiwgIikpOwoKICBjb25zb2xlLmxvZygiXG49PT0gd29yay5odG1sIOaKveajgCA9PT0iKTsKICBjb25zdCB3ID0gYXdhaXQgZ2V0KGJhc2UgKyAiL3dvcmsuaHRtbCIpOwogIGNvbnNvbGUubG9nKCIgIHRpdGxlOiIsICh3Lm1hdGNoKC88dGl0bGU+KFtePF0rKS8pIHx8IFtdKVsxXSk7CiAgY29uc3QgZmJzID0gWy4uLncubWF0Y2hBbGwoL2RhdGEtZj0iKFx3KykiL2cpXS5tYXAoKG0pID0+IG1bMV0pOwogIGNvbnNvbGUubG9nKCIgIOetm+mAiemhuToiLCBmYnMuam9pbigiLCAiKSk7CiAgY29uc29sZS5sb2coIiAg5byVIHByb2plY3RzLmpzOiIsIC9wcm9qZWN0c1wuanMvLnRlc3QodykpOwoKICBjb25zb2xlLmxvZygiXG49PT0g5YWz6ZSu6aG555uu6ZO+5o6l5oq95qOA77yI57q/5LiK5Y+v6K6/6Zeu5oCn77yJPT09Iik7CiAgY29uc3QgbGlua3MgPSBbLi4uanMubWF0Y2hBbGwoL2RlbW86XHMqIihodHRwczpbXiJdKykiL2cpXS5tYXAoKG0pID0+IG1bMV0pOwogIGNvbnNvbGUubG9nKCIgIGRlbW8g6ZO+5o6l5oC75pWwOiIsIGxpbmtzLmxlbmd0aCk7CiAgY29uc3QgdW5pcSA9IFsuLi5uZXcgU2V0KGxpbmtzKV0uZmlsdGVyKCh1KSA9PiB1LmluY2x1ZGVzKCJ1YWh6LmdpdGh1Yi5pbyIpKTsKICBmb3IgKGNvbnN0IHUgb2YgdW5pcSkgewogICAgYXdhaXQgbmV3IFByb21pc2UoKHJlcykgPT4gewogICAgICBodHRwcy5nZXQodSwgeyBoZWFkZXJzOiB7ICJVc2VyLUFnZW50IjogImNoZWNrIiB9IH0sIChyKSA9PiB7CiAgICAgICAgY29uc29sZS5sb2coIiAgICIsIHIuc3RhdHVzQ29kZSwgdS5yZXBsYWNlKGJhc2UsICIiKSk7CiAgICAgICAgcmVzKCk7CiAgICAgIH0pLm9uKCJlcnJvciIsICgpID0+IHsgY29uc29sZS5sb2coIiAgICBFUlIiLCB1KTsgcmVzKCk7IH0pOwogICAgfSk7CiAgfQoKICBjb25zb2xlLmxvZygiXG49PT0gNDA0IOaKveajgCA9PT0iKTsKICBjb25zdCBuZiA9IGF3YWl0IGdldChiYXNlICsgIi9kZWZpbml0ZWx5LW5vdC1hLXBhZ2UtOXg4eTd6Iik7CiAgY29uc29sZS5sb2coIiAg5ZCr5YWc5bqV5paH5qGIOiIsIC/ov5nkuKrpobXpnaLkuI3lrZjlnKgvLnRlc3QobmYpKTsKICBjb25zb2xlLmxvZygiICDlkKvnspLlrZDnlLvluIM6IiwgL2lkPSJmbG93Ii8udGVzdChuZikpOwp9KSgpOw==
+/** 线上内容抽检：确认部署的产物与本地一致 */
+const https = require("https");
+
+function get(url) {
+  return new Promise((res, rej) => {
+    https.get(url, { headers: { "User-Agent": "check" } }, (r) => {
+      let s = "";
+      r.on("data", (d) => (s += d));
+      r.on("end", () => res(s));
+    }).on("error", rej);
+  });
+}
+
+(async () => {
+  const base = "https://uahz.github.io";
+  console.log("=== projects.js 数据抽检 ===");
+  const js = await get(base + "/assets/js/projects.js");
+  const ids = [...js.matchAll(/^\s*id:\s*"([^"]+)"/gm)].map((m) => m[1]);
+  const banned = ["JcJgame", "file-mark-remover", "my-tiku-api"];
+  console.log("  项目数:", ids.length);
+  console.log("  被排除的 3 个是否混入:", banned.filter((x) => ids.includes(x)).join(", ") || "否 ✓");
+  console.log("  前 5 个:", ids.slice(0, 5).join(", "));
+  console.log("  末 3 个:", ids.slice(-3).join(", "));
+
+  console.log("\n=== work.html 抽检 ===");
+  const w = await get(base + "/work.html");
+  console.log("  title:", (w.match(/<title>([^<]+)/) || [])[1]);
+  const fbs = [...w.matchAll(/data-f="(\w+)"/g)].map((m) => m[1]);
+  console.log("  筛选项:", fbs.join(", "));
+  console.log("  引 projects.js:", /projects\.js/.test(w));
+
+  console.log("\n=== 关键项目链接抽检（线上可访问性）===");
+  const links = [...js.matchAll(/demo:\s*"(https:[^"]+)"/g)].map((m) => m[1]);
+  console.log("  demo 链接总数:", links.length);
+  const uniq = [...new Set(links)].filter((u) => u.includes("uahz.github.io"));
+  for (const u of uniq) {
+    await new Promise((res) => {
+      https.get(u, { headers: { "User-Agent": "check" } }, (r) => {
+        console.log("   ", r.statusCode, u.replace(base, ""));
+        res();
+      }).on("error", () => { console.log("    ERR", u); res(); });
+    });
+  }
+
+  console.log("\n=== 404 抽检 ===");
+  const nf = await get(base + "/definitely-not-a-page-9x8y7z");
+  console.log("  含兜底文案:", /这个页面不存在/.test(nf));
+  console.log("  含粒子画布:", /id="flow"/.test(nf));
+})();

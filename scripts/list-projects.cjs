@@ -1,1 +1,7 @@
-LyoqIOWIl+WHuuermeeCueW9k+WJjeaUtuW9leeahOmhueebriBpZCAqLwpjb25zdCBmcyA9IHJlcXVpcmUoImZzIik7CmNvbnN0IHBhdGggPSByZXF1aXJlKCJwYXRoIik7CmNvbnN0IGQgPSBmcy5yZWFkRmlsZVN5bmMocGF0aC5qb2luKF9fZGlybmFtZSwgIi4uIiwgImFzc2V0cyIsICJqcyIsICJwcm9qZWN0cy5qcyIpLCAidXRmOCIpOwpjb25zdCBpZHMgPSBbLi4uZC5tYXRjaEFsbCgvXlxzKmlkOlxzKiIoW14iXSspIi9nbSldLm1hcCgobSkgPT4gbVsxXSk7CmNvbnNvbGUubG9nKGlkcy5sZW5ndGggKyAiIOS4qumhueebru+8miIpOwppZHMuZm9yRWFjaCgoeCwgaSkgPT4gY29uc29sZS5sb2coIiAgIiArIChpICsgMSkgKyAiLiAiICsgeCkpOwo=
+/** 列出站点当前收录的项目 id */
+const fs = require("fs");
+const path = require("path");
+const d = fs.readFileSync(path.join(__dirname, "..", "assets", "js", "projects.js"), "utf8");
+const ids = [...d.matchAll(/^\s*id:\s*"([^"]+)"/gm)].map((m) => m[1]);
+console.log(ids.length + " 个项目：");
+ids.forEach((x, i) => console.log("  " + (i + 1) + ". " + x));

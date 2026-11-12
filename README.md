@@ -1,1 +1,151 @@
-IyB1YWh6LmdpdGh1Yi5pbwoK5Liq5Lq66aG555uu56uZ44CCKirpppbpobUqKu+8iOS4quS6uueugOS7iyAvIOaKgOiDvSAvIOiBlOezu+aWueW8jyArIOeyvumAiemhueebru+8ieS4jioq6aG555uu6aG1KirvvIgxOSDkuKrlvIDmupDpobnnm67vvIzlj6/mjInnsbvlnovnrZvvvInjgIIKCi0g5oqA5pyv5qCI77yaSFRNTCArIENTUyArIOWOn+eUnyBKUyArIENhbnZhc++8jOmbtuahhuaetuOAgembtuaehOW7uuOAgembtuS+nei1lgotIOe6v+S4iuWcsOWdgO+8mjxodHRwczovL3VhaHouZ2l0aHViLmlvLz4KLSDliqjmlYjvvJroh6rlhpkgUGVybGluIOWZquWjsOeykuWtkOa1geWcuiArIDNEIOWAvuaWnOWNoeeJhyArIOaJk+Wtl+acuiArIOe7iOerr+mAkOihjCArIOmAkOWtl+WFpeWcuiArIOejgeaAp+aMiemSrgoKIyMg55uu5b2VCgpgYGAKLgrilJzilIAgaW5kZXguaHRtbCAgICAgICAgICAgIOmmlumhtQrilJzilIAgd29yay5odG1sICAgICAgICAgICAgIOWFqOmDqCAxOSDkuKrpobnnm64K4pSc4pSAIDQwNC5odG1sICAgICAgICAgICAgICBHaXRIdWIgUGFnZXMg5LiT55So5YWc5bqV6aG1CuKUnOKUgCBhc3NldHMvCuKUgiAg4pSc4pSAIGNzcy9zdHlsZS5jc3MgICAgICDllK/kuIDmoLflvI/mupDvvIjku6TniYwgKyDliqjmlYggKyDnu4Tku7YgKyDlk43lupTlvI/vvIkK4pSCICDilJzilIAganMvcHJvamVjdHMuanMgICAgIOmhueebruaVsOaNrua6kO+8iOWinuWIoOmhueebruWPquaUuei/memHjO+8iQrilIIgIOKUnOKUgCBqcy9tYWluLmpzICAgICAgICAg57KS5a2Q5byV5pOOICsg5YWo6YOo5Lqk5LqSCuKUgiAg4pSU4pSAIGltZy9mYXZpY29uLnN2ZwrilJzilIAgc2NyaXB0cy8K4pSCICDilJzilIAgdmVyaWZ5LXNpdGUuY2pzICAgICAgIOe7k+aehOmqjOaUtu+8iDMwNiDpobnmlq3oqIDvvIkK4pSCICDilJzilIAgYnJvd3Nlci1jaGVjay5janMgICAgIOa1j+iniOWZqOWunua1i++8iENEUO+8jDIyIOmhue+8mua4suafkyAvIOetm+mAiSAvIOi3s+i9rCAvIOW8guW4uO+8iQrilIIgIOKUnOKUgCBjaGVjay1saW5rcy5janMgICAgICAg5aSW6ZO+5a2Y5rS75qOA5p+l77yIMjgg5Liq6ZO+5o6l77yM6Ziy5LuT5bqT6KKr5Yig5ZCO55WZ5q276ZO+77yJCuKUgiAg4pSc4pSAIGNoZWNrLWxpdmUuY2pzICAgICAgICDnur/kuIrmir3mo4DvvIjlhoXlrrkgLyDnrZvpgInpobkgLyBkZW1vIOmTvuaOpeWPr+eUqOaAp++8iQrilIIgIOKUnOKUgCB2ZXJpZnktbGl2ZS1ieXRlcy5janMg57q/5LiK5LiO5pys5Zyw5a2X6IqC57qn5LiA6Ie05oCn5q+U5a+5CuKUgiAg4pSc4pSAIHB1c2gtdmlhLWFwaS5janMgICAgICBnaXQg5LiN5Y+v55So5pe255qEIFJFU1QgQVBJIOaOqOmAgemAmumBkwrilIIgIOKUnOKUgCBzdGF0cy5janMgICAgICAgICAgICAg5YiG57G75LiO57K+6YCJ5pWw6YeP57uf6K6hCuKUgiAg4pSU4pSAIGxpc3QtbGlua3MuY2pzICAgICAgICDliJflh7rlkITpobnnm67pk77mjqXnsbvlnosK4pSU4pSAIFJFQURNRS5tZApgYGAKCiMjIOmhtemdoue7k+aehAoK5Zu65a6aIEhlYWRlciDmmK/llK/kuIDlhajlsYDlr7zoiKrvvIzlvZPliY3pobXnlLEgYGJvZHlbZGF0YS1wYWdlXWAg6amx5YqoIEpTIOmrmOS6ruOAggoKKirpppbpobUqKu+8mkhlcm/vvIjmoIfpopjpgJDlrZflhaXlnLogKyDmiZPlrZfmnLogKyDmlbDlrZfmu5rliqjvvInihpIg57uI56uv5Yy677yI6YCQ6KGM5omT5Ye677yJ4oaSIOeyvumAiSA0IOS4qumhueebriDihpIK5oqA6IO9IDUg57uEIOKGkiDlhbPkuo7vvIjml7bpl7Tnur/vvInihpIg6IGU57O777yINCDmuKDpgZMgKyDooajljZXvvInjgIIKCioq6aG555uu6aG1KirvvJrpobXlpLQg4oaSIHN0aWNreSDliIbnsbvnrZvpgInvvIjlhajpg6ggLyDmuLjmiI8gLyDnvZHpobXlupTnlKggLyDmoYzpnaLlt6XlhbcgLyDnlJ/miJDoibrmnK8gLyBTa2lsbO+8ieKGkiAzIOWIl+mhueebrue9keagvCDihpIg5bqV6YOo5a+85Zue6aaW6aG144CCCgrpobnnm67ljaHniYfnlLEgYG1haW4uanNgIOS7jiBgcHJvamVjdHMuanNgIOa4suafk++8jCoq5Lik6aG15aSN55So5ZCM5LiA5LiqIGBjYXJkSFRNTCgpYCoq77yM5omA5Lul6aaW6aG157K+6YCJ5Y2h5LiO6aG555uu6aG15Y2h54mH54mI5byP5aSp54S25LiA6Ie044CCCgojIyDliqjmlYjmuIXljZUKCnwg5pWI5p6cIHwg5a6e546wIHwg6K+05piOIHwKfC0tLXwtLS18LS0tfAp8IOeykuWtkOa1geWcuiB8IENhbnZhcyArIFBlcmxpbiDlmarlo7AgfCDnspLlrZDmsr/lmarlo7DlnLrov5DliqjmiJDmuY3mtYHvvIzpvKDmoIfpmYTov5HmnInlkLjlvJXmibDliqggfAp8IOW4p+eOh+iHqumAguW6lCB8IOi/nue7reaFouW4p+iHquWKqOmZjeWvhuW6piB8IOaOieW4p+aXtuegjeeykuWtkOaVsO+8jOS4jemZjeeUu+i0qCB8Cnwg55yB55S1IHwgYHZpc2liaWxpdHljaGFuZ2VgIOWBnOacuiB8IOWIh+WIsOWIq+eahOagh+etvumhteWwseaaguWBnCB8Cnwg6byg5qCH5YWJ5pmVIHwgbGVycCDnvJPliqjot5/pmo8gfCDpnZLoibLkuLvlhYnmmZUgKyDntKvoibLlhoXoiq8gfAp8IOa7muWKqOi/m+W6puadoSB8IGBzY2FsZVhgICsg5rWB5YWJIHwg6aG26YOoIDJweCDmuJDlj5jmnaEgfAp8IOWNoeeJhyAzRCDlgL7mlpwgfCBgcGVyc3BlY3RpdmVgICsgcm90YXRlWC9ZIHwg6Lef6ZqP6byg5qCH77yM5pyA5aSnIDnCsCB8Cnwg6Lef6ZqP6auY5YWJIHwgQ1NTIOWPmOmHjyBgLS1teC8tLW15YCB8IOW+hOWQkeWFieaWkei3n+edgOWFieagh+i1sCB8Cnwg56OB5oCn5oyJ6ZKuIHwg5L2N56e757O75pWwIDAuMTQgfCDpnaDov5Hml7bovbvlvq7lkLjpmYQgfAp8IOmAkOWtl+WFpeWcuiB8IEpTIOaLhuWtlyArIOmUmeWzsCBkZWxheSB8IOavj+S4quWtlyAzMm1zIOmXtOmalOe/u+i9rOWFpeWcuiB8Cnwg5pWw5a2X5rua5YqoIHwgckFGICsgZWFzZU91dEN1YmljIHwg6L+b5YWl6KeG5Y+j5omN6K6h5pWwIHwKfCDmiZPlrZfmnLogfCDlvqrnjq/miZPlrZcv5Yig6ZmkIHwgNSDooYzmlofmoYjova7mkq3vvIzluKblhYnmoIfpl6rng4EgfAp8IOe7iOerr+mAkOihjCB8IEludGVyc2VjdGlvbk9ic2VydmVyIHwg5rua5Yqo5Yiw5omN6YCQ6KGM5omT5Ye6IHwKfCDplJnls7Dov5vlnLogfCBgdHJhbnNpdGlvbi1kZWxheWAgfCDljaHniYfmjInntKLlvJUgNzBtcyDpgJLlop4gfAoKKirml6Dpmpznoo0qKu+8mmBwcmVmZXJzLXJlZHVjZWQtbW90aW9uYCDkuIvmiYDmnInliqjmlYjlhbPpl63jgIHnspLlrZDnlLvluIPpmpDol4/jgIHov5vlnLrlhoXlrrnnm7TmjqXmmL7npLrjgIIK56e75Yqo56uvIDg2MHB4IOS7peS4i+axieWgoeiPnOWNle+8jOeykuWtkOWvhuW6puiHquWKqOmZjeS9juOAggoKIyMg5pys5Zyw6aKE6KeICgpgYGBiYXNoCnB5dGhvbiAtbSBodHRwLnNlcnZlciA4OTAwCiMg5omT5byAIGh0dHA6Ly8xMjcuMC4wLjE6ODkwMC9pbmRleC5odG1sCmBgYAoKIyMg5aKe5Yig6aG555uuCgrlj6rmlLkgYGFzc2V0cy9qcy9wcm9qZWN0cy5qc2DvvIzkuKTpobXoh6rliqjlkIzmraXjgIIqKummlumhtee7n+iuoeaVsOWtl+S4jumhueebrumhteeahOWIhuexu+agh+etvumDveaYr+S7juaVsOaNrua6kArlrp7ml7bnrpflh7rmnaXnmoQqKu+8jOS4jeeUqOaJi+aUuSDigJTigJQg5Yqg5LiA5Liq6aG555uu77yM6aaW6aG155qE44CM5byA5rqQ6aG555uu44CN5pWw5ZKM5YiG57G75qCH562+5Lya6Ieq5Yqo5pu05paw44CCCgpgYGBqcwp7CiAgaWQ6ICJyZXBvLW5hbWUiLCAgICAgICAgICAgICAgLy8g5b+F5aGr77yM6aG75LiOIEdpdEh1YiDku5PlupPlkI3kuIDoh7TvvIjlhYHorrjlpKflhpnvvIzlpoIgTFBkZu+8iQogIGNuOiAi5Lit5paH5ZCNIiwgICAgICAgICAgICAgICAgICAvLyDlv4XloavvvIzljaHniYfmoIfpopgKICBkZXNjOiAi5LiA5Y+l6K+d566A5LuL77yMMjAg5a2X5Lul5LiKIiwgIC8vIOW/heWhqwogIHRlY2g6IFsiSFRNTCIsICJDYW52YXMiXSwgICAgICAvLyDlv4XloavvvIzoh7PlsJEgMyDkuKoKICBjYXQ6ICJnYW1lIiwgICAgICAgICAgICAgICAgICAgLy8g5b+F5aGr77yMZ2FtZS93ZWIvdG9vbC9tb2JpbGUvYXJ0L3NraWxsIOS5i+S4gAogIHllYXI6ICIyMDI2IiwgICAgICAgICAgICAgICAgICAvLyDlv4XloasKICBkZW1vOiAiaHR0cHM6Ly8uLi4iLCAgICAgICAgICAgLy8g5b+F5aGr77yM5oyH5ZCR6Ieq5bex55qE5LuT5bqT6ZO+5o6l5YiZ5pi+56S644CM5LuT5bqT44CNCiAgZmVhdHVyZWQ6IHRydWUsICAgICAgICAgICAgICAgIC8vIOWPr+mAie+8jHRydWUg5YiZ5Ye6546w5Zyo6aaW6aG157K+6YCJCiAgc3RhcnM6IDEsICAgICAgICAgICAgICAgICAgICAgIC8vIOWPr+mAie+8jOacieaYn+agh+aJjeaYvuekugogIGhpZ2hsaWdodHM6IFsi5Lqu54K5MSIsICLkuq7ngrkyIl0gIC8vIOW/heWhq++8jOiHs+WwkSAyIOadoQp9CmBgYAoK5YiG57G75Ye6546w6aG65bqP55SxIGB3aW5kb3cuQ0FUU2Ag5o6n5Yi244CC6Iul5paw5aKe5LqG5YiG57G777yM6K6w5b6X5ZyoIGB3b3JrLmh0bWxgIOeahOetm+mAieagj+WKoOS4gOS4qgpgPGJ1dHRvbiBjbGFzcz0iZmJ0biIgZGF0YS1mPSLmlrDliIbnsbsiPmDvvIzlubblnKggYG1haW4uanNgIOeahCBgQ0FUX0xBQkVMYCDliqDkuK3mloflkI3jgIIK77yI6aqM5pS26ISa5pys5Lya5qOA5p+l562b6YCJ5oyJ6ZKu5LiOIGBDQVRTYCDmmK/lkKbkuIDkuIDlr7nlupTvvIzmvI/kuobkvJrmiqXplJnjgILvvIkKCiMjIOmqjOaUtgoKYGBgYmFzaApub2RlIHNjcmlwdHMvdmVyaWZ5LXNpdGUuY2pzICAgICAgICMg5pys5Zyw57uT5p6E77yaMTAg57uEIDMwNiDpobnmlq3oqIAKbm9kZSBzY3JpcHRzL2Jyb3dzZXItY2hlY2suY2pzICAgICAjIOa1j+iniOWZqOWunua1i++8mjIyIOmhue+8iOa4suafkyAvIOetm+mAiSAvIOi3s+i9rCAvIOi/kOihjOaXtuW8guW4uO+8iQpub2RlIHNjcmlwdHMvY2hlY2stbGlua3MuY2pzICAgICAgICMg5aSW6ZO+5a2Y5rS777yaMjgg5Liq6ZO+5o6l77yM5LuT5bqT6KKr5Yig5Lya5oql6ZSZCm5vZGUgc2NyaXB0cy9jaGVjay1saXZlLmNqcyAgICAgICAgIyDnur/kuIrmir3mo4DvvJrlhoXlrrkgLyDnrZvpgInpobkgLyBkZW1vIOmTvuaOpeWPr+i+vuaApwpub2RlIHNjcmlwdHMvdmVyaWZ5LWxpdmUtYnl0ZXMuY2pzICMg57q/5LiK5LiO5pys5Zyw5a2X6IqC57qn5LiA6Ie05oCnCmBgYAoKYGJyb3dzZXItY2hlY2suY2pzYCDnlKggQ0RQIOmpseWKqCBFZGdl77yI5LiN6KOFIHBsYXl3cmlnaHTvvInvvIzopobnm5bnnJ/lrp7muLLmn5PjgIHnrZvpgInkuqTkupLjgIEK5Lik6aG16Lez6L2s44CBNDA0IOWFnOW6le+8jOW5tuaNleiOt+i/kOihjOaXtuW8guW4uOS4jiBjb25zb2xlLmVycm9y44CCCgoqKuazqOaEjyoq77yaaGVhZGxlc3MgRWRnZSDpu5jorqQgYHByZWZlcnMtcmVkdWNlZC1tb3Rpb246IHJlZHVjZWDvvIznspLlrZDnrYnliqjmlYjkvJrooqvmraPnoa7lhbPpl63jgIIK6ISa5pys6YeM5bey55SoIGBFbXVsYXRpb24uc2V0RW11bGF0ZWRNZWRpYWAg5qih5ouf5pmu6YCa55So5oi3546v5aKD77yM5ZCm5YiZ5rWL5LiN5Yiw5Yqo5pWI44CCCgojIyDlkIzmraUgR2l0SHViIOWPmOabtAoK56uZ54K55pS25b2V55qE6aG555uu6KaB6LefIEdpdEh1YiDkv53mjIHkuIDoh7TjgILku5PlupPlj6/og73ooqvliKDpmaTmiJbovaznp4HmnInvvIjmraTml7blhazlvIAgQVBJIOi/lOWbniA0MDTjgIEKUGFnZXMg5ZCM5pe25aSx5pWI77yJ77yM6ZyA6KaB5LiL5p6277yaCgpgYGBiYXNoCm5vZGUgc2NyaXB0cy9jaGVjay1saW5rcy5janMgICAgICAgICMg5YWI5om+5Ye65aSx5pWI6ZO+5o6lCm5vZGUgc2NyaXB0cy9zdGF0cy5janMgICAgICAgICAgICAgICMg55yL5b2T5YmN5YiG57G75LiO57K+6YCJ5YiG5biDCiMg5LuOIGFzc2V0cy9qcy9wcm9qZWN0cy5qcyDliKDmjonlpLHmlYjpobnnm67vvIzlubblkIzmraXosIPmlbQgd2luZG93LkNBVFMKYGBgCgpgdmVyaWZ5LXNpdGUuY2pzYCDph4zmnInkuIDmnaHmlq3oqIDkuJPpl6jmo4Dmn6Xlt7LkuIvmnrbpobnnm67kuI3kvJrmrovnlZnlnKjmlbDmja7mupDkuK3jgIIKCmB2ZXJpZnktc2l0ZS5janNgIOimhueblu+8mumhueebruaVsOaNruWujOaVtOaAp++8iDE5IOS4qumhueebrumAkOS4quagoemqjOWtl+aute+8ieOAgeS4pOmhteWvvOiIquS6kumAmuOAgQrpppbpobXlv4XlpIfljLrlnZfjgIHnrZvpgInnu5PmnoTjgIHljaHniYfmuLLmn5Plh73mlbDjgIHliqjmlYjlrZjlnKjmgKfjgIHop4bop4nnu5/kuIDmgKfjgIHml6Dpmpznoo3kuI7lronlhajjgIHor63ms5XkuI7moIfnrb7phY3lubPjgIIKCmB2ZXJpZnktbGl2ZS1ieXRlcy5janNgIOS8muaKk+WPlue6v+S4iuaWh+S7tuS4juacrOWcsOmAkOWtl+iKguavlOWvue+8jOWQjOaXtuajgOa1i+S4reaWh+aYr+WQpuiiq+WtmOaIkOS5seeggQrvvIhVK0ZGRkQg5pu/5o2i5a2X56ym77yJ77yM5pS55a6M5paH5Lu25o6o6YCB5ZCO6LeR5LiA5qyh5bCx55+l6YGT5pyJ5rKh5pyJ5Lyg5Z2P44CCCgojIyDpg6jnvbIKCuacrOS7k+W6k+WNsyBgdWFoei5naXRodWIuaW9g77yMR2l0SHViIFBhZ2VzIOiHquWKqOWPkeW4g+WcqCA8aHR0cHM6Ly91YWh6LmdpdGh1Yi5pby8+44CCCgrmjqjpgIHliLDpu5jorqTliIbmlK/ljbPnlJ/mlYjvvIzpgJrluLggMeKAkzIg5YiG6ZKf5a6M5oiQ5p6E5bu644CC6IulIFBhZ2VzIOacquW8gOWQr++8mgrku5PlupMgU2V0dGluZ3Mg4oaSIFBhZ2VzIOKGkiBTb3VyY2Ug6YCJIGBtYWluYCAvIGAvIChyb290KWDjgIIKCioq572R57uc5Y+X6ZmQ5pe25pS555SoIEFQSSDmjqjpgIEqKu+8iGdpdCBvdmVyIEhUVFBTIOiiq+S7o+eQhumYu+aWreaXtu+8ie+8mgoKYGBgYmFzaApleHBvcnQgU0s9Z2hwX3h4eApub2RlIHNjcmlwdHMvcHVzaC12aWEtYXBpLmNqcyBpbmRleC5odG1sICJjb21taXQgbWVzc2FnZSIKYGBgCgror6XohJrmnKzmmL7lvI/ku6UgVVRGLTgg6K+75Y+W5paH5Lu277yM6YG/5YWN5Lit5paH6KKr5oyJIGxhdGluLTEg5a2Y5oiQ5Lmx56CB44CCCgojIyDlt7Lnn6XovrnnlYwKCi0g6IGU57O76KGo5Y2V5piv57qv5YmN56uv5ryU56S677yM5o+Q5Lqk5ZCO5Y+q5Zyo5pys5Zyw5pi+56S65Zue5omn77yMKirkuI3kvJrlj5Hpgq7ku7YqKuOAguS4iue6v+aXtuaOpQogIEZvcm1zcHJlZSAvIOmCruS7tuacjeWKoe+8jOaKiiBgbWFpbi5qc2Ag55qEIGBpbml0Rm9ybWAg5pS55oiQ55yf5a6e6K+35rGC5Y2z5Y+v44CCCi0g6aG555uu6ZO+5o6l5LiO5LuL57uN5Z+65LqO5LuT5bqTIGRlc2NyaXB0aW9uIOWSjCBSRUFETUUg5pW055CG77yM5aaC5pyJ5Ye65YWl5Lul5LuT5bqT5Li65YeG44CCCg==
+# uahz.github.io
+
+个人项目站。**首页**（个人简介 / 技能 / 联系方式 + 精选项目）与**项目页**（19 个开源项目，可按类型筛）。
+
+- 技术栈：HTML + CSS + 原生 JS + Canvas，零框架、零构建、零依赖
+- 线上地址：<https://uahz.github.io/>
+- 动效：自写 Perlin 噪声粒子流场 + 3D 倾斜卡片 + 打字机 + 终端逐行 + 逐字入场 + 磁性按钮
+
+## 目录
+
+```
+.
+├─ index.html            首页
+├─ work.html             全部 19 个项目
+├─ 404.html              GitHub Pages 专用兜底页
+├─ assets/
+│  ├─ css/style.css      唯一样式源（令牌 + 动效 + 组件 + 响应式）
+│  ├─ js/projects.js     项目数据源（增删项目只改这里）
+│  ├─ js/main.js         粒子引擎 + 全部交互
+│  └─ img/favicon.svg
+├─ scripts/
+│  ├─ verify-site.cjs       结构验收（306 项断言）
+│  ├─ browser-check.cjs     浏览器实测（CDP，22 项：渲染 / 筛选 / 跳转 / 异常）
+│  ├─ check-links.cjs       外链存活检查（28 个链接，防仓库被删后留死链）
+│  ├─ check-live.cjs        线上抽检（内容 / 筛选项 / demo 链接可用性）
+│  ├─ verify-live-bytes.cjs 线上与本地字节级一致性比对
+│  ├─ push-via-api.cjs      git 不可用时的 REST API 推送通道
+│  ├─ stats.cjs             分类与精选数量统计
+│  └─ list-links.cjs        列出各项目链接类型
+└─ README.md
+```
+
+## 页面结构
+
+固定 Header 是唯一全局导航，当前页由 `body[data-page]` 驱动 JS 高亮。
+
+**首页**：Hero（标题逐字入场 + 打字机 + 数字滚动）→ 终端区（逐行打出）→ 精选 4 个项目 →
+技能 5 组 → 关于（时间线）→ 联系（4 渠道 + 表单）。
+
+**项目页**：页头 → sticky 分类筛选（全部 / 游戏 / 网页应用 / 桌面工具 / 生成艺术 / Skill）→ 3 列项目网格 → 底部导回首页。
+
+项目卡片由 `main.js` 从 `projects.js` 渲染，**两页复用同一个 `cardHTML()`**，所以首页精选卡与项目页卡片版式天然一致。
+
+## 动效清单
+
+| 效果 | 实现 | 说明 |
+|---|---|---|
+| 粒子流场 | Canvas + Perlin 噪声 | 粒子沿噪声场运动成湍流，鼠标附近有吸引扰动 |
+| 帧率自适应 | 连续慢帧自动降密度 | 掉帧时砍粒子数，不降画质 |
+| 省电 | `visibilitychange` 停机 | 切到别的标签页就暂停 |
+| 鼠标光晕 | lerp 缓动跟随 | 青色主光晕 + 紫色内芯 |
+| 滚动进度条 | `scaleX` + 流光 | 顶部 2px 渐变条 |
+| 卡片 3D 倾斜 | `perspective` + rotateX/Y | 跟随鼠标，最大 9° |
+| 跟随高光 | CSS 变量 `--mx/--my` | 径向光斑跟着光标走 |
+| 磁性按钮 | 位移系数 0.14 | 靠近时轻微吸附 |
+| 逐字入场 | JS 拆字 + 错峰 delay | 每个字 32ms 间隔翻转入场 |
+| 数字滚动 | rAF + easeOutCubic | 进入视口才计数 |
+| 打字机 | 循环打字/删除 | 5 行文案轮播，带光标闪烁 |
+| 终端逐行 | IntersectionObserver | 滚动到才逐行打出 |
+| 错峰进场 | `transition-delay` | 卡片按索引 70ms 递增 |
+
+**无障碍**：`prefers-reduced-motion` 下所有动效关闭、粒子画布隐藏、进场内容直接显示。
+移动端 860px 以下汉堡菜单，粒子密度自动降低。
+
+## 本地预览
+
+```bash
+python -m http.server 8900
+# 打开 http://127.0.0.1:8900/index.html
+```
+
+## 增删项目
+
+只改 `assets/js/projects.js`，两页自动同步。**首页统计数字与项目页的分类标签都是从数据源
+实时算出来的**，不用手改 —— 加一个项目，首页的「开源项目」数和分类标签会自动更新。
+
+```js
+{
+  id: "repo-name",              // 必填，须与 GitHub 仓库名一致（允许大写，如 LPdf）
+  cn: "中文名",                  // 必填，卡片标题
+  desc: "一句话简介，20 字以上",  // 必填
+  tech: ["HTML", "Canvas"],      // 必填，至少 3 个
+  cat: "game",                   // 必填，game/web/tool/mobile/art/skill 之一
+  year: "2026",                  // 必填
+  demo: "https://...",           // 必填，指向自己的仓库链接则显示「仓库」
+  featured: true,                // 可选，true 则出现在首页精选
+  stars: 1,                      // 可选，有星标才显示
+  highlights: ["亮点1", "亮点2"]  // 必填，至少 2 条
+}
+```
+
+分类出现顺序由 `window.CATS` 控制。若新增了分类，记得在 `work.html` 的筛选栏加一个
+`<button class="fbtn" data-f="新分类">`，并在 `main.js` 的 `CAT_LABEL` 加中文名。
+（验收脚本会检查筛选按钮与 `CATS` 是否一一对应，漏了会报错。）
+
+## 验收
+
+```bash
+node scripts/verify-site.cjs       # 本地结构：10 组 306 项断言
+node scripts/browser-check.cjs     # 浏览器实测：22 项（渲染 / 筛选 / 跳转 / 运行时异常）
+node scripts/check-links.cjs       # 外链存活：28 个链接，仓库被删会报错
+node scripts/check-live.cjs        # 线上抽检：内容 / 筛选项 / demo 链接可达性
+node scripts/verify-live-bytes.cjs # 线上与本地字节级一致性
+```
+
+`browser-check.cjs` 用 CDP 驱动 Edge（不装 playwright），覆盖真实渲染、筛选交互、
+两页跳转、404 兜底，并捕获运行时异常与 console.error。
+
+**注意**：headless Edge 默认 `prefers-reduced-motion: reduce`，粒子等动效会被正确关闭。
+脚本里已用 `Emulation.setEmulatedMedia` 模拟普通用户环境，否则测不到动效。
+
+## 同步 GitHub 变更
+
+站点收录的项目要跟 GitHub 保持一致。仓库可能被删除或转私有（此时公开 API 返回 404、
+Pages 同时失效），需要下架：
+
+```bash
+node scripts/check-links.cjs        # 先找出失效链接
+node scripts/stats.cjs              # 看当前分类与精选分布
+# 从 assets/js/projects.js 删掉失效项目，并同步调整 window.CATS
+```
+
+`verify-site.cjs` 里有一条断言专门检查已下架项目不会残留在数据源中。
+
+`verify-site.cjs` 覆盖：项目数据完整性（19 个项目逐个校验字段）、两页导航互通、
+首页必备区块、筛选结构、卡片渲染函数、动效存在性、视觉统一性、无障碍与安全、语法与标签配平。
+
+`verify-live-bytes.cjs` 会抓取线上文件与本地逐字节比对，同时检测中文是否被存成乱码
+（U+FFFD 替换字符），改完文件推送后跑一次就知道有没有传坏。
+
+## 部署
+
+本仓库即 `uahz.github.io`，GitHub Pages 自动发布在 <https://uahz.github.io/>。
+
+推送到默认分支即生效，通常 1–2 分钟完成构建。若 Pages 未开启：
+仓库 Settings → Pages → Source 选 `main` / `/ (root)`。
+
+**网络受限时改用 API 推送**（git over HTTPS 被代理阻断时）：
+
+```bash
+export SK=ghp_xxx
+node scripts/push-via-api.cjs index.html "commit message"
+```
+
+该脚本显式以 UTF-8 读取文件，避免中文被按 latin-1 存成乱码。
+
+## 已知边界
+
+- 联系表单是纯前端演示，提交后只在本地显示回执，**不会发邮件**。上线时接
+  Formspree / 邮件服务，把 `main.js` 的 `initForm` 改成真实请求即可。
+- 项目链接与介绍基于仓库 description 和 README 整理，如有出入以仓库为准。

@@ -1,1 +1,170 @@
-LyoqCiAqIOS4gOmUrumDqOe9su+8muaKiuacrOWcsOermeeCueaOqOmAgeWIsCBHaXRIdWLjgIIKICoKICog55So5rOV77yaCiAqICAgbm9kZSBzY3JpcHRzL2RlcGxveS5janMgPFRPS0VOPgogKiDmiJYKICogICBTSz08dG9rZW4+IG5vZGUgc2NyaXB0cy9kZXBsb3kuY2pzCiAqCiAqIOivtOaYju+8mmdpdCBvdmVyIEhUVFBTIOWcqOacrOacuuW4uOiiq+S7o+eQhumYu+aWre+8jOS4lCBDb250ZW50cyBBUEkg5q+P5qyh5Y+q6IO95Lyg5LiA5Liq5paH5Lu277yMCiAqIOaJgOS7pei/memHjOeUqCBHaXQg55qEIERhdGEgQVBJ77yIZ2l0L3RyZWVzICsgZ2l0L2NvbW1pdHMgKyBnaXQvcmVmc++8ieS4gOasoeaAp+aPkOS6pOaVtOajteagkeOAggogKiDpnIDopoEgdG9rZW4g5YW35aSH6K+l5LuT5bqT55qEIGNvbnRlbnRzOndyaXRlIOadg+mZkOOAggogKi8KY29uc3QgaHR0cHMgPSByZXF1aXJlKCJodHRwcyIpOwpjb25zdCBmcyA9IHJlcXVpcmUoImZzIik7CmNvbnN0IHBhdGggPSByZXF1aXJlKCJwYXRoIik7Cgpjb25zdCBST09UID0gcGF0aC5qb2luKF9fZGlybmFtZSwgIi4uIik7CmNvbnN0IE9XTkVSID0gInVhaHoiOwpjb25zdCBSRVBPID0gInVhaHouZ2l0aHViLmlvIjsKY29uc3QgQlJBTkNIID0gIm1haW4iOwpjb25zdCBTSVRFID0gImh0dHBzOi8vIiArIE9XTkVSICsgIi5naXRodWIuaW8iOwoKY29uc3QgVE9LRU4gPSBwcm9jZXNzLmFyZ3ZbMl0gfHwgcHJvY2Vzcy5lbnYuU0s7CmlmICghVE9LRU4pIHsKICBjb25zb2xlLmVycm9yKCLpnIDopoEgdG9rZW7vvJpub2RlIHNjcmlwdHMvZGVwbG95LmNqcyA8VE9LRU4+Iik7CiAgcHJvY2Vzcy5leGl0KDEpOwp9CgovKiAtLS0tLS0tLS0tIOermeeCuemcgOimgeaOqOmAgeeahOaWh+S7tiAtLS0tLS0tLS0tICovCmNvbnN0IElOQ0xVREUgPSBbCiAgIi5naXRpZ25vcmUiLCAiLm5vamVreWxsIiwgIjQwNC5odG1sIiwgIlJFQURNRS5tZCIsCiAgImluZGV4Lmh0bWwiLCAid29yay5odG1sIiwKICAiYXNzZXRzL2Nzcy9zdHlsZS5jc3MiLAogICJhc3NldHMvanMvbWFpbi5qcyIsICJhc3NldHMvanMvcHJvamVjdHMuanMiLAogICJhc3NldHMvaW1nL2Zhdmljb24uc3ZnIiwKXTsKCi8qIHNjcmlwdHMvIOS4i+S5n+WQjOatpe+8jOaWueS+v+e6v+S4iuaOkuafpSAqLwpjb25zdCBTQ1JJUFRfRVhUID0gWyIuY2pzIiwgIi5weSJdOwoKZnVuY3Rpb24gYXBpKG1ldGhvZCwgdXJsLCBib2R5KSB7CiAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXMsIHJlaikgPT4gewogICAgY29uc3QgZGF0YSA9IGJvZHkgPyBKU09OLnN0cmluZ2lmeShib2R5KSA6IG51bGw7CiAgICBjb25zdCByZXEgPSBodHRwcy5yZXF1ZXN0KHVybCwgewogICAgICBtZXRob2QsCiAgICAgIGhlYWRlcnM6IHsKICAgICAgICBBdXRob3JpemF0aW9uOiAidG9rZW4gIiArIFRPS0VOLAogICAgICAgIEFjY2VwdDogImFwcGxpY2F0aW9uL3ZuZC5naXRodWIranNvbiIsCiAgICAgICAgIlVzZXItQWdlbnQiOiAiZGVwbG95LWJvdCIsCiAgICAgICAgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIiwKICAgICAgICAiQ29udGVudC1MZW5ndGgiOiBkYXRhID8gQnVmZmVyLmJ5dGVMZW5ndGgoZGF0YSkgOiAwLAogICAgICB9LAogICAgfSwgKHIpID0+IHsKICAgICAgbGV0IHMgPSAiIjsKICAgICAgci5vbigiZGF0YSIsIChkKSA9PiAocyArPSBkKSk7CiAgICAgIHIub24oImVuZCIsICgpID0+IHsKICAgICAgICB0cnkgeyByZXMoSlNPTi5wYXJzZShzKSk7IH0gY2F0Y2ggKGUpIHsgcmVzKHsgcmF3OiBzIH0pOyB9CiAgICAgIH0pOwogICAgfSk7CiAgICByZXEub24oImVycm9yIiwgcmVqKTsKICAgIGlmIChkYXRhKSByZXEud3JpdGUoZGF0YSk7CiAgICByZXEuZW5kKCk7CiAgfSk7Cn0KCmNvbnN0IHNsZWVwID0gKG1zKSA9PiBuZXcgUHJvbWlzZSgocikgPT4gc2V0VGltZW91dChyLCBtcykpOwoKZnVuY3Rpb24gY29sbGVjdEZpbGVzKCkgewogIGNvbnN0IGZpbGVzID0gWy4uLklOQ0xVREVdOwogIGNvbnN0IHNkaXIgPSBwYXRoLmpvaW4oUk9PVCwgInNjcmlwdHMiKTsKICBpZiAoZnMuZXhpc3RzU3luYyhzZGlyKSkgewogICAgZnMucmVhZGRpclN5bmMoc2RpcikuZm9yRWFjaCgoZikgPT4gewogICAgICBpZiAoU0NSSVBUX0VYVC5zb21lKChlKSA9PiBmLmVuZHNXaXRoKGUpKSkgZmlsZXMucHVzaCgic2NyaXB0cy8iICsgZik7CiAgICB9KTsKICB9CiAgcmV0dXJuIGZpbGVzLmZpbHRlcigoZikgPT4gZnMuZXhpc3RzU3luYyhwYXRoLmpvaW4oUk9PVCwgZikpKTsKfQoKKGFzeW5jICgpID0+IHsKICBjb25zdCBiYXNlID0gImh0dHBzOi8vYXBpLmdpdGh1Yi5jb20vcmVwb3MvIiArIE9XTkVSICsgIi8iICsgUkVQTzsKCiAgLy8gMS4g5ou/5b2T5YmNIHJlZgogIGNvbnN0IHJlZiA9IGF3YWl0IGFwaSgiR0VUIiwgYmFzZSArICIvZ2l0L3JlZi9oZWFkcy8iICsgQlJBTkNIKTsKICBpZiAoIXJlZi5vYmplY3QpIHsKICAgIGNvbnNvbGUuZXJyb3IoIuKclyDmi7/kuI3liLDliIbmlK8gcmVm77yaIiwgcmVmLm1lc3NhZ2UgfHwgSlNPTi5zdHJpbmdpZnkocmVmKS5zbGljZSgwLCAyMDApKTsKICAgIHByb2Nlc3MuZXhpdCgxKTsKICB9CiAgY29uc3QgYmFzZUNvbW1pdCA9IHJlZi5vYmplY3Quc2hhOwogIGNvbnNvbGUubG9nKCLlvZPliY3ov5znq68gY29tbWl0OiAiICsgYmFzZUNvbW1pdC5zbGljZSgwLCA3KSk7CgogIC8vIDIuIOaehOmAoCB0cmVlCiAgY29uc3QgdHJlZSA9IFtdOwogIGZvciAoY29uc3QgZiBvZiBjb2xsZWN0RmlsZXMoKSkgewogICAgY29uc3QgYnVmID0gZnMucmVhZEZpbGVTeW5jKHBhdGguam9pbihST09ULCBmKSk7CiAgICB0cmVlLnB1c2goewogICAgICBwYXRoOiBmLAogICAgICBtb2RlOiAiMTAwNjQ0IiwKICAgICAgdHlwZTogImJsb2IiLAogICAgICAvLyDmmL7lvI8gdXRmOCDop6PnoIHvvIzpgb/lhY3kuK3mlofooqvmjIkgbGF0aW4tMSDlrZgKICAgICAgY29udGVudDogQnVmZmVyLmZyb20oYnVmLnRvU3RyaW5nKCJ1dGY4IiksICJ1dGY4IikudG9TdHJpbmcoImJhc2U2NCIpLAogICAgfSk7CiAgfQogIGNvbnNvbGUubG9nKCLlh4blpIfmj5DkuqQgIiArIHRyZWUubGVuZ3RoICsgIiDkuKrmlofku7YiKTsKCiAgY29uc3QgdHJlZVJlcyA9IGF3YWl0IGFwaSgiUE9TVCIsIGJhc2UgKyAiL2dpdC90cmVlcyIsIHsKICAgIHRyZWUsCiAgICBiYXNlX3RyZWU6IGJhc2VDb21taXQsCiAgfSk7CiAgaWYgKCF0cmVlUmVzLnNoYSkgewogICAgY29uc29sZS5lcnJvcigi4pyXIOW7uiB0cmVlIOWksei0pe+8miIsIHRyZWVSZXMubWVzc2FnZSB8fCBKU09OLnN0cmluZ2lmeSh0cmVlUmVzKS5zbGljZSgwLCAzMDApKTsKICAgIHByb2Nlc3MuZXhpdCgxKTsKICB9CiAgY29uc29sZS5sb2coIuaWsCB0cmVlOiAiICsgdHJlZVJlcy5zaGEuc2xpY2UoMCwgNykpOwoKICAvLyAzLiDlu7ogY29tbWl0CiAgY29uc3QgY29tbWl0ID0gYXdhaXQgYXBpKCJQT1NUIiwgYmFzZSArICIvZ2l0L2NvbW1pdHMiLCB7CiAgICBtZXNzYWdlOiBwcm9jZXNzLmVudi5NU0cgfHwgImNob3JlOiDlkIzmraXnq5nngrnmm7TmlrAiLAogICAgdHJlZTogdHJlZVJlcy5zaGEsCiAgICBwYXJlbnRzOiBbYmFzZUNvbW1pdF0sCiAgfSk7CiAgaWYgKCFjb21taXQuc2hhKSB7CiAgICBjb25zb2xlLmVycm9yKCLinJcg5bu6IGNvbW1pdCDlpLHotKXvvJoiLCBjb21taXQubWVzc2FnZSB8fCBKU09OLnN0cmluZ2lmeShjb21taXQpLnNsaWNlKDAsIDMwMCkpOwogICAgcHJvY2Vzcy5leGl0KDEpOwogIH0KICBjb25zb2xlLmxvZygi5pawIGNvbW1pdDogIiArIGNvbW1pdC5zaGEuc2xpY2UoMCwgNykpOwoKICAvLyA0LiDmjqggcmVmCiAgY29uc3QgdXBkID0gYXdhaXQgYXBpKCJQQVRDSCIsIGJhc2UgKyAiL2dpdC9yZWZzL2hlYWRzLyIgKyBCUkFOQ0gsIHsKICAgIHNoYTogY29tbWl0LnNoYSwKICAgIGZvcmNlOiBmYWxzZSwKICB9KTsKICBpZiAoIXVwZC5vYmplY3QpIHsKICAgIGNvbnNvbGUuZXJyb3IoIuKclyDmm7TmlrAgcmVmIOWksei0pe+8miIsIHVwZC5tZXNzYWdlIHx8IEpTT04uc3RyaW5naWZ5KHVwZCkuc2xpY2UoMCwgMzAwKSk7CiAgICBwcm9jZXNzLmV4aXQoMSk7CiAgfQogIGNvbnNvbGUubG9nKCLinJMg5bey5o6o6YCBIOKGkiAiICsgY29tbWl0LnNoYS5zbGljZSgwLCA3KSk7CgogIC8vIDUuIOetiSBQYWdlcyDph43lu7oKICBjb25zb2xlLmxvZygiXG7nrYnlvoUgR2l0SHViIFBhZ2VzIOmHjeW7uu+8iOe6piAzMOKAkzYwIOenku+8iS4uLiIpOwogIGZvciAobGV0IGkgPSAwOyBpIDwgMTI7IGkrKykgewogICAgYXdhaXQgc2xlZXAoMTAwMDApOwogICAgY29uc3QgcGFnZXMgPSBhd2FpdCBhcGkoIkdFVCIsIGJhc2UgKyAiL3BhZ2VzL2J1aWxkcy9sYXRlc3QiKTsKICAgIGNvbnN0IHN0ID0gcGFnZXMuc3RhdHVzIHx8ICI/IjsKICAgIHByb2Nlc3Muc3Rkb3V0LndyaXRlKCIgIOaehOW7uueKtuaAgTogIiArIHN0ICsgIlxyIik7CiAgICBpZiAoc3QgPT09ICJidWlsdCIpIHsKICAgICAgY29uc29sZS5sb2coIlxu4pyTIOaehOW7uuWujOaIkCIpOwogICAgICBicmVhazsKICAgIH0KICAgIGlmIChzdCA9PT0gImVycm9yZWQiKSB7CiAgICAgIGNvbnNvbGUubG9nKCJcbuKclyDmnoTlu7rlpLHotKUiKTsKICAgICAgcHJvY2Vzcy5leGl0KDEpOwogICAgfQogIH0KCiAgLy8gNi4g57q/5LiK6aqM6K+BCiAgY29uc29sZS5sb2coIlxu57q/5LiK6aqM6K+B77yaIik7CiAgZm9yIChjb25zdCBwIG9mIFsiIiwgIndvcmsuaHRtbCIsICJhc3NldHMvanMvcHJvamVjdHMuanMiLCAiYXNzZXRzL2Nzcy9zdHlsZS5jc3MiXSkgewogICAgY29uc3QgciA9IGF3YWl0IG5ldyBQcm9taXNlKChyZXMpID0+IHsKICAgICAgaHR0cHMuZ2V0KFNJVEUgKyAiLyIgKyBwLCB7IGhlYWRlcnM6IHsgIlVzZXItQWdlbnQiOiAiZGVwbG95LWNoZWNrIiB9IH0sICh4KSA9PiB7CiAgICAgICAgeC5yZXN1bWUoKTsKICAgICAgICByZXMoeC5zdGF0dXNDb2RlKTsKICAgICAgfSkub24oImVycm9yIiwgKCkgPT4gcmVzKDApKTsKICAgIH0pOwogICAgY29uc29sZS5sb2coIiAgIiArIChyID09PSAyMDAgPyAi4pyTIiA6ICLinJciKSArICIgIiArIHIgKyAiICAvIiArIHApOwogIH0KICBjb25zb2xlLmxvZygiXG7nur/kuIrlnLDlnYA6ICIgKyBTSVRFKTsKfSkoKTs=
+/**
+ * 一键部署：把本地站点推送到 GitHub。
+ *
+ * 用法：
+ *   node scripts/deploy.cjs <TOKEN>
+ * 或
+ *   SK=<token> node scripts/deploy.cjs
+ *
+ * 说明：git over HTTPS 在本机常被代理阻断，且 Contents API 每次只能传一个文件，
+ * 所以这里用 Git 的 Data API（git/trees + git/commits + git/refs）一次性提交整棵树。
+ * 需要 token 具备该仓库的 contents:write 权限。
+ */
+const https = require("https");
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.join(__dirname, "..");
+const OWNER = "uahz";
+const REPO = "uahz.github.io";
+const BRANCH = "main";
+const SITE = "https://" + OWNER + ".github.io";
+
+const TOKEN = process.argv[2] || process.env.SK;
+if (!TOKEN) {
+  console.error("需要 token：node scripts/deploy.cjs <TOKEN>");
+  process.exit(1);
+}
+
+/* ---------- 站点需要推送的文件 ---------- */
+const INCLUDE = [
+  ".gitignore", ".nojekyll", "404.html", "README.md",
+  "index.html", "work.html",
+  "assets/css/style.css",
+  "assets/js/main.js", "assets/js/projects.js",
+  "assets/img/favicon.svg",
+];
+
+/* scripts/ 下也同步，方便线上排查 */
+const SCRIPT_EXT = [".cjs", ".py"];
+
+function api(method, url, body) {
+  return new Promise((res, rej) => {
+    const data = body ? JSON.stringify(body) : null;
+    const req = https.request(url, {
+      method,
+      headers: {
+        Authorization: "token " + TOKEN,
+        Accept: "application/vnd.github+json",
+        "User-Agent": "deploy-bot",
+        "Content-Type": "application/json",
+        "Content-Length": data ? Buffer.byteLength(data) : 0,
+      },
+    }, (r) => {
+      let s = "";
+      r.on("data", (d) => (s += d));
+      r.on("end", () => {
+        try { res(JSON.parse(s)); } catch (e) { res({ raw: s }); }
+      });
+    });
+    req.on("error", rej);
+    if (data) req.write(data);
+    req.end();
+  });
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function collectFiles() {
+  const files = [...INCLUDE];
+  const sdir = path.join(ROOT, "scripts");
+  if (fs.existsSync(sdir)) {
+    fs.readdirSync(sdir).forEach((f) => {
+      if (SCRIPT_EXT.some((e) => f.endsWith(e))) files.push("scripts/" + f);
+    });
+  }
+  return files.filter((f) => fs.existsSync(path.join(ROOT, f)));
+}
+
+(async () => {
+  const base = "https://api.github.com/repos/" + OWNER + "/" + REPO;
+
+  // 1. 拿当前 ref
+  const ref = await api("GET", base + "/git/ref/heads/" + BRANCH);
+  if (!ref.object) {
+    console.error("✗ 拿不到分支 ref：", ref.message || JSON.stringify(ref).slice(0, 200));
+    process.exit(1);
+  }
+  const baseCommit = ref.object.sha;
+  console.log("当前远端 commit: " + baseCommit.slice(0, 7));
+
+  // 2. 构造 tree
+  const tree = [];
+  for (const f of collectFiles()) {
+    const buf = fs.readFileSync(path.join(ROOT, f));
+    tree.push({
+      path: f,
+      mode: "100644",
+      type: "blob",
+      // 关键：git/trees 的 content 字段要的是【纯文本内容】，不是 base64！
+      // 只有 Contents API (PUT /repos/{o}/{r}/contents/{path}) 才要 base64。
+      // 这里若传 base64，GitHub 会把那串字符当成文件内容原样存下来，
+      // 线上页面就变成一整段 base64 乱码，而 API 仍返回 200、Pages 仍显示 built。
+      content: buf.toString("utf8"),
+    });
+  }
+  console.log("准备提交 " + tree.length + " 个文件");
+
+  const treeRes = await api("POST", base + "/git/trees", {
+    tree,
+    base_tree: baseCommit,
+  });
+  if (!treeRes.sha) {
+    console.error("✗ 建 tree 失败：", treeRes.message || JSON.stringify(treeRes).slice(0, 300));
+    process.exit(1);
+  }
+  console.log("新 tree: " + treeRes.sha.slice(0, 7));
+
+  // 3. 建 commit
+  const commit = await api("POST", base + "/git/commits", {
+    message: process.env.MSG || "chore: 同步站点更新",
+    tree: treeRes.sha,
+    parents: [baseCommit],
+  });
+  if (!commit.sha) {
+    console.error("✗ 建 commit 失败：", commit.message || JSON.stringify(commit).slice(0, 300));
+    process.exit(1);
+  }
+  console.log("新 commit: " + commit.sha.slice(0, 7));
+
+  // 4. 推 ref
+  const upd = await api("PATCH", base + "/git/refs/heads/" + BRANCH, {
+    sha: commit.sha,
+    force: false,
+  });
+  if (!upd.object) {
+    console.error("✗ 更新 ref 失败：", upd.message || JSON.stringify(upd).slice(0, 300));
+    process.exit(1);
+  }
+  console.log("✓ 已推送 → " + commit.sha.slice(0, 7));
+
+  // 5. 等 Pages 重建
+  console.log("\n等待 GitHub Pages 重建（约 30–60 秒）...");
+  for (let i = 0; i < 12; i++) {
+    await sleep(10000);
+    const pages = await api("GET", base + "/pages/builds/latest");
+    const st = pages.status || "?";
+    process.stdout.write("  构建状态: " + st + "\r");
+    if (st === "built") {
+      console.log("\n✓ 构建完成");
+      break;
+    }
+    if (st === "errored") {
+      console.log("\n✗ 构建失败");
+      process.exit(1);
+    }
+  }
+
+  // 6. 线上验证
+  console.log("\n线上验证：");
+  for (const p of ["", "work.html", "assets/js/projects.js", "assets/css/style.css"]) {
+    const r = await new Promise((res) => {
+      https.get(SITE + "/" + p, { headers: { "User-Agent": "deploy-check" } }, (x) => {
+        x.resume();
+        res(x.statusCode);
+      }).on("error", () => res(0));
+    });
+    console.log("  " + (r === 200 ? "✓" : "✗") + " " + r + "  /" + p);
+  }
+  console.log("\n线上地址: " + SITE);
+})();

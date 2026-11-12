@@ -1,1 +1,15 @@
-LyoqIOe7n+iuoeOAjOe6r+WJjeerr+OAjemhueebruaVsO+8iOaKgOacr+agiOWQqyBIVE1MIOaIliBKYXZhU2NyaXB077yJICovCmNvbnN0IGZzID0gcmVxdWlyZSgiZnMiKTsKY29uc3QgcGF0aCA9IHJlcXVpcmUoInBhdGgiKTsKY29uc3QgZCA9IGZzLnJlYWRGaWxlU3luYyhwYXRoLmpvaW4oX19kaXJuYW1lLCAiLi4iLCAiYXNzZXRzIiwgImpzIiwgInByb2plY3RzLmpzIiksICJ1dGY4Iik7Cgpjb25zdCBibG9ja3MgPSBkLnNwbGl0KC9cbiAgXHtcbi8pLnNsaWNlKDEpOwpsZXQgZmUgPSAwOwpibG9ja3MuZm9yRWFjaCgoYikgPT4gewogIGNvbnN0IGlkID0gKGIubWF0Y2goL2lkOlxzKiIoW14iXSspIi8pIHx8IFtdKVsxXTsKICBjb25zdCB0ZWNoID0gKGIubWF0Y2goL3RlY2g6XHMqXFsoW1xzXFNdKj8pXF0vKSB8fCBbIiIsICIiXSlbMV07CiAgY29uc3QgaXNGZSA9IC9IVE1MfEphdmFTY3JpcHQvLnRlc3QodGVjaCk7CiAgaWYgKGlzRmUpIGZlKys7CiAgY29uc29sZS5sb2coKGlzRmUgPyAi5YmN56uvICIgOiAi5qGM6Z2iICIpICsgaWQpOwp9KTsKY29uc29sZS5sb2coIlxu57qv5YmN56uvOiAiICsgZmUgKyAiIC8g5YWxICIgKyBibG9ja3MubGVuZ3RoKTsK
+/** 统计「纯前端」项目数（技术栈含 HTML 或 JavaScript） */
+const fs = require("fs");
+const path = require("path");
+const d = fs.readFileSync(path.join(__dirname, "..", "assets", "js", "projects.js"), "utf8");
+
+const blocks = d.split(/\n  \{\n/).slice(1);
+let fe = 0;
+blocks.forEach((b) => {
+  const id = (b.match(/id:\s*"([^"]+)"/) || [])[1];
+  const tech = (b.match(/tech:\s*\[([\s\S]*?)\]/) || ["", ""])[1];
+  const isFe = /HTML|JavaScript/.test(tech);
+  if (isFe) fe++;
+  console.log((isFe ? "前端 " : "桌面 ") + id);
+});
+console.log("\n纯前端: " + fe + " / 共 " + blocks.length);

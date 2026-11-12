@@ -1,1 +1,24 @@
-LyoqIOe7n+iuoemhueebruWIhuexu+WIhuW4g+S4jueyvumAieaVsOmHjyAqLwpjb25zdCBmcyA9IHJlcXVpcmUoImZzIik7CmNvbnN0IHBhdGggPSByZXF1aXJlKCJwYXRoIik7CmNvbnN0IGQgPSBmcy5yZWFkRmlsZVN5bmMocGF0aC5qb2luKF9fZGlybmFtZSwgIi4uIiwgImFzc2V0cyIsICJqcyIsICJwcm9qZWN0cy5qcyIpLCAidXRmOCIpOwoKY29uc3QgaXRlbXMgPSBbXTsKbGV0IGN1ciA9IG51bGw7CmZvciAoY29uc3QgbGluZSBvZiBkLnNwbGl0KCJcbiIpKSB7CiAgbGV0IG0gPSBsaW5lLm1hdGNoKC9eXHMqaWQ6XHMqIihbXiJdKykiLyk7CiAgaWYgKG0pIHsgY3VyID0geyBpZDogbVsxXSwgY2F0OiBudWxsLCBmZWF0dXJlZDogZmFsc2UgfTsgaXRlbXMucHVzaChjdXIpOyBjb250aW51ZTsgfQogIG0gPSBsaW5lLm1hdGNoKC9eXHMqY2F0OlxzKiIoXHcrKSIvKTsKICBpZiAobSAmJiBjdXIpIHsgY3VyLmNhdCA9IG1bMV07IGNvbnRpbnVlOyB9CiAgaWYgKC9mZWF0dXJlZDpccyp0cnVlLy50ZXN0KGxpbmUpICYmIGN1cikgY3VyLmZlYXR1cmVkID0gdHJ1ZTsKfQoKY29uc3QgY250ID0ge307Cml0ZW1zLmZvckVhY2goKGkpID0+IHsgaWYgKGkuY2F0KSBjbnRbaS5jYXRdID0gKGNudFtpLmNhdF0gfHwgMCkgKyAxOyB9KTsKY29uc3QgZmVhdCA9IGl0ZW1zLmZpbHRlcigoaSkgPT4gaS5mZWF0dXJlZCk7Cgpjb25zb2xlLmxvZygi5oC75pWwOiAiICsgaXRlbXMubGVuZ3RoKTsKY29uc29sZS5sb2coIuWIhuexuzogIiArIEpTT04uc3RyaW5naWZ5KGNudCkpOwpjb25zb2xlLmxvZygi57K+6YCJOiAiICsgZmVhdC5sZW5ndGggKyAiIOKGkiAiICsgZmVhdC5tYXAoKGYpID0+IGYuaWQpLmpvaW4oIiwgIikpOwpjb25zb2xlLmxvZygiXG7mmI7nu4Y6Iik7Cml0ZW1zLmZvckVhY2goKGkpID0+IGNvbnNvbGUubG9nKCIgICIgKyBpLmlkLnBhZEVuZCgyOCkgKyBpLmNhdC5wYWRFbmQoOCkgKyAoaS5mZWF0dXJlZCA/ICLimIUiIDogIiIpKSk7Cg==
+/** 统计项目分类分布与精选数量 */
+const fs = require("fs");
+const path = require("path");
+const d = fs.readFileSync(path.join(__dirname, "..", "assets", "js", "projects.js"), "utf8");
+
+const items = [];
+let cur = null;
+for (const line of d.split("\n")) {
+  let m = line.match(/^\s*id:\s*"([^"]+)"/);
+  if (m) { cur = { id: m[1], cat: null, featured: false }; items.push(cur); continue; }
+  m = line.match(/^\s*cat:\s*"(\w+)"/);
+  if (m && cur) { cur.cat = m[1]; continue; }
+  if (/featured:\s*true/.test(line) && cur) cur.featured = true;
+}
+
+const cnt = {};
+items.forEach((i) => { if (i.cat) cnt[i.cat] = (cnt[i.cat] || 0) + 1; });
+const feat = items.filter((i) => i.featured);
+
+console.log("总数: " + items.length);
+console.log("分类: " + JSON.stringify(cnt));
+console.log("精选: " + feat.length + " → " + feat.map((f) => f.id).join(", "));
+console.log("\n明细:");
+items.forEach((i) => console.log("  " + i.id.padEnd(28) + i.cat.padEnd(8) + (i.featured ? "★" : "")));

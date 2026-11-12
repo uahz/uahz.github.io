@@ -1,1 +1,50 @@
-LyoqIOWvueavlCBHaXRIdWIg5pyA5paw5LuT5bqT5YiX6KGo5LiO56uZ54K55bey5pS25b2V6aG555uu77yM6L6T5Ye65beu5byCICovCmNvbnN0IGZzID0gcmVxdWlyZSgiZnMiKTsKY29uc3QgcGF0aCA9IHJlcXVpcmUoInBhdGgiKTsKCmNvbnN0IFJBVyA9IHByb2Nlc3MuYXJndlsyXTsKY29uc3QgZGlyID0gcGF0aC5kaXJuYW1lKFJBVyk7CmNvbnN0IGZpbGVzID0gZnMucmVhZGRpclN5bmMoZGlyKS5maWx0ZXIoKGYpID0+IGYuc3RhcnRzV2l0aCgibWNwLWdpdGh1Yi1zZWFyY2hfcmVwb3NpdG9yaWVzLSIpKTsKZmlsZXMuc29ydCgpOwpjb25zdCBsYXRlc3QgPSBmaWxlc1tmaWxlcy5sZW5ndGggLSAxXTsKY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoZnMucmVhZEZpbGVTeW5jKHBhdGguam9pbihkaXIsIGxhdGVzdCksICJ1dGY4IikpOwpjb25zdCBhcnIgPSBkYXRhLml0ZW1zIHx8IGRhdGE7Cgpjb25zdCBzaXRlID0gWy4uLmZzLnJlYWRGaWxlU3luYyhwYXRoLmpvaW4oX19kaXJuYW1lLCAiLi4iLCAiYXNzZXRzIiwgImpzIiwgInByb2plY3RzLmpzIiksICJ1dGY4IikKICAubWF0Y2hBbGwoL15ccyppZDpccyoiKFteIl0rKSIvZ20pXS5tYXAoKG0pID0+IG1bMV0pOwoKY29uc29sZS5sb2coIkdpdEh1YiDmnIDmlrDku5PlupPvvJoiICsgYXJyLmxlbmd0aCArICIg5LiqXG4iKTsKY29uc29sZS5sb2coIj09PSDlhajpg6jku5PlupPvvIjmjInmm7TmlrDml7bpl7TmjpLluo/vvIk9PT0iKTsKYXJyLmZvckVhY2goKHIpID0+IHsKICBjb25zdCBvbiA9IHNpdGUuaW5jbHVkZXMoci5uYW1lKSA/ICJb56uZ5YaFXSIgOiAiW+acquaUtuW9lV0iOwogIGNvbnN0IHN0YXIgPSByLnN0YXJnYXplcnNfY291bnQgPyAiIOKYhSIgKyByLnN0YXJnYXplcnNfY291bnQgOiAiIjsKICBjb25zdCBzaXRlMiA9IHIuaGFzX3BhZ2VzID8gIiBQYWdlcyIgOiAiIjsKICBjb25zdCBob21lID0gci5ob21lcGFnZSA/ICIgIiArIHIuaG9tZXBhZ2UucmVwbGFjZSgiaHR0cHM6Ly8iLCAiIikgOiAiIjsKICBjb25zb2xlLmxvZygKICAgIG9uLnBhZEVuZCgxMCkgKyAiWyIgKyAoci5sYW5ndWFnZSB8fCAiLSIpICsgIl0iICsKICAgIChyLm5hbWUgKyBzdGFyICsgc2l0ZTIpLnBhZEVuZCgzNCkgKwogICAgKHIudXBkYXRlZF9hdCB8fCAiIikuc2xpY2UoMCwgMTApICsKICAgIGhvbWUKICApOwogIGNvbnNvbGUubG9nKCIgICAgICAgICAgICIgKyAoci5kZXNjcmlwdGlvbiB8fCAiKOaXoOaPj+i/sCkiKS5zbGljZSgwLCAxNTApKTsKfSk7Cgpjb25zdCBzaXRlU2V0ID0gbmV3IFNldChzaXRlKTsKY29uc3Qgb25TaXRlID0gYXJyLmZpbHRlcigocikgPT4gc2l0ZVNldC5oYXMoci5uYW1lKSk7CmNvbnN0IG5vdE9uU2l0ZSA9IGFyci5maWx0ZXIoKHIpID0+ICFzaXRlU2V0LmhhcyhyLm5hbWUpKTsKY29uc3Qgc3RhbGUgPSBzaXRlLmZpbHRlcigoaWQpID0+ICFhcnIuZmluZCgocikgPT4gci5uYW1lID09PSBpZCkpOwoKY29uc29sZS5sb2coIlxuPT09IOW3ruW8giA9PT0iKTsKY29uc29sZS5sb2coIuermeWGheW3suaUtuW9leS4lCBHaXRIdWIg5LuN5a2Y5ZyoOiAiICsgb25TaXRlLmxlbmd0aCk7CmNvbnNvbGUubG9nKCJHaXRIdWIg5paw5aKe77yI5pyq5pS25b2V77yJOiIpOwpub3RPblNpdGUuZm9yRWFjaCgocikgPT4gY29uc29sZS5sb2coIiAgKyAiICsgci5uYW1lICsgIiAgWyIgKyByLmxhbmd1YWdlICsgIl0gIiArIChyLmRlc2NyaXB0aW9uIHx8ICIiKS5zbGljZSgwLCA5MCkpKTsKY29uc29sZS5sb2coIuermeWGheW3suaUtuW9leS9hiBHaXRIdWIg5bey5Yig6ZmkL+aUueWQjToiKTsKc3RhbGUuZm9yRWFjaCgocykgPT4gY29uc29sZS5sb2coIiAgLSAiICsgcykpOwoKZnMud3JpdGVGaWxlU3luYyhwYXRoLmpvaW4oX19kaXJuYW1lLCAiLi4iLCAiLmdoLWxhdGVzdC5qc29uIiksIEpTT04uc3RyaW5naWZ5KGFyci5tYXAoKHIpID0+ICh7CiAgbjogci5uYW1lLCBkOiByLmRlc2NyaXB0aW9uLCBsYW5nOiByLmxhbmd1YWdlLCBob21lOiByLmhvbWVwYWdlLAogIHRvcGljczogci50b3BpY3MgfHwgW10sIHVwZDogKHIudXBkYXRlZF9hdCB8fCAiIikuc2xpY2UoMCwgMTApLAogIGNyZTogKHIuY3JlYXRlZF9hdCB8fCAiIikuc2xpY2UoMCwgMTApLCBzdGFyczogci5zdGFyZ2F6ZXJzX2NvdW50LAogIHNpdGU6IHIuaGFzX3BhZ2VzLCBzaXplOiByLnNpemUsIGZvcms6IHIuZm9yaywgYXJjaDogci5hcmNoaXZlZCwKfSkpLCBudWxsLCAxKSk7CmNvbnNvbGUubG9nKCJcbuW3suWGmeWHuiAuZ2gtbGF0ZXN0Lmpzb24iKTsK
+/** 对比 GitHub 最新仓库列表与站点已收录项目，输出差异 */
+const fs = require("fs");
+const path = require("path");
+
+const RAW = process.argv[2];
+const dir = path.dirname(RAW);
+const files = fs.readdirSync(dir).filter((f) => f.startsWith("mcp-github-search_repositories-"));
+files.sort();
+const latest = files[files.length - 1];
+const data = JSON.parse(fs.readFileSync(path.join(dir, latest), "utf8"));
+const arr = data.items || data;
+
+const site = [...fs.readFileSync(path.join(__dirname, "..", "assets", "js", "projects.js"), "utf8")
+  .matchAll(/^\s*id:\s*"([^"]+)"/gm)].map((m) => m[1]);
+
+console.log("GitHub 最新仓库：" + arr.length + " 个\n");
+console.log("=== 全部仓库（按更新时间排序）===");
+arr.forEach((r) => {
+  const on = site.includes(r.name) ? "[站内]" : "[未收录]";
+  const star = r.stargazers_count ? " ★" + r.stargazers_count : "";
+  const site2 = r.has_pages ? " Pages" : "";
+  const home = r.homepage ? " " + r.homepage.replace("https://", "") : "";
+  console.log(
+    on.padEnd(10) + "[" + (r.language || "-") + "]" +
+    (r.name + star + site2).padEnd(34) +
+    (r.updated_at || "").slice(0, 10) +
+    home
+  );
+  console.log("           " + (r.description || "(无描述)").slice(0, 150));
+});
+
+const siteSet = new Set(site);
+const onSite = arr.filter((r) => siteSet.has(r.name));
+const notOnSite = arr.filter((r) => !siteSet.has(r.name));
+const stale = site.filter((id) => !arr.find((r) => r.name === id));
+
+console.log("\n=== 差异 ===");
+console.log("站内已收录且 GitHub 仍存在: " + onSite.length);
+console.log("GitHub 新增（未收录）:");
+notOnSite.forEach((r) => console.log("  + " + r.name + "  [" + r.language + "] " + (r.description || "").slice(0, 90)));
+console.log("站内已收录但 GitHub 已删除/改名:");
+stale.forEach((s) => console.log("  - " + s));
+
+fs.writeFileSync(path.join(__dirname, "..", ".gh-latest.json"), JSON.stringify(arr.map((r) => ({
+  n: r.name, d: r.description, lang: r.language, home: r.homepage,
+  topics: r.topics || [], upd: (r.updated_at || "").slice(0, 10),
+  cre: (r.created_at || "").slice(0, 10), stars: r.stargazers_count,
+  site: r.has_pages, size: r.size, fork: r.fork, arch: r.archived,
+})), null, 1));
+console.log("\n已写出 .gh-latest.json");

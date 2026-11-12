@@ -1,1 +1,60 @@
-LyoqIOaOkuafpeeykuWtkOeUu+W4g+WcqCBoZWFkbGVzcyDkuIvnmoTnirbmgIEgKi8KY29uc3QgeyBzcGF3biB9ID0gcmVxdWlyZSgiY2hpbGRfcHJvY2VzcyIpOwpjb25zdCBvcyA9IHJlcXVpcmUoIm9zIiksIHBhdGggPSByZXF1aXJlKCJwYXRoIiksIGZzID0gcmVxdWlyZSgiZnMiKTsKCmNvbnN0IEVER0UgPSBbIkM6L1Byb2dyYW0gRmlsZXMgKHg4NikvTWljcm9zb2Z0L0VkZ2UvQXBwbGljYXRpb24vbXNlZGdlLmV4ZSIsCiAgIkM6L1Byb2dyYW0gRmlsZXMvTWljcm9zb2Z0L0VkZ2UvQXBwbGljYXRpb24vbXNlZGdlLmV4ZSJdLmZpbmQoKHApID0+IGZzLmV4aXN0c1N5bmMocCkpOwpjb25zdCBQT1JUID0gOTMzNTsKY29uc3QgcHJvZmlsZSA9IHBhdGguam9pbihvcy50bXBkaXIoKSwgImRiZzItIiArIERhdGUubm93KCkpOwpjb25zdCBzbGVlcCA9IChtcykgPT4gbmV3IFByb21pc2UoKHIpID0+IHNldFRpbWVvdXQociwgbXMpKTsKCihhc3luYyAoKSA9PiB7CiAgY29uc3QgcHJvYyA9IHNwYXduKEVER0UsIFsiLS1oZWFkbGVzcz1uZXciLCBgLS1yZW1vdGUtZGVidWdnaW5nLXBvcnQ9JHtQT1JUfWAsCiAgICAiLS1kaXNhYmxlLWdwdSIsICItLW5vLWZpcnN0LXJ1biIsICItLW5vLXByb3h5LXNlcnZlciIsICItLXByb3h5LWJ5cGFzcy1saXN0PSoiLAogICAgYC0tdXNlci1kYXRhLWRpcj0ke3Byb2ZpbGV9YCwgImFib3V0OmJsYW5rIl0sIHsgc3RkaW86ICJpZ25vcmUiIH0pOwogIGxldCB3cywgaWQgPSAwOwogIGNvbnN0IHBlbmRpbmcgPSBuZXcgTWFwKCk7CiAgZm9yIChsZXQgaSA9IDA7IGkgPCA0MDsgaSsrKSB7CiAgICB0cnkgewogICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goYGh0dHA6Ly8xMjcuMC4wLjE6JHtQT1JUfS9qc29uL2xpc3RgKTsKICAgICAgY29uc3QgbCA9IGF3YWl0IHIuanNvbigpOwogICAgICBjb25zdCBwZyA9IGwuZmluZCgodCkgPT4gdC50eXBlID09PSAicGFnZSIpOwogICAgICBpZiAocGcpIHsgd3MgPSBuZXcgV2ViU29ja2V0KHBnLndlYlNvY2tldERlYnVnZ2VyVXJsKTsgYnJlYWs7IH0KICAgIH0gY2F0Y2ggKGUpIHt9CiAgICBhd2FpdCBzbGVlcCgyNTApOwogIH0KICBhd2FpdCBuZXcgUHJvbWlzZSgocmVzKSA9PiB7IHdzLm9ub3BlbiA9IHJlczsgfSk7CiAgd3Mub25tZXNzYWdlID0gKGV2KSA9PiB7IGNvbnN0IG0gPSBKU09OLnBhcnNlKGV2LmRhdGEpOyBpZiAobS5pZCAmJiBwZW5kaW5nLmhhcyhtLmlkKSkgeyBwZW5kaW5nLmdldChtLmlkKShtKTsgcGVuZGluZy5kZWxldGUobS5pZCk7IH0gfTsKICBjb25zdCBzZW5kID0gKG1ldGhvZCwgcGFyYW1zID0ge30pID0+IG5ldyBQcm9taXNlKChyZXMpID0+IHsgY29uc3QgbWlkID0gKytpZDsgcGVuZGluZy5zZXQobWlkLCByZXMpOyB3cy5zZW5kKEpTT04uc3RyaW5naWZ5KHsgaWQ6IG1pZCwgbWV0aG9kLCBwYXJhbXMgfSkpOyB9KTsKICBhd2FpdCBzZW5kKCJQYWdlLmVuYWJsZSIpOyBhd2FpdCBzZW5kKCJSdW50aW1lLmVuYWJsZSIpOwogIGF3YWl0IHNlbmQoIlBhZ2UubmF2aWdhdGUiLCB7IHVybDogImh0dHA6Ly8xMjcuMC4wLjE6ODkxMS9pbmRleC5odG1sIiB9KTsKCiAgZm9yIChjb25zdCB0IG9mIFsxMDAwLCAzMDAwLCA2MDAwXSkgewogICAgYXdhaXQgc2xlZXAodCA9PT0gMTAwMCA/IDEwMDAgOiAyMDAwKTsKICAgIGNvbnN0IHIgPSBhd2FpdCBzZW5kKCJSdW50aW1lLmV2YWx1YXRlIiwgewogICAgICBleHByZXNzaW9uOiBgKGZ1bmN0aW9uKCl7CiAgICAgICAgdmFyIGN2PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdmbG93Jyk7CiAgICAgICAgaWYoIWN2KSByZXR1cm4gJ25vIGNhbnZhcyc7CiAgICAgICAgdmFyIGN0eD1jdi5nZXRDb250ZXh0KCcyZCcpOwogICAgICAgIHZhciBweD1jdHguZ2V0SW1hZ2VEYXRhKGN2LndpZHRoPj4xLCBjdi5oZWlnaHQ+PjEsIDEsIDEpLmRhdGE7CiAgICAgICAgcmV0dXJuIEpTT04uc3RyaW5naWZ5KHsKICAgICAgICAgIGhhc09uOiBjdi5jbGFzc0xpc3QuY29udGFpbnMoJ2lzLW9uJyksCiAgICAgICAgICB3OiBjdi53aWR0aCwgaDogY3YuaGVpZ2h0LAogICAgICAgICAgZGlzcGxheTogZ2V0Q29tcHV0ZWRTdHlsZShjdikuZGlzcGxheSwKICAgICAgICAgIG9wYWNpdHk6IGdldENvbXB1dGVkU3R5bGUoY3YpLm9wYWNpdHksCiAgICAgICAgICBjZW50ZXJQaXhlbDogW3B4WzBdLHB4WzFdLHB4WzJdLHB4WzNdXSwKICAgICAgICAgIHJhZjogdHlwZW9mIHJlcXVlc3RBbmltYXRpb25GcmFtZQogICAgICAgIH0pOwogICAgICB9KSgpYCwgcmV0dXJuQnlWYWx1ZTogdHJ1ZSwKICAgIH0pOwogICAgY29uc29sZS5sb2coInQ9IiArIHQgKyAibXM6Iiwgci5yZXN1bHQucmVzdWx0LnZhbHVlKTsKICB9CgogIC8vIOajgOafpSByZWR1Y2VkLW1vdGlvbgogIGNvbnN0IHJtID0gYXdhaXQgc2VuZCgiUnVudGltZS5ldmFsdWF0ZSIsIHsKICAgIGV4cHJlc3Npb246ICJtYXRjaE1lZGlhKCcocHJlZmVycy1yZWR1Y2VkLW1vdGlvbjogcmVkdWNlKScpLm1hdGNoZXMiLCByZXR1cm5CeVZhbHVlOiB0cnVlIH0pOwogIGNvbnNvbGUubG9nKCJwcmVmZXJzLXJlZHVjZWQtbW90aW9uOiIsIHJtLnJlc3VsdC5yZXN1bHQudmFsdWUpOwoKICBwcm9jLmtpbGwoKTsKICB0cnkgeyBmcy5ybVN5bmMocHJvZmlsZSwgeyByZWN1cnNpdmU6IHRydWUsIGZvcmNlOiB0cnVlIH0pOyB9IGNhdGNoIChlKSB7fQp9KSgpOw==
+/** 排查粒子画布在 headless 下的状态 */
+const { spawn } = require("child_process");
+const os = require("os"), path = require("path"), fs = require("fs");
+
+const EDGE = ["C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+  "C:/Program Files/Microsoft/Edge/Application/msedge.exe"].find((p) => fs.existsSync(p));
+const PORT = 9335;
+const profile = path.join(os.tmpdir(), "dbg2-" + Date.now());
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+(async () => {
+  const proc = spawn(EDGE, ["--headless=new", `--remote-debugging-port=${PORT}`,
+    "--disable-gpu", "--no-first-run", "--no-proxy-server", "--proxy-bypass-list=*",
+    `--user-data-dir=${profile}`, "about:blank"], { stdio: "ignore" });
+  let ws, id = 0;
+  const pending = new Map();
+  for (let i = 0; i < 40; i++) {
+    try {
+      const r = await fetch(`http://127.0.0.1:${PORT}/json/list`);
+      const l = await r.json();
+      const pg = l.find((t) => t.type === "page");
+      if (pg) { ws = new WebSocket(pg.webSocketDebuggerUrl); break; }
+    } catch (e) {}
+    await sleep(250);
+  }
+  await new Promise((res) => { ws.onopen = res; });
+  ws.onmessage = (ev) => { const m = JSON.parse(ev.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
+  const send = (method, params = {}) => new Promise((res) => { const mid = ++id; pending.set(mid, res); ws.send(JSON.stringify({ id: mid, method, params })); });
+  await send("Page.enable"); await send("Runtime.enable");
+  await send("Page.navigate", { url: "http://127.0.0.1:8911/index.html" });
+
+  for (const t of [1000, 3000, 6000]) {
+    await sleep(t === 1000 ? 1000 : 2000);
+    const r = await send("Runtime.evaluate", {
+      expression: `(function(){
+        var cv=document.getElementById('flow');
+        if(!cv) return 'no canvas';
+        var ctx=cv.getContext('2d');
+        var px=ctx.getImageData(cv.width>>1, cv.height>>1, 1, 1).data;
+        return JSON.stringify({
+          hasOn: cv.classList.contains('is-on'),
+          w: cv.width, h: cv.height,
+          display: getComputedStyle(cv).display,
+          opacity: getComputedStyle(cv).opacity,
+          centerPixel: [px[0],px[1],px[2],px[3]],
+          raf: typeof requestAnimationFrame
+        });
+      })()`, returnByValue: true,
+    });
+    console.log("t=" + t + "ms:", r.result.result.value);
+  }
+
+  // 检查 reduced-motion
+  const rm = await send("Runtime.evaluate", {
+    expression: "matchMedia('(prefers-reduced-motion: reduce)').matches", returnByValue: true });
+  console.log("prefers-reduced-motion:", rm.result.result.value);
+
+  proc.kill();
+  try { fs.rmSync(profile, { recursive: true, force: true }); } catch (e) {}
+})();
