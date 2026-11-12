@@ -26,10 +26,13 @@ if (!TOKEN) {
   process.exit(1);
 }
 
-/* ---------- 站点需要推送的文件 ---------- */
+/* ---------- 站点需要推送的文件 ----------
+   注意：主入口 index.html 由「../作品集单页/deploy-pages.cjs」负责，
+   这里【不能】推 index.html，否则会把亮色作品集主页覆盖成旧的暗色多页站主页。
+   本仓库现在只承担归档：work.html / 404.html / assets / scripts。 */
 const INCLUDE = [
   ".gitignore", ".nojekyll", "404.html", "README.md",
-  "index.html", "work.html",
+  "work.html",
   "assets/css/style.css",
   "assets/js/main.js", "assets/js/projects.js",
   "assets/img/favicon.svg",
