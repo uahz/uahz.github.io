@@ -548,6 +548,19 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 /* 5.9 联系 */
 .ct-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
+/* 直接联系块（替代原表单：静态站没有后端，不放假回执的输入框） */
+.ct-direct {
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: linear-gradient(165deg, var(--bg-2), var(--bg-1));
+}
+.ct-direct__mail {
+  margin-top: 28px; padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono); font-size: 13.5px;
+  color: var(--cy-400); letter-spacing: .03em;
+}
 .ct-list { display: grid; gap: 12px; margin-top: 30px; }
 .ct {
   display: flex; align-items: center; gap: 16px;

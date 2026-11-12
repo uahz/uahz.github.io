@@ -573,22 +573,7 @@
     }, 80);
   }
 
-  function initForm() {
-    var f = document.getElementById("ct-form");
-    if (!f) return;
-    var st = f.querySelector("[data-status]");
-    f.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!f.checkValidity()) {
-        if (st) st.textContent = "把称呼、邮箱和内容都填一下。";
-        f.reportValidity();
-        return;
-      }
-      var n = (f.elements.name.value || "").trim();
-      if (st) st.textContent = "收到" + (n ? "，" + n : "") + "。站点是纯静态的，正式上线时接上邮件服务即可。";
-      f.reset();
-    });
-  }
+  /* 联系区改为纯 mailto，没有表单后端，也就不需要提交逻辑了。 */
 
   /* ---------- 启动 ---------- */
   function boot() {
@@ -606,7 +591,6 @@
     initTerm();
     initMagnet();
     initDeepLink();
-    initForm();
   }
 
   if (document.readyState === "loading") {

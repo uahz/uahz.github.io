@@ -85,7 +85,9 @@ console.log("\n== 4. 首页必备区块 ==");
  ["核心技能区", /id="skills"/], ["技能条 5 组", cnt(home, /class="skill rv"/g) === 5],
  ["关于区", /id="about"/], ["时间线", /class="tl__i"/g],
  ["联系方式区", /id="contact"/], ["邮箱 mailto", /mailto:uahz@qq\.com/],
- ["联系表单", /id="ct-form"/],
+ ["直接联系块（无表单）", /class="ct-direct/],
+ ["不含联系表单", !/id="ct-form"/.test(home)],
+ ["mailto 为 uahz@qq.com", /href="mailto:uahz@qq\.com"/.test(home)],
  ["精选容器", /data-grid="featured"/],
 ].forEach(([n, re]) => check(n, re instanceof RegExp ? re.test(home) : re));
 
@@ -157,7 +159,7 @@ check("sticky header", /\.head\s*\{[^}]*position:\s*fixed/.test(css));
 check("skip link", /class="skip"/.test(home) && /class="skip"/.test(work));
 check("aria 标注充分", cnt(home, /aria-hidden="true"/g) >= 3 && /aria-label/.test(home));
 check("aria-pressed 用于筛选", /aria-pressed/.test(js) && /aria-pressed/.test(work));
-check("表单状态区 role=status", /role="status"/.test(home));
+check("导航 aria-label 齐全", /<nav[^>]*aria-label="主导航"/.test(home) && /<nav[^>]*aria-label="页脚导航"/.test(home));
 check("html lang", /<html lang="zh-CN">/.test(home) && /<html lang="zh-CN">/.test(work));
 check("theme-color", /name="theme-color"/.test(home) && /name="theme-color"/.test(work));
 
