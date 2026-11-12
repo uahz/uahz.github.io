@@ -75,6 +75,10 @@
   /* —— 动效 —— */
   --ease:cubic-bezier(.22,.61,.36,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
+  /* 入场专用：expo-out 会让 80% 的变化挤在前 400ms、后面像卡住，
+     这条曲线前段更缓、中段推进、结尾柔和收住。 */
+  --ease-reveal:cubic-bezier(.2,.65,.3,1);
+  --t-reveal:.62s;
   --t-fast:.22s;
   --t-mid:.42s;
   --t-slow:.66s;
@@ -165,7 +169,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   /* 底部两角保持直角：否则 border-bottom 会沿着圆角向上弯成 U 形 */
   border-radius:var(--r-sm) var(--r-sm) 0 0;
   font-size:var(--fs-sm);font-weight:500;color:var(--c-text-2);
-  transition:color .24s var(--ease),background .24s var(--ease);
+  transition:color .24s var(--ease),background .24s var(--ease),
+             border-color .24s var(--ease);
+  border-bottom:2px solid transparent;   /* 预留位置，避免 active 时高度跳 2px */
 }
 .nav__link:hover{color:var(--c-text);background:rgba(29,29,31,.035)}
 .nav__link.is-active{
@@ -173,7 +179,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   /* 指示线用 border-bottom：不要用 background + calc(background-size) ——
      calc 一旦失效，渐变会铺满整个链接，再被 nav 的 backdrop-filter 糊成一团蓝块。
      也不用 ::after，同样会被那个模糊层污染。 */
-  border-bottom:2px solid var(--c-primary);
+  border-bottom-color:var(--c-primary);
 }
 .nav__toggle{
   display:none;width:40px;height:40px;border-radius:var(--r-sm);
@@ -316,7 +322,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 }
 .card__media img{
   width:100%;height:100%;object-fit:cover;
-  transition:transform .68s var(--ease-out);
+  /* 用均匀曲线 + 0.9s：expo-out 会把缩放压缩到 300ms 内完成，看着并不「慢」 */
+  transition:transform .9s cubic-bezier(.22,.61,.36,1);
 }
 .card:hover .card__media img{transform:scale(1.06)}
 .card__badge{
@@ -481,13 +488,43 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .footer__links a{transition:color .24s var(--ease)}
 .footer__links a:hover{color:var(--c-primary)}
 
-/* ══════════ 滚动入场动效（全局唯一一套）══════════ */
-.reveal{
-  opacity:0;transform:translateY(20px);
-  transition:opacity .78s var(--ease-out),transform .78s var(--ease-out);
-  transition-delay:var(--delay,0ms);
+/* ══════════ 滚动入场动效（全局唯一一套）══════════
+   用 animation 而不是 transition：
+   .reveal 与 .card 特异性相同，若用 transition 会覆盖卡片的 hover 过渡，
+   导致上浮被加上 90ms 延迟、耗时 620ms。animation 不占用 transition 属性。
+   填充模式用 `backwards`（不是 both）：
+   both 会在动画结束后继续锁住 transform，把卡片 hover 的上浮吃掉；
+   backwards 只保证 delay 期间停在起始帧，播完就把 transform 交还给普通样式。 */
+.reveal{opacity:0}
+.reveal.is-in{
+  opacity:1;                       /* 动画结束后靠它保持可见 */
+  animation:revealIn var(--t-reveal) var(--ease-reveal) var(--delay,0ms) backwards;
 }
-.reveal.is-in{opacity:1;transform:none}
+@keyframes revealIn{
+  from{
+    opacity:0;
+    /* translate3d 直接走合成层，比 translateY 更稳 */
+    transform:translate3d(0,var(--reveal-y,24px),0) scale(var(--reveal-s,.99));
+  }
+  to{
+    opacity:1;
+    transform:translate3d(0,0,0) scale(1);
+  }
+}
+
+/* 位移量按元素「重量」分级：字号越大动得越多，小标签几乎只是淡入。
+   全场同幅度平移会显得平，分级后才有层次。 */
+.hero__title.reveal{--reveal-y:36px;--reveal-s:.985}
+.section__title.reveal,
+.contact__lead.reveal,
+.detail__title.reveal{--reveal-y:30px;--reveal-s:.985}
+.hero__role.reveal,
+.hero__desc.reveal,
+.section__desc.reveal{--reveal-y:20px;--reveal-s:1}
+.hero__eyebrow.reveal,
+.eyebrow.reveal{--reveal-y:10px;--reveal-s:1}
+.card.reveal{--reveal-y:22px;--reveal-s:.99}
+.hero__stats.reveal{--reveal-y:14px;--reveal-s:1}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{
@@ -742,18 +779,18 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   <section class="wrap hero">
     <div class="hero__left">
       <span class="hero__eyebrow reveal"><i aria-hidden="true"></i>2026 · 开放合作</span>
-      <h1 class="hero__title reveal" style="--delay:70ms">
+      <h1 class="hero__title reveal" style="--delay:60ms">
         把复杂的事<br>做得<em>能用且好看</em>
       </h1>
-      <p class="hero__role reveal" style="--delay:140ms">产品工程师 · 界面设计 · 前端工程</p>
-      <p class="hero__desc reveal" style="--delay:210ms">
+      <p class="hero__role reveal" style="--delay:120ms">产品工程师 · 界面设计 · 前端工程</p>
+      <p class="hero__desc reveal" style="--delay:180ms">
         在设计系统、数据密集型后台、移动端应用之间来回切换。
         共同点是——都花在用户看不见但能感觉到的地方。
       </p>
     </div>
 
     <!-- 右侧：当前动态 + 主按钮，贴底对齐，主按钮落在右下角 -->
-    <div class="hero__right reveal" style="--delay:280ms">
+    <div class="hero__right reveal" style="--delay:240ms">
       <div class="hero__note">
         <p class="hero__note-label">最近在做什么</p>
         <p class="hero__note-text">
@@ -774,7 +811,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
       </div>
     </div>
 
-    <div class="hero__stats reveal" style="--delay:340ms">
+    <div class="hero__stats reveal" style="--delay:300ms">
       <div class="hero__stat"><b>19</b><span>开源项目</span></div>
       <div class="hero__stat"><b>6</b><span>技术方向</span></div>
       <div class="hero__stat"><b>11</b><span>纯前端项目</span></div>
@@ -950,7 +987,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
           <div class="about__fact"><dt>语言</dt><dd>中文 / English</dd></div>
         </dl>
       </div>
-      <div class="about__media reveal" style="--delay:140ms">
+      <div class="about__media reveal" style="--delay:120ms">
         <!-- ↓ 替换为本人照片 -->
         <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23EAE7E4%22%2F%3E%3Ccircle%20cx%3D%22668%22%20cy%3D%22272%22%20r%3D%22236%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.065%22%20stroke-width%3D%2280%22%2F%3E%3Ccircle%20cx%3D%22168%22%20cy%3D%22452%22%20r%3D%2226%22%20fill%3D%22%23165DFF%22%2F%3E%3Ctext%20x%3D%22742%22%20y%3D%22566%22%20text-anchor%3D%22end%22%20font-family%3D%22Helvetica%2CArial%2Csans-serif%22%20font-size%3D%22104%22%20font-weight%3D%22600%22%20letter-spacing%3D%22-6%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.085%22%3E03%3C%2Ftext%3E%3C%2Fsvg%3E" alt="个人照片占位图">
       </div>
@@ -1070,7 +1107,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
     card.href = "project.html?id=" + encodeURIComponent(w.id);
     card.setAttribute("data-cat", w.cat);
     card.setAttribute("aria-label", "查看项目详情：" + w.title);
-    card.style.setProperty("--delay", (i % 6) * 70 + "ms");
+    // Bento 每行 2 张：左卡先、右卡晚 90ms，节奏跟着视觉行走
+    card.style.setProperty("--delay", (i % 2) * 90 + "ms");
 
     var media = el("div","card__media");
     var img = el("img");
