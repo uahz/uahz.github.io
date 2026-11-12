@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>项目详情 · 汤</title>
+<meta name="description" content="项目详情 —— 完整介绍、实现要点、技术栈与访问链接。">
+<meta name="theme-color" content="#FAFAFA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23165DFF%27%2F%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%277%27%20fill%3D%27%23FFFFFF%27%2F%3E%3C%2Fsvg%3E">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   设计系统
+   所有色值、圆角、阴影、间距一律走 CSS 变量，禁止零散写色。
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  /* —— 品牌色 —— */
+  --c-primary:#165DFF;
+  --c-primary-hover:#0E4AD8;
+  --c-primary-soft:rgba(22,93,255,.08);
+  --c-primary-line:rgba(22,93,255,.22);
+
+  /* —— 中性色 —— */
+  --c-bg:#FAFAFA;
+  --c-surface:#FFFFFF;
+  --c-text:#1D1D1F;
+  --c-text-2:#86868B;
+  --c-text-3:#AEAEB2;
+  --c-line:rgba(29,29,31,.10);
+  --c-line-soft:rgba(29,29,31,.06);
+  --c-on-primary:#FFFFFF;   /* 主色之上的文字色 */
+
+  /* —— 阴影：低透明度、柔和，拒绝厚重黑影 —— */
+  --sh-1:0 1px 2px rgba(29,29,31,.04), 0 4px 14px rgba(29,29,31,.045);
+  --sh-2:0 2px 6px rgba(29,29,31,.05), 0 14px 40px rgba(29,29,31,.075);
+  --sh-3:0 8px 24px rgba(29,29,31,.09), 0 32px 72px rgba(29,29,31,.13);
+
+  /* —— 圆角：统一 12px —— */
+  --r-sm:8px;
+  --r:12px;
+  --r-lg:20px;
+  --r-pill:999px;
+
+  /* —— 字体：标题用 Sora（几何感、有辨识度），正文用 Noto Sans SC —— */
+  --font-display:"Sora","SF Pro Display","Helvetica Neue",-apple-system,
+                 "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+  --font-body:"Noto Sans SC","SF Pro Text","PingFang SC","Microsoft YaHei",
+              -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+
+  /* —— 字号阶梯：层级严格区分 —— */
+  --fs-xs:.75rem;      /* 12 */
+  --fs-sm:.8125rem;    /* 13 */
+  --fs-base:.9375rem;  /* 15 */
+  --fs-md:1.0625rem;   /* 17 */
+  --fs-lg:1.25rem;     /* 20 */
+  --fs-xl:1.75rem;     /* 28 */
+  --fs-2xl:2.5rem;     /* 40 */
+  --fs-3xl:clamp(2.6rem,5.6vw,4.25rem); /* 42–68 */
+
+  /* —— 间距 —— */
+  --sp-1:.5rem; --sp-2:1rem; --sp-3:1.5rem; --sp-4:2rem;
+  --sp-5:3rem; --sp-6:4rem; --sp-7:6rem; --sp-8:8rem;
+
+  --gutter:1.5rem;
+  --maxw:1240px;
+  --nav-h:64px;
+
+  /* —— 动效 —— */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --t-fast:.22s;
+  --t-mid:.42s;
+  --t-slow:.66s;
+}
+
+/* ══════════ 基础 ══════════ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  font-size:var(--fs-base);
+  line-height:1.7;
+  color:var(--c-text);
+  background:var(--c-bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+/* 极淡径向渐变：营造空间深度，肉眼几乎不可见 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(1200px 680px at 78% -10%,rgba(22,93,255,.035),transparent 62%),
+    radial-gradient(900px 560px at 4% 24%,rgba(29,29,31,.022),transparent 60%),
+    radial-gradient(1000px 620px at 50% 108%,rgba(22,93,255,.022),transparent 64%);
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  margin:0;font-weight:600;line-height:1.14;
+  letter-spacing:-.025em;color:var(--c-text);
+}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--c-primary);outline-offset:3px;border-radius:4px}
+::selection{background:var(--c-primary);color:var(--c-on-primary)}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.skip{
+  position:fixed;left:var(--sp-3);top:-80px;z-index:200;
+  padding:.65rem 1.1rem;border-radius:var(--r-sm);
+  background:var(--c-primary);color:var(--c-on-primary);font-weight:600;font-size:var(--fs-sm);
+  transition:top .2s var(--ease);
+}
+.skip:focus{top:var(--sp-3)}
+
+/* ══════════ 1. 固定导航栏 ══════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  display:flex;align-items:center;
+  background:rgba(250,250,250,0);
+  border-bottom:1px solid transparent;
+  transition:background .4s var(--ease),border-color .4s var(--ease),
+             backdrop-filter .4s var(--ease),box-shadow .4s var(--ease);
+}
+.nav.is-stuck{
+  background:rgba(250,250,250,.72);
+  -webkit-backdrop-filter:saturate(180%) blur(18px);
+  backdrop-filter:saturate(180%) blur(18px);
+  border-bottom-color:var(--c-line-soft);
+  box-shadow:0 1px 0 rgba(29,29,31,.02);
+}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;width:100%}
+.brand{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:var(--font-display);font-size:1.0625rem;font-weight:600;
+  letter-spacing:-.02em;color:var(--c-text);
+}
+.brand__dot{
+  width:7px;height:7px;border-radius:50%;background:var(--c-primary);
+  transition:transform .4s var(--ease-out);
+}
+.brand:hover .brand__dot{transform:scale(1.6)}
+.nav__menu{display:flex;align-items:center;gap:.35rem}
+.nav__link{
+  position:relative;padding:.5rem .8rem;border-radius:var(--r-sm);
+  font-size:var(--fs-sm);font-weight:500;color:var(--c-text-2);
+  transition:color .24s var(--ease),background .24s var(--ease);
+}
+.nav__link:hover{color:var(--c-text);background:rgba(29,29,31,.035)}
+.nav__link.is-active{color:var(--c-text)}
+.nav__link.is-active::after{
+  content:"";position:absolute;left:.8rem;right:.8rem;bottom:.15rem;
+  height:1.5px;border-radius:2px;background:var(--c-primary);
+}
+.nav__toggle{
+  display:none;width:40px;height:40px;border-radius:var(--r-sm);
+  align-items:center;justify-content:center;flex-direction:column;gap:5px;
+}
+.nav__toggle span{
+  display:block;width:19px;height:1.5px;border-radius:2px;background:var(--c-text);
+  transition:transform .3s var(--ease),opacity .2s var(--ease);
+}
+.nav__toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav__toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav__toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ══════════ 通用：板块标题 ══════════ */
+.section{padding:var(--sp-8) 0;position:relative}
+.section__head{margin-bottom:var(--sp-5);max-width:44rem}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--c-primary);
+  margin-bottom:var(--sp-2);
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor;opacity:.55}
+.section__title{font-size:var(--fs-2xl)}
+.section__desc{margin-top:var(--sp-3);color:var(--c-text-2);font-size:var(--fs-md);line-height:1.75}
+.section__num{
+  font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--c-text-3);
+  letter-spacing:.1em;
+}
+
+/* ══════════ 2. Hero ══════════ */
+.hero{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:var(--sp-4);
+  align-items:end;
+  padding-top:calc(var(--nav-h) + var(--sp-8));
+  padding-bottom:var(--sp-7);
+  min-height:calc(100vh - var(--nav-h));
+  min-height:calc(100svh - var(--nav-h));
+}
+.hero__left{grid-column:1/8}
+.hero__right{grid-column:9/13;padding-top:var(--sp-6);display:flex;flex-direction:column;justify-content:flex-end;gap:var(--sp-4)}
+.hero__eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.34rem .8rem;border-radius:var(--r-pill);
+  background:var(--c-primary-soft);border:1px solid var(--c-primary-line);
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--c-primary);
+  margin-bottom:var(--sp-3);
+}
+.hero__eyebrow i{
+  width:6px;height:6px;border-radius:50%;background:var(--c-primary);
+  animation:pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(22,93,255,.34)}
+  50%{box-shadow:0 0 0 7px rgba(22,93,255,0)}
+}
+.hero__title{font-size:var(--fs-3xl);letter-spacing:-.035em}
+.hero__title em{font-style:normal;color:var(--c-primary)}
+.hero__role{
+  margin-top:var(--sp-3);font-size:var(--fs-lg);
+  color:var(--c-text);font-weight:500;letter-spacing:-.01em;
+}
+.hero__desc{
+  margin-top:var(--sp-3);font-size:var(--fs-md);color:var(--c-text-2);
+  max-width:34rem;line-height:1.8;
+}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.85rem;justify-content:flex-end}
+.hero__stats{
+  grid-column:1/-1;display:flex;flex-wrap:wrap;gap:var(--sp-5);
+  margin-top:var(--sp-6);padding-top:var(--sp-4);
+  border-top:1px solid var(--c-line-soft);
+}
+.hero__stat{display:grid;gap:.1rem}
+.hero__stat b{
+  font-family:var(--font-display);font-size:var(--fs-xl);
+  font-weight:600;letter-spacing:-.02em;
+}
+.hero__stat span{font-size:var(--fs-xs);color:var(--c-text-2);letter-spacing:.02em}
+
+/* Hero 右侧：一条当前动态，克制的小段落 */
+.hero__note{
+  padding:var(--sp-3) 0 var(--sp-3) var(--sp-3);
+  border-left:2px solid var(--c-primary-line);
+}
+.hero__note-label{
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--c-text-3);
+  margin-bottom:.7rem;
+}
+.hero__note-text{font-size:var(--fs-base);color:var(--c-text);line-height:1.75}
+.hero__note-meta{
+  margin-top:.8rem;font-family:var(--font-mono);font-size:var(--fs-xs);
+  color:var(--c-primary);letter-spacing:.04em;
+}
+
+/* 按钮 */
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.82rem 1.5rem;border-radius:var(--r-pill);
+  font-size:var(--fs-base);font-weight:600;letter-spacing:-.005em;
+  transition:transform .3s var(--ease-out),box-shadow .3s var(--ease),
+             background .3s var(--ease),border-color .3s var(--ease);
+}
+.btn--primary{background:var(--c-primary);color:var(--c-on-primary);box-shadow:0 4px 18px rgba(22,93,255,.22)}
+.btn--primary:hover{background:var(--c-primary-hover);transform:translateY(-2px);box-shadow:0 10px 30px rgba(22,93,255,.30)}
+.btn--ghost{border:1px solid var(--c-line);color:var(--c-text);background:var(--c-surface)}
+.btn--ghost:hover{border-color:var(--c-primary);color:var(--c-primary);transform:translateY(-2px)}
+.btn svg{transition:transform .3s var(--ease-out)}
+.btn:hover svg{transform:translateX(3px)}
+
+/* ══════════ 3. 作品画廊（Bento 错落网格）══════════ */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:var(--sp-4);
+}
+.card{
+  position:relative;display:flex;flex-direction:column;
+  background:var(--c-surface);
+  border:1px solid var(--c-line-soft);
+  border-radius:var(--r);
+  overflow:hidden;cursor:pointer;
+  text-align:left;width:100%;
+  transition:transform .42s var(--ease-out),box-shadow .42s var(--ease),
+             border-color .42s var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh-2);border-color:var(--c-line)}
+.card:focus-visible{outline:2px solid var(--c-primary);outline-offset:3px}
+.card__media{
+  position:relative;aspect-ratio:4/3;overflow:hidden;
+  background:var(--c-surface);
+  border-bottom:1px solid var(--c-line-soft);
+}
+.card__media img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .68s var(--ease-out);
+}
+.card:hover .card__media img{transform:scale(1.06)}
+.card__badge{
+  position:absolute;top:.85rem;left:.85rem;
+  padding:.24rem .6rem;border-radius:var(--r-pill);
+  background:rgba(255,255,255,.86);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1px solid var(--c-line-soft);
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  color:var(--c-text-2);letter-spacing:.06em;
+}
+.card__body{padding:1.15rem 1.25rem 1.3rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+.card__title{font-size:var(--fs-lg);letter-spacing:-.018em}
+.card__cat{
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--c-primary);
+}
+.card__desc{font-size:var(--fs-sm);color:var(--c-text-2);line-height:1.65}
+.card__foot{
+  margin-top:auto;padding-top:.85rem;
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  font-size:var(--fs-xs);color:var(--c-text-3);
+}
+.card__more{
+  display:inline-flex;align-items:center;gap:.3rem;
+  color:var(--c-text-2);font-weight:600;
+  transition:color .26s var(--ease),gap .26s var(--ease);
+}
+.card:hover .card__more{color:var(--c-primary);gap:.55rem}
+
+/* Bento 桌面规则见文件末尾 @media (min-width:1024px) */
+
+
+/* ══════════ 5. 技能与工具 ══════════ */
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);align-items:start}
+.skill-group{margin-bottom:var(--sp-4)}
+.skill-group:last-child{margin-bottom:0}
+.skill-group__name{
+  font-size:var(--fs-sm);font-weight:600;color:var(--c-text);
+  margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem;
+}
+.skill-group__name::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:var(--c-primary);
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.skill-tag{
+  padding:.38rem .85rem;border-radius:var(--r-pill);
+  background:var(--c-surface);border:1px solid var(--c-line-soft);
+  font-size:var(--fs-sm);color:var(--c-text);
+  transition:border-color .26s var(--ease),color .26s var(--ease),
+             transform .26s var(--ease-out);
+}
+.skill-tag:hover{border-color:var(--c-primary-line);color:var(--c-primary);transform:translateY(-2px)}
+.tools{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));
+  gap:.75rem;
+}
+.tool{
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  padding:1.05rem .5rem;border-radius:var(--r);
+  background:var(--c-surface);border:1px solid var(--c-line-soft);
+  color:var(--c-text-2);
+  transition:border-color .26s var(--ease),color .26s var(--ease),
+             transform .26s var(--ease-out),box-shadow .26s var(--ease);
+}
+.tool:hover{
+  border-color:var(--c-primary-line);color:var(--c-primary);
+  transform:translateY(-3px);box-shadow:var(--sh-1);
+}
+.tool svg{width:24px;height:24px}
+.tool span{font-size:var(--fs-xs);letter-spacing:.01em}
+
+/* ══════════ 6. 关于我 ══════════ */
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--sp-6);align-items:center}
+.about__text p{color:var(--c-text-2);font-size:var(--fs-md);line-height:1.85}
+.about__text p + p{margin-top:var(--sp-3)}
+.about__text strong{color:var(--c-text);font-weight:600}
+.about__quote{
+  margin-top:var(--sp-4);padding-left:var(--sp-3);
+  border-left:2px solid var(--c-primary);
+  font-family:var(--font-display);font-size:var(--fs-lg);
+  line-height:1.55;letter-spacing:-.015em;color:var(--c-text);
+}
+.about__facts{
+  margin-top:var(--sp-4);display:grid;gap:0;
+  border-top:1px solid var(--c-line-soft);
+}
+.about__fact{
+  display:flex;justify-content:space-between;gap:var(--sp-3);
+  padding:.85rem 0;border-bottom:1px solid var(--c-line-soft);
+  font-size:var(--fs-sm);
+}
+.about__fact dt{color:var(--c-text-2)}
+.about__fact dd{margin:0;font-weight:600;text-align:right}
+.about__media{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  aspect-ratio:4/5;background:var(--c-surface);
+  border:1px solid var(--c-line-soft);box-shadow:var(--sh-1);
+}
+.about__media img{width:100%;height:100%;object-fit:cover}
+
+/* ══════════ 7. 联系 ══════════ */
+.contact{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);
+  align-items:center;
+}
+.contact__lead{font-size:var(--fs-2xl);letter-spacing:-.03em;line-height:1.2}
+.contact__mail{
+  display:inline-flex;align-items:center;gap:.6rem;margin-top:var(--sp-4);
+  font-family:var(--font-display);font-size:var(--fs-lg);font-weight:600;
+  letter-spacing:-.02em;
+  border-bottom:1.5px solid var(--c-primary-line);
+  padding-bottom:.2rem;
+  transition:border-color .28s var(--ease),color .28s var(--ease);
+}
+.contact__mail:hover{color:var(--c-primary);border-color:var(--c-primary)}
+.socials{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:var(--sp-5)}
+.social{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.6rem 1.05rem;border-radius:var(--r-pill);
+  background:var(--c-surface);border:1px solid var(--c-line-soft);
+  font-size:var(--fs-sm);font-weight:500;color:var(--c-text);
+  transition:all .26s var(--ease);
+}
+.social:hover{
+  border-color:var(--c-primary);color:var(--c-primary);
+  transform:translateY(-2px);box-shadow:var(--sh-1);
+}
+.social svg{width:17px;height:17px;flex:none}
+
+/* 联系区右栏：合作方式清单 */
+.contact__note{
+  padding:var(--sp-4);border-radius:var(--r);
+  background:var(--c-surface);border:1px solid var(--c-line-soft);
+}
+.contact__note-label{
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--c-text-3);
+  margin-bottom:1rem;
+}
+.contact__note-list{display:grid;gap:.85rem}
+.contact__note-list li{
+  position:relative;padding-left:1.15rem;
+  font-size:var(--fs-sm);color:var(--c-text-2);line-height:1.6;
+}
+.contact__note-list li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:5px;height:5px;border-radius:50%;background:var(--c-primary);opacity:.65;
+}
+
+/* ══════════ 8. 页脚 ══════════ */
+.footer{
+  border-top:1px solid var(--c-line-soft);
+  padding:var(--sp-4) 0;
+}
+.footer__inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:var(--sp-3);flex-wrap:wrap;
+  font-size:var(--fs-sm);color:var(--c-text-2);
+}
+.footer__links{display:flex;gap:var(--sp-3);flex-wrap:wrap}
+.footer__links a{transition:color .24s var(--ease)}
+.footer__links a:hover{color:var(--c-primary)}
+
+/* ══════════ 滚动入场动效（全局唯一一套）══════════ */
+.reveal{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .78s var(--ease-out),transform .78s var(--ease-out);
+  transition-delay:var(--delay,0ms);
+}
+.reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+  .reveal{opacity:1;transform:none}
+}
+
+/* ══════════ 响应式：375 / 768 / 1200 ══════════ */
+@media (max-width:1199px){
+  :root{--sp-8:6.5rem}
+  .hero__left{grid-column:1/9}
+  .hero__right{grid-column:9/13;padding-top:var(--sp-5)}
+}
+/* 1023 以下：Hero 改为上下堆叠，主按钮回到内容流中 */
+@media (max-width:1023px){
+  .hero{grid-template-columns:1fr;min-height:auto;gap:var(--sp-4)}
+  .hero__left,.hero__right{grid-column:1/-1}
+  .hero__right{padding-top:0;justify-content:flex-start}
+  .hero__cta{justify-content:flex-start}
+}
+@media (max-width:1023px){
+  .skills{grid-template-columns:1fr;gap:var(--sp-5)}
+  .about{grid-template-columns:1fr;gap:var(--sp-5)}
+  .about__media{max-width:420px;aspect-ratio:16/11}
+  .contact{grid-template-columns:1fr;gap:var(--sp-4)}
+}
+/* 768–1023 平板档：画廊两列，导航仍用桌面菜单（够宽） */
+@media (max-width:1023px) and (min-width:768px){
+  .gallery{grid-template-columns:repeat(6,1fr)}
+  .gallery .card:nth-child(n){grid-column:span 3;margin-top:0}
+  .gallery .card:nth-child(4n+1){grid-column:span 4}
+  .gallery .card:nth-child(4n+4){grid-column:span 2}
+}
+@media (max-width:767px){
+  :root{
+    --gutter:1.25rem;--sp-7:4.5rem;--sp-8:4.5rem;
+    --fs-2xl:2rem;--fs-xl:1.5rem;--fs-3xl:clamp(2.15rem,9vw,3rem);
+  }
+  .nav__toggle{display:flex}
+  .nav__menu{
+    position:absolute;top:var(--nav-h);left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:.1rem;
+    padding:var(--sp-2) var(--gutter) var(--sp-3);
+    background:rgba(250,250,250,.96);
+    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--c-line-soft);
+    opacity:0;visibility:hidden;transform:translateY(-6px);
+    transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s var(--ease);
+  }
+  .nav__menu.is-open{opacity:1;visibility:visible;transform:none}
+  .nav__link{padding:.65rem .5rem;font-size:var(--fs-base)}
+  .nav__link.is-active::after{left:.5rem;right:auto;width:16px;bottom:.3rem}
+
+  /* Hero：竖排，主按钮移到左下区域 */
+  .hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding-top:calc(var(--nav-h) + var(--sp-6));
+    padding-bottom:var(--sp-6);
+    gap:var(--sp-4);
+  }
+  .hero__left,.hero__right{grid-column:1/-1}
+  .hero__right{padding-top:0;justify-content:flex-start}
+  .hero__cta{justify-content:flex-start}
+  .hero__stats{gap:var(--sp-4) var(--sp-5);margin-top:var(--sp-4);padding-top:var(--sp-3)}
+  .hero__stat b{font-size:var(--fs-lg)}
+
+  /* 画廊：单列堆叠 */
+  .gallery{grid-template-columns:1fr;gap:var(--sp-3)}
+  .gallery .card:nth-child(n){grid-column:1/-1;margin-top:0}
+
+
+  .section__desc{font-size:var(--fs-base)}
+  .tools{grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+}
+@media (max-width:374px){
+  :root{--gutter:1rem}
+  .hero__cta{flex-direction:column;align-items:stretch}
+  .hero__cta .btn{justify-content:center}
+  .tools{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1200px){
+  .gallery .card:nth-child(6n+2){margin-top:var(--sp-7)}
+  .gallery .card:nth-child(6n+3){margin-top:calc(var(--sp-7) * -1)}
+}
+
+/* ══════════ 作品筛选条 ══════════ */
+.filters{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;
+  margin-bottom:var(--sp-4);
+  padding-bottom:var(--sp-3);
+  border-bottom:1px solid var(--c-line-soft);
+}
+.filter{
+  padding:.42rem 1rem;border-radius:var(--r-pill);
+  background:transparent;border:1px solid var(--c-line-soft);
+  font-size:var(--fs-sm);font-weight:500;color:var(--c-text-2);
+  transition:all .26s var(--ease);
+}
+.filter:hover{color:var(--c-text);border-color:var(--c-line)}
+.filter.is-active{
+  background:var(--c-primary);border-color:var(--c-primary);
+  color:var(--c-on-primary);font-weight:600;
+}
+.filter__count{
+  margin-left:auto;font-family:var(--font-mono);font-size:var(--fs-xs);
+  color:var(--c-text-3);letter-spacing:.04em;
+}
+.card.is-hidden{display:none}
+
+/* 19 张卡片的 Bento 节奏：每 6 张一个循环，跨度 7/5 交替 + 垂直偏移。
+   必须限定 min-width:1024 —— 否则这段写在响应式之后，会覆盖掉移动端单列。 */
+@media (min-width:1024px){
+  .gallery .card:nth-child(6n+1){grid-column:span 7}
+  .gallery .card:nth-child(6n+2){grid-column:span 5;margin-top:var(--sp-6)}
+  .gallery .card:nth-child(6n+3){grid-column:span 5;margin-top:calc(var(--sp-6) * -1)}
+  .gallery .card:nth-child(6n+4){grid-column:span 7;margin-top:var(--sp-4)}
+  .gallery .card:nth-child(6n+5){grid-column:span 8}
+  .gallery .card:nth-child(6n+6){grid-column:span 4;margin-top:var(--sp-5)}
+}
+
+/* ══════════ 二级详情页 ══════════ */
+.detail{padding-top:calc(var(--nav-h) + var(--sp-6));padding-bottom:var(--sp-7)}
+.back{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:var(--fs-sm);font-weight:600;color:var(--c-text-2);
+  transition:color .24s var(--ease),gap .24s var(--ease);
+}
+.back:hover{color:var(--c-primary);gap:.7rem}
+.detail__head{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);
+  align-items:end;margin-top:var(--sp-4);margin-bottom:var(--sp-5);
+}
+.detail__cat{
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--c-primary);
+}
+.detail__title{margin-top:.6rem;font-size:var(--fs-3xl);letter-spacing:-.035em}
+.detail__repo{
+  font-family:var(--font-mono);font-size:var(--fs-sm);
+  color:var(--c-text-3);margin-top:.7rem;
+}
+.detail__lead{font-size:var(--fs-md);color:var(--c-text-2);line-height:1.85}
+.detail__hero{
+  aspect-ratio:16/9;overflow:hidden;border-radius:var(--r-lg);
+  border:1px solid var(--c-line-soft);background:var(--c-surface);
+  box-shadow:var(--sh-1);
+}
+.detail__hero img{width:100%;height:100%;object-fit:cover}
+.detail__grid{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:var(--sp-6);
+  margin-top:var(--sp-6);align-items:start;
+}
+.detail__label{
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--c-text-3);
+  margin-bottom:var(--sp-2);
+}
+.detail__desc{font-size:var(--fs-md);color:var(--c-text-2);line-height:1.9}
+.points{display:grid;gap:.9rem;margin-top:var(--sp-4)}
+.points li{
+  position:relative;padding-left:1.35rem;
+  font-size:var(--fs-base);color:var(--c-text-2);line-height:1.7;
+}
+.points li::before{
+  content:"";position:absolute;left:0;top:.68em;
+  width:6px;height:6px;border-radius:50%;background:var(--c-primary);opacity:.7;
+}
+.side{display:grid;gap:var(--sp-5)}
+.techs{display:flex;flex-wrap:wrap;gap:.5rem}
+.tech{
+  padding:.38rem .85rem;border-radius:var(--r-pill);
+  background:var(--c-surface);border:1px solid var(--c-line-soft);
+  font-size:var(--fs-sm);color:var(--c-text);
+}
+.detail__links{display:grid;gap:.6rem}
+.detail__link{
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+  padding:.9rem 1.1rem;border-radius:var(--r);
+  background:var(--c-surface);border:1px solid var(--c-line-soft);
+  font-size:var(--fs-sm);font-weight:600;
+  transition:all .26s var(--ease);
+}
+.detail__link:hover{
+  border-color:var(--c-primary);color:var(--c-primary);
+  transform:translateY(-2px);box-shadow:var(--sh-1);
+}
+.detail__link--primary{background:var(--c-primary);border-color:var(--c-primary);color:var(--c-on-primary)}
+.detail__link--primary:hover{background:var(--c-primary-hover);color:var(--c-on-primary)}
+.detail__nav{
+  display:flex;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;
+  margin-top:var(--sp-6);padding-top:var(--sp-4);
+  border-top:1px solid var(--c-line-soft);
+}
+.detail__nav a{
+  display:grid;gap:.25rem;font-size:var(--fs-sm);color:var(--c-text-2);
+  transition:color .24s var(--ease);
+}
+.detail__nav a:hover{color:var(--c-primary)}
+.detail__nav a b{font-family:var(--font-display);font-size:var(--fs-base);color:var(--c-text);font-weight:600}
+.detail__nav a span:first-child{
+  font-family:var(--font-mono);font-size:var(--fs-xs);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--c-text-3);
+}
+.detail__nav .is-next{text-align:right}
+
+@media (max-width:1023px){
+  .detail__head{grid-template-columns:1fr;gap:var(--sp-3)}
+  .detail__grid{grid-template-columns:1fr;gap:var(--sp-5)}
+}
+@media (max-width:767px){
+  .detail__hero{aspect-ratio:4/3}
+  .filters{gap:.4rem}
+  .filter{padding:.38rem .8rem;font-size:var(--fs-xs)}
+  .filter__count{width:100%;margin-left:0;margin-top:.5rem}
+}
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#detail">跳到详情</a>
+
+<!-- ══════════ 导航（详情页：作品项高亮）══════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="index.html"><span class="brand__dot" aria-hidden="true"></span>汤</a>
+    <nav class="nav__menu" id="navMenu" aria-label="主导航">
+      <a class="nav__link" href="index.html#top">首页</a>
+      <a class="nav__link is-active" href="index.html#work">作品</a>
+      <a class="nav__link" href="index.html#about">关于</a>
+      <a class="nav__link" href="index.html#contact">联系</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" type="button"
+            aria-expanded="false" aria-controls="navMenu" aria-label="打开导航菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="detail" class="wrap detail">
+
+  <a class="back" href="index.html#work">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5M11 18l-6-6 6-6"/>
+    </svg>
+    返回全部作品
+  </a>
+
+  <div class="detail__head">
+    <div>
+      <p class="detail__cat" id="dCat"></p>
+      <h1 class="detail__title" id="dTitle"></h1>
+      <p class="detail__repo" id="dRepo"></p>
+    </div>
+    <p class="detail__lead" id="dLead"></p>
+  </div>
+
+  <div class="detail__hero"><img id="dImg" src="" alt=""></div>
+
+  <div class="detail__grid">
+    <div>
+      <p class="detail__label">项目简介</p>
+      <p class="detail__desc" id="dDesc"></p>
+
+      <p class="detail__label" style="margin-top:var(--sp-5)">实现要点</p>
+      <ul class="points" id="dPoints"></ul>
+    </div>
+
+    <aside class="side">
+      <div>
+        <p class="detail__label">技术栈</p>
+        <div class="techs" id="dTechs"></div>
+      </div>
+      <div>
+        <p class="detail__label">项目链接</p>
+        <div class="detail__links" id="dLinks"></div>
+      </div>
+      <div>
+        <p class="detail__label">信息</p>
+        <dl class="about__facts" id="dMeta"></dl>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="detail__nav" id="dNav" aria-label="项目间导航"></nav>
+</main>
+
+<!-- ══════════ 页脚 ══════════ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span>© <span id="year">2026</span> 汤 · 作品集</span>
+    <nav class="footer__links" aria-label="页脚导航">
+      <a href="index.html">回到首页</a>
+      <a href="index.html#work">全部作品</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var WORKS = [{"id":"personal-agent-toolkit","title":"个人代理工具箱","repo":"personal-agent-toolkit","cat":"tool","catLabel":"桌面工具","year":"2026","desc":"把「Personal Agent 邪修玩法」落地成能直接跑的本地工具。账单自动续费扫描、冷却队列、跨维度成本核算。","highlights":["按「固定商户 + 固定周期 + 固定金额」扫描疑似自动续费，算出年化成本","冷却队列：候选全在冷静期内就保持静默，不制造信息垃圾","跨维度成本核算：电价 + 优惠 + 停车费折算，单维最便宜的常常不是最省的","全程本地运行，真实账单被 .gitignore 排除，状态存在 .agent_state/"],"tech":["Python","标准库","CSV 分析","MCP 配置"],"demo":"https://github.com/uahz/personal-agent-toolkit","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/personal-agent-toolkit","cover":"s1","featured":true,"stars":0},{"id":"xiaoyuzhou-web","title":"小宇宙播客客户端","repo":"xiaoyuzhou-web","cat":"web","catLabel":"网页应用","year":"2026","desc":"小宇宙播客客户端搬进浏览器。三栏 macOS 布局 + 液态玻璃，数据实时同步、真实音频播放，单文件零构建。","highlights":["7644 档节目全库目录，排行榜与搜索直接基于它，不是构建时的静态快照","真实音频流式播放，倍速 / 后退 15s / 进度拖拽 / 自动续下一集","封面主色构建时离线算好写入数据，运行时 canvas 取色仅作兜底","不内置假登录：跨域受限的接口需要服务端代理才能接"],"tech":["HTML","Web Audio","Canvas","Electron"],"demo":"https://workbuddy.link/p/zbiqxybWkdMKOmjYbiovHJ","demoLabel":"在线体验","repoUrl":"https://github.com/uahz/xiaoyuzhou-web","cover":"s2","featured":false,"stars":0},{"id":"LPdf","title":"LPdf 阅读器","repo":"LPdf","cat":"mobile","catLabel":"移动端","year":"2026","desc":"安卓 PDF 阅读器。Kotlin + Compose + PDFium，iOS 26 液态玻璃风格，AGSL 实时折射。","highlights":["超长页按 tile 分块渲染，峰值内存与总页数解耦，不再 OOM","液态玻璃真做对了：折射 + 色散 + 模糊 + 边缘高光，内容层不做折射","251 项单测 + Lint 0 error 进 CI，纯函数化的页面适配有可执行断言","只发布签名 release 包，debug 包不对外"],"tech":["Kotlin","Jetpack Compose","PDFium","AGSL"],"demo":"https://github.com/uahz/LPdf","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/LPdf","cover":"s3","featured":false,"stars":0},{"id":"pdfmate-web","title":"PDFMate","repo":"pdfmate-web","cat":"tool","catLabel":"桌面工具","year":"2026","desc":"PDF 全格式转换工具。Windows 桌面端 + Web + Android + iOS，全程本地处理，文件不上传。","highlights":["四端同源：网页端纯前端零上传，桌面端走本地引擎双方案","桌面端写盘用一次性令牌 + 路径边界校验，IPC 通道白名单","Actions 自动构建 APK / IPA 并更新 Release 附件"],"tech":["JavaScript","Electron","Capacitor","LibreOffice"],"demo":"https://uahz.github.io/pdfmate-web/","demoLabel":"在线体验","repoUrl":"https://github.com/uahz/pdfmate-web","cover":"s4","featured":true,"stars":0},{"id":"shoutu","title":"守土","repo":"shoutu","cat":"game","catLabel":"游戏","year":"2026","desc":"原创架空城市治理模拟游戏。单文件网页版 + Windows 桌面版，平衡与反噬系统驱动。","highlights":["资源循环系统：任何产出都会反过来削弱你的底盘","一局 30 分钟内的完整节奏，长线重开有隐藏变量","网页与桌面共用同一份核心逻辑代码"],"tech":["HTML","JavaScript","Canvas","PyWebView"],"demo":"https://uahz.github.io/shoutu/","demoLabel":"在线体验","repoUrl":"https://github.com/uahz/shoutu","cover":"s5","featured":true,"stars":0},{"id":"perlin-flow-field","title":"粒子流场","repo":"perlin-flow-field","cat":"art","catLabel":"生成艺术","year":"2026","desc":"Perlin 噪声粒子流场生成艺术。单文件、零依赖、帧率无上限，按帧率自适应粒子密度。","highlights":["用 Perlin 噪声场驱动粒子，湍流形态自然不重复","帧率优先策略：掉帧时自动降密度而不是降画质","4.6KB 单文件，可以直接贴进任何页面"],"tech":["HTML","Canvas","Perlin Noise","粒子系统"],"demo":"https://uahz.github.io/perlin-flow-field/","demoLabel":"在线体验","repoUrl":"https://github.com/uahz/perlin-flow-field","cover":"s6","featured":true,"stars":0},{"id":"life-simulator","title":"现实人生模拟器","repo":"life-simulator","cat":"game","catLabel":"游戏","year":"2026","desc":"一次出生，万种人生。PyQt6 反设计桌面版（Windows EXE）+ 单文件网页版在线试玩。","highlights":["反设计路线：界面故意做旧，操作本身就是游戏内容","桌面版与网页版双端，一次开发两处运行","随机人生事件池 300+ 条，分支互斥且不重复"],"tech":["Python","PyQt6","HTML","SQLite"],"demo":"https://uahz.github.io/life-simulator/","demoLabel":"在线体验","repoUrl":"https://github.com/uahz/life-simulator","cover":"s7","featured":false,"stars":0},{"id":"time-capsule-letter","title":"时间胶囊","repo":"time-capsule-letter","cat":"web","catLabel":"网页应用","year":"2026","desc":"写一封信，设定一个未来日期。可导出 ICS 日历文件，到点系统提醒；离线可用、PWA 可安装。","highlights":["生成标准 ICS 文件，导入系统日历后由系统负责提醒","本地信筒自动存档最近 10 封，可回看可删除","断网可用，数据全部留在本地"],"tech":["HTML","ICS","PWA","IndexedDB"],"demo":"https://github.com/uahz/time-capsule-letter","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/time-capsule-letter","cover":"s8","featured":false,"stars":0},{"id":"future-me-letter","title":"给未来的信","repo":"future-me-letter","cat":"web","catLabel":"网页应用","year":"2026","desc":"填几个问题，让未来的你回一封信。零 API、8 套模板、四种语气，卡片可导出 1080px 竖图。","highlights":["8 套高质量模板 × 温和/犀利/诗意/朋友四种语气","零 API 调用，生成逻辑全在浏览器本地完成","一键导出 1080×1920 竖版分享图"],"tech":["HTML","Canvas","PWA","模板引擎"],"demo":"https://github.com/uahz/future-me-letter","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/future-me-letter","cover":"s9","featured":false,"stars":0},{"id":"year-progress","title":"年度进度","repo":"year-progress","cat":"web","catLabel":"网页应用","year":"2026","desc":"打开即看今天是一年中第几天、已过百分比、还剩多少天。SVG 环形动画，每日一句，一键生成分享卡。","highlights":["SVG 环形进度条带渐变描边与实时动画","可安装到手机桌面，离线也能看当天进度","每日一句 + 一键生成分享卡"],"tech":["HTML","SVG","PWA","Canvas"],"demo":"https://github.com/uahz/year-progress","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/year-progress","cover":"s10","featured":false,"stars":0},{"id":"token-monitor","title":"Token 监视器","repo":"token-monitor","cat":"tool","catLabel":"桌面工具","year":"2026","desc":"实时 Token 用量仪表盘。纯 Python 本地服务 + 浏览器面板，四项指标实时刷新，兼容任意 Agent 客户端。","highlights":["兼容 Loomy / Cursor / Claude Code / Windsurf 等任意客户端","Input / Output / Total / Speed 四项指标实时刷新","纯本地运行，不上传任何数据"],"tech":["Python","HTTP Server","WebSocket","Canvas"],"demo":"https://github.com/uahz/token-monitor","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/token-monitor","cover":"s11","featured":false,"stars":0},{"id":"screen-auditor","title":"屏幕时间审计","repo":"screen-auditor","cat":"tool","catLabel":"桌面工具","year":"2026","desc":"你的一天，尽在一张热力图。纯本地零依赖的 Windows 屏幕时间被动审计器。","highlights":["被动审计，不注入、不截屏内容，只记录窗口标题与时长","24 小时热力图，一眼看出自己什么时候在摸鱼","数据全部留在本机 SQLite，不做任何外发"],"tech":["Python","PySide6","热力图","本地存储"],"demo":"https://github.com/uahz/screen-auditor","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/screen-auditor","cover":"s12","featured":false,"stars":0},{"id":"zcode-conversation-cleaner","title":"对话清理器","repo":"zcode-conversation-cleaner","cat":"tool","catLabel":"桌面工具","year":"2026","desc":"扫描并彻底删除 Zcode 客户端的对话记录与全部关联数据，不留残留。带预览、批量删除与误删恢复。","highlights":["扫描顺序化：先列内容再删，避免误操作","覆盖消息 / 产物 / 缓存 / 日志四类关联数据","误删走回收站机制，24 小时内可恢复"],"tech":["Python","PySide6","Qt6","深色模式"],"demo":"https://github.com/uahz/zcode-conversation-cleaner","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/zcode-conversation-cleaner","cover":"s13","featured":false,"stars":1},{"id":"universal-parser","title":"万能解析器","repo":"universal-parser","cat":"tool","catLabel":"桌面工具","year":"2026","desc":"解析一切：文本、文件、图片、二进制、代码、编码。PySide6 界面 + 纯 Python 解析引擎。","highlights":["自动识别编码，GBK / UTF-8 / UTF-16 混排不乱码","拖文件即出结果，支持十六进制与结构化树两种视图","纯引擎设计，界面与解析逻辑完全解耦"],"tech":["Python","PySide6","正则","编码检测"],"demo":"https://github.com/uahz/universal-parser","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/universal-parser","cover":"s14","featured":false,"stars":0},{"id":"blueprint-flow","title":"蓝图工坊","repo":"blueprint-flow","cat":"tool","catLabel":"桌面工具","year":"2026","desc":"零依赖单文件离线可视化流程编辑器。拖拽连线定义流程，导出 JSON，可离线使用。","highlights":["单文件 165KB，断网状态下功能完整","节点拖拽、连线、参数编辑全靠原生事件","流程可导出 JSON，方便版本管理与分享"],"tech":["HTML","Canvas","拖拽","JSON"],"demo":"https://github.com/uahz/blueprint-flow","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/blueprint-flow","cover":"s15","featured":false,"stars":0},{"id":"h5-duel","title":"同屏对决","repo":"h5-duel","cat":"game","catLabel":"游戏","year":"2026","desc":"本地双人小游戏合集。一台电脑两个人，键盘左右分区同屏竞技。","highlights":["键盘左右分区设计，一台电脑两个人直接玩","多款小游戏共用一套输入与计分框架","零依赖单文件，局域网内拷贝即玩"],"tech":["HTML","Canvas","双人同屏","键盘输入"],"demo":"https://uahz.github.io/h5-duel/","demoLabel":"在线体验","repoUrl":"https://github.com/uahz/h5-duel","cover":"s16","featured":false,"stars":0},{"id":"h5-star-game","title":"星愿收集者","repo":"h5-star-game","cat":"game","catLabel":"游戏","year":"2026","desc":"零依赖单文件 H5 小游戏。收集散落的星星，躲开会吃掉星星的黑洞。","highlights":["星星拖尾与黑洞吸入动画，手感顺滑","难度随分数平滑上升，不存在突然暴毙","单文件 11KB，社交平台传播友好"],"tech":["HTML","Canvas","粒子效果","单文件"],"demo":"https://uahz.github.io/h5-star-game/","demoLabel":"在线体验","repoUrl":"https://github.com/uahz/h5-star-game","cover":"s17","featured":false,"stars":1},{"id":"live-stream-ops","title":"直播运营工具集","repo":"live-stream-ops","cat":"skill","catLabel":"Skill","year":"2026","desc":"直播全流程工具集。脚本生成 / 回放拆解 / 配品表 / 憋单逼单话术 / 切片挖掘 / 场控 SOP。","highlights":["覆盖开播前 / 中场 / 下播后的完整链路","回放拆解可自动定位高转化片段，直接产出切片清单","已封装为可复用 Skill，开箱即用"],"tech":["Python","WorkBuddy Skill","文本分析","直播运营"],"demo":"https://github.com/uahz/live-stream-ops","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/live-stream-ops","cover":"s18","featured":false,"stars":3},{"id":"short-video-bgm","title":"短视频配乐","repo":"short-video-bgm","cat":"skill","catLabel":"Skill","year":"2026","desc":"短视频 BGM 与音效匹配工具。免版权配乐 / 卡点音效 / 热门原声追踪 / 商用风险扫描。","highlights":["自动计算卡点时间戳，输出可直接照抄的时间轴","配乐商用风险逐条标注，避免上线后下架","已封装为可复用 Skill，附带选曲决策依据"],"tech":["Python","WorkBuddy Skill","音频分析","卡点计算"],"demo":"https://github.com/uahz/short-video-bgm","demoLabel":"仓库源码","repoUrl":"https://github.com/uahz/short-video-bgm","cover":"s19","featured":false,"stars":0}];
+  var COVERS = {"s1":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E9EBEE%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22280%22%20width%3D%2246%22%20height%3D%22150%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22188%22%20y%3D%22233%22%20width%3D%2228%22%20height%3D%22197%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22186%22%20width%3D%2262%22%20height%3D%22244%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22322%22%20y%3D%22139%22%20width%3D%2234%22%20height%3D%22291%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22378%22%20y%3D%2292%22%20width%3D%2254%22%20height%3D%22338%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22454%22%20y%3D%2245%22%20width%3D%2224%22%20height%3D%22385%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22500%22%20y%3D%22258%22%20width%3D%2270%22%20height%3D%22172%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22592%22%20y%3D%22211%22%20width%3D%2238%22%20height%3D%22219%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22652%22%20y%3D%22164%22%20width%3D%2230%22%20height%3D%22266%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22704%22%20y%3D%22117%22%20width%3D%2258%22%20height%3D%22313%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22784%22%20y%3D%2270%22%20width%3D%2226%22%20height%3D%22360%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22832%22%20y%3D%2223%22%20width%3D%2244%22%20height%3D%22407%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22290%22%20width%3D%2238%22%20height%3D%22140%22%20rx%3D%226%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s2":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E6E9ED%22%2F%3E%3Ccircle%20cx%3D%22387%22%20cy%3D%22400%22%20r%3D%2284%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.130%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22126%20336%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-109%20387%20400%29%22%2F%3E%3Ccircle%20cx%3D%22387%22%20cy%3D%22400%22%20r%3D%22136%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.114%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22204%20544%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-109%20387%20400%29%22%2F%3E%3Ccircle%20cx%3D%22387%22%20cy%3D%22400%22%20r%3D%22188%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.098%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22282%20752%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-109%20387%20400%29%22%2F%3E%3Ccircle%20cx%3D%22387%22%20cy%3D%22400%22%20r%3D%22240%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.082%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22360%20960%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-109%20387%20400%29%22%2F%3E%3Ccircle%20cx%3D%22387%22%20cy%3D%22400%22%20r%3D%22292%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.066%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22438%201168%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-109%20387%20400%29%22%2F%3E%3Ccircle%20cx%3D%22387%22%20cy%3D%22400%22%20r%3D%2234%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s3":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E7EAEF%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22342%22%20cy%3D%22296%22%20r%3D%2222%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s4":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E6E9EC%22%2F%3E%3Crect%20x%3D%22170%22%20y%3D%22150%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.88%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22209%22%20y%3D%22177%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.90%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22248%22%20y%3D%22205%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.91%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22287%22%20y%3D%22232%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.93%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22188%22%20width%3D%22132%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22222%22%20width%3D%22220%22%20height%3D%2210%22%20rx%3D%225%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.16%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22250%22%20width%3D%22186%22%20height%3D%2210%22%20rx%3D%225%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.12%22%2F%3E%3C%2Fsvg%3E","s5":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E8EBEE%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22250%22%20ry%3D%22110%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.140%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%286%20400%20300%29%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22195%22%20ry%3D%2286%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.112%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%2828%20400%20300%29%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22140%22%20ry%3D%2262%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.084%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%2850%20400%20300%29%22%2F%3E%3Ccircle%20cx%3D%22400%22%20cy%3D%22300%22%20r%3D%2226%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3Ccircle%20cx%3D%22556%22%20cy%3D%22244%22%20r%3D%2213%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.26%22%2F%3E%3Ccircle%20cx%3D%22272%22%20cy%3D%22372%22%20r%3D%2213%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.26%22%2F%3E%3C%2Fsvg%3E","s6":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E7E9ED%22%2F%3E%3Crect%20x%3D%22130%22%20y%3D%22325%22%20width%3D%2270%22%20height%3D%22145%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.162%22%2F%3E%3Crect%20x%3D%22222%22%20y%3D%22273%22%20width%3D%2270%22%20height%3D%22197%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22221%22%20width%3D%2270%22%20height%3D%22249%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.136%22%2F%3E%3Crect%20x%3D%22406%22%20y%3D%22169%22%20width%3D%2270%22%20height%3D%22301%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.162%22%2F%3E%3Crect%20x%3D%22498%22%20y%3D%22377%22%20width%3D%2270%22%20height%3D%2293%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Crect%20x%3D%22590%22%20y%3D%22325%22%20width%3D%2270%22%20height%3D%22145%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.136%22%2F%3E%3Crect%20x%3D%22590%22%20y%3D%22325%22%20width%3D%2270%22%20height%3D%22145%22%20rx%3D%2210%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s7":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E9EBEE%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%2294%22%20width%3D%2246%22%20height%3D%22336%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22188%22%20y%3D%2247%22%20width%3D%2228%22%20height%3D%22383%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22260%22%20width%3D%2262%22%20height%3D%22170%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22322%22%20y%3D%22213%22%20width%3D%2234%22%20height%3D%22217%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22378%22%20y%3D%22166%22%20width%3D%2254%22%20height%3D%22264%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22454%22%20y%3D%22119%22%20width%3D%2224%22%20height%3D%22311%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22500%22%20y%3D%2272%22%20width%3D%2270%22%20height%3D%22358%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22592%22%20y%3D%2225%22%20width%3D%2238%22%20height%3D%22405%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22652%22%20y%3D%22238%22%20width%3D%2230%22%20height%3D%22192%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22704%22%20y%3D%22191%22%20width%3D%2258%22%20height%3D%22239%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22784%22%20y%3D%22144%22%20width%3D%2226%22%20height%3D%22286%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22832%22%20y%3D%2297%22%20width%3D%2244%22%20height%3D%22333%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22198%22%20y%3D%22290%22%20width%3D%2238%22%20height%3D%22140%22%20rx%3D%226%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s8":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E6E9ED%22%2F%3E%3Ccircle%20cx%3D%22369%22%20cy%3D%22400%22%20r%3D%2284%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.130%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22126%20336%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-55%20369%20400%29%22%2F%3E%3Ccircle%20cx%3D%22369%22%20cy%3D%22400%22%20r%3D%22136%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.114%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22204%20544%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-55%20369%20400%29%22%2F%3E%3Ccircle%20cx%3D%22369%22%20cy%3D%22400%22%20r%3D%22188%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.098%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22282%20752%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-55%20369%20400%29%22%2F%3E%3Ccircle%20cx%3D%22369%22%20cy%3D%22400%22%20r%3D%22240%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.082%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22360%20960%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-55%20369%20400%29%22%2F%3E%3Ccircle%20cx%3D%22369%22%20cy%3D%22400%22%20r%3D%22292%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.066%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22438%201168%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-55%20369%20400%29%22%2F%3E%3Ccircle%20cx%3D%22369%22%20cy%3D%22400%22%20r%3D%2234%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s9":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E7EAEF%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22348%22%20cy%3D%22334%22%20r%3D%2222%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s10":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E6E9EC%22%2F%3E%3Crect%20x%3D%22170%22%20y%3D%22150%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.88%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22209%22%20y%3D%22177%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.90%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22248%22%20y%3D%22205%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.91%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22287%22%20y%3D%22232%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.93%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22188%22%20width%3D%22132%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22222%22%20width%3D%22220%22%20height%3D%2210%22%20rx%3D%225%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.16%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22250%22%20width%3D%22186%22%20height%3D%2210%22%20rx%3D%225%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.12%22%2F%3E%3C%2Fsvg%3E","s11":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E8EBEE%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22250%22%20ry%3D%22110%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.140%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%2842%20400%20300%29%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22195%22%20ry%3D%2286%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.112%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%2864%20400%20300%29%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22140%22%20ry%3D%2262%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.084%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%2886%20400%20300%29%22%2F%3E%3Ccircle%20cx%3D%22400%22%20cy%3D%22300%22%20r%3D%2226%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3Ccircle%20cx%3D%22556%22%20cy%3D%22244%22%20r%3D%2213%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.26%22%2F%3E%3Ccircle%20cx%3D%22272%22%20cy%3D%22372%22%20r%3D%2213%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.26%22%2F%3E%3C%2Fsvg%3E","s12":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E7E9ED%22%2F%3E%3Crect%20x%3D%22130%22%20y%3D%22223%22%20width%3D%2270%22%20height%3D%22247%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.162%22%2F%3E%3Crect%20x%3D%22222%22%20y%3D%22171%22%20width%3D%2270%22%20height%3D%22299%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22379%22%20width%3D%2270%22%20height%3D%2291%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.136%22%2F%3E%3Crect%20x%3D%22406%22%20y%3D%22327%22%20width%3D%2270%22%20height%3D%22143%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.162%22%2F%3E%3Crect%20x%3D%22498%22%20y%3D%22275%22%20width%3D%2270%22%20height%3D%22195%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Crect%20x%3D%22590%22%20y%3D%22223%22%20width%3D%2270%22%20height%3D%22247%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.136%22%2F%3E%3Crect%20x%3D%22590%22%20y%3D%22223%22%20width%3D%2270%22%20height%3D%22247%22%20rx%3D%2210%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s13":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E9EBEE%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22168%22%20width%3D%2246%22%20height%3D%22262%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22188%22%20y%3D%22121%22%20width%3D%2228%22%20height%3D%22309%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%2274%22%20width%3D%2262%22%20height%3D%22356%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22322%22%20y%3D%2227%22%20width%3D%2234%22%20height%3D%22403%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22378%22%20y%3D%22240%22%20width%3D%2254%22%20height%3D%22190%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22454%22%20y%3D%22193%22%20width%3D%2224%22%20height%3D%22237%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22500%22%20y%3D%22146%22%20width%3D%2270%22%20height%3D%22284%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22592%22%20y%3D%2299%22%20width%3D%2238%22%20height%3D%22331%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22652%22%20y%3D%2252%22%20width%3D%2230%22%20height%3D%22378%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22704%22%20y%3D%22265%22%20width%3D%2258%22%20height%3D%22165%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22784%22%20y%3D%22218%22%20width%3D%2226%22%20height%3D%22212%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22832%22%20y%3D%22171%22%20width%3D%2244%22%20height%3D%22259%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22276%22%20y%3D%22290%22%20width%3D%2238%22%20height%3D%22140%22%20rx%3D%226%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s14":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E6E9ED%22%2F%3E%3Ccircle%20cx%3D%22441%22%20cy%3D%22400%22%20r%3D%2284%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.130%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22126%20336%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-1%20441%20400%29%22%2F%3E%3Ccircle%20cx%3D%22441%22%20cy%3D%22400%22%20r%3D%22136%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.114%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22204%20544%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-1%20441%20400%29%22%2F%3E%3Ccircle%20cx%3D%22441%22%20cy%3D%22400%22%20r%3D%22188%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.098%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22282%20752%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-1%20441%20400%29%22%2F%3E%3Ccircle%20cx%3D%22441%22%20cy%3D%22400%22%20r%3D%22240%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.082%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22360%20960%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-1%20441%20400%29%22%2F%3E%3Ccircle%20cx%3D%22441%22%20cy%3D%22400%22%20r%3D%22292%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.066%22%20stroke-width%3D%2214%22%20stroke-dasharray%3D%22438%201168%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%28-1%20441%20400%29%22%2F%3E%3Ccircle%20cx%3D%22441%22%20cy%3D%22400%22%20r%3D%2234%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s15":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E7EAEF%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22150%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22150%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22150%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22212%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22212%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22212%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22274%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22274%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22274%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22336%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22336%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22336%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22198%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22266%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22334%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22402%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.206%22%2F%3E%3Ccircle%20cx%3D%22470%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Ccircle%20cx%3D%22538%22%20cy%3D%22398%22%20r%3D%223.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.134%22%2F%3E%3Ccircle%20cx%3D%22606%22%20cy%3D%22398%22%20r%3D%225.5%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.158%22%2F%3E%3Ccircle%20cx%3D%22674%22%20cy%3D%22398%22%20r%3D%228.0%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.182%22%2F%3E%3Ccircle%20cx%3D%22354%22%20cy%3D%22372%22%20r%3D%2222%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s16":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E6E9EC%22%2F%3E%3Crect%20x%3D%22170%22%20y%3D%22150%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.88%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22209%22%20y%3D%22177%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.90%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22248%22%20y%3D%22205%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.91%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22287%22%20y%3D%22232%22%20width%3D%22330%22%20height%3D%22230%22%20rx%3D%2214%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%220.93%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22188%22%20width%3D%22132%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22222%22%20width%3D%22220%22%20height%3D%2210%22%20rx%3D%225%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.16%22%2F%3E%3Crect%20x%3D%22204%22%20y%3D%22250%22%20width%3D%22186%22%20height%3D%2210%22%20rx%3D%225%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.12%22%2F%3E%3C%2Fsvg%3E","s17":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E8EBEE%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22250%22%20ry%3D%22110%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.140%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%2878%20400%20300%29%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22195%22%20ry%3D%2286%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.112%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%28100%20400%20300%29%22%2F%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22300%22%20rx%3D%22140%22%20ry%3D%2262%22%20fill%3D%22none%22%20stroke%3D%22%231D1D1F%22%20stroke-opacity%3D%220.084%22%20stroke-width%3D%221.6%22%20transform%3D%22rotate%28122%20400%20300%29%22%2F%3E%3Ccircle%20cx%3D%22400%22%20cy%3D%22300%22%20r%3D%2226%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3Ccircle%20cx%3D%22556%22%20cy%3D%22244%22%20r%3D%2213%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.26%22%2F%3E%3Ccircle%20cx%3D%22272%22%20cy%3D%22372%22%20r%3D%2213%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.26%22%2F%3E%3C%2Fsvg%3E","s18":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E7E9ED%22%2F%3E%3Crect%20x%3D%22130%22%20y%3D%22381%22%20width%3D%2270%22%20height%3D%2289%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.162%22%2F%3E%3Crect%20x%3D%22222%22%20y%3D%22329%22%20width%3D%2270%22%20height%3D%22141%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22277%22%20width%3D%2270%22%20height%3D%22193%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.136%22%2F%3E%3Crect%20x%3D%22406%22%20y%3D%22225%22%20width%3D%2270%22%20height%3D%22245%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.162%22%2F%3E%3Crect%20x%3D%22498%22%20y%3D%22173%22%20width%3D%2270%22%20height%3D%22297%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.110%22%2F%3E%3Crect%20x%3D%22590%22%20y%3D%22381%22%20width%3D%2270%22%20height%3D%2289%22%20rx%3D%2210%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.136%22%2F%3E%3Crect%20x%3D%22590%22%20y%3D%22381%22%20width%3D%2270%22%20height%3D%2289%22%20rx%3D%2210%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E","s19":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23E9EBEE%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22242%22%20width%3D%2246%22%20height%3D%22188%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22188%22%20y%3D%22195%22%20width%3D%2228%22%20height%3D%22235%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22148%22%20width%3D%2262%22%20height%3D%22282%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22322%22%20y%3D%22101%22%20width%3D%2234%22%20height%3D%22329%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22378%22%20y%3D%2254%22%20width%3D%2254%22%20height%3D%22376%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22454%22%20y%3D%22267%22%20width%3D%2224%22%20height%3D%22163%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22500%22%20y%3D%22220%22%20width%3D%2270%22%20height%3D%22210%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22592%22%20y%3D%22173%22%20width%3D%2238%22%20height%3D%22257%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22652%22%20y%3D%22126%22%20width%3D%2230%22%20height%3D%22304%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.100%22%2F%3E%3Crect%20x%3D%22704%22%20y%3D%2279%22%20width%3D%2258%22%20height%3D%22351%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.122%22%2F%3E%3Crect%20x%3D%22784%22%20y%3D%2232%22%20width%3D%2226%22%20height%3D%22398%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.144%22%2F%3E%3Crect%20x%3D%22832%22%20y%3D%22245%22%20width%3D%2244%22%20height%3D%22185%22%20rx%3D%226%22%20fill%3D%22%231D1D1F%22%20fill-opacity%3D%220.166%22%2F%3E%3Crect%20x%3D%22354%22%20y%3D%22290%22%20width%3D%2238%22%20height%3D%22140%22%20rx%3D%226%22%20fill%3D%22%23165DFF%22%20fill-opacity%3D%220.88%22%2F%3E%3C%2Fsvg%3E"};
+
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if(cls) n.className = cls;
+    if(text != null) n.textContent = text;
+    return n;
+  }
+  function get(id){ return document.getElementById(id); }
+
+  /* 从 ?id=xxx 定位项目 */
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get("id");
+  var idx = -1;
+  for(var i=0;i<WORKS.length;i++){ if(WORKS[i].id === id){ idx = i; break; } }
+  // 没带 id 或 id 无效 → 回首页作品区
+  if(idx < 0){ window.location.replace("index.html#work"); return; }
+
+  var w = WORKS[idx];
+  document.title = w.title + " · 汤";
+
+  get("dCat").textContent = w.catLabel + " · " + w.year;
+  get("dTitle").textContent = w.title;
+  get("dRepo").textContent = "github.com/uahz/" + w.repo;
+  get("dLead").textContent = w.desc;
+  get("dDesc").textContent = w.desc;
+
+  var img = get("dImg");
+  img.src = COVERS[w.cover];
+  img.alt = w.title + " 项目大图";
+  img.width = 800; img.height = 600;
+
+  var pts = get("dPoints");
+  w.highlights.forEach(function(t){ pts.appendChild(el("li", null, t)); });
+
+  var techs = get("dTechs");
+  w.tech.forEach(function(t){ techs.appendChild(el("span","tech", t)); });
+
+  /* 链接：在线体验（若有）+ 仓库源码，均为外链 */
+  var links = get("dLinks");
+  function addLink(href, label, primary){
+    var a = el("a", "detail__link" + (primary ? " detail__link--primary" : ""));
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.appendChild(el("span", null, label));
+    var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+    var attrs = ["width","height","viewBox","fill","stroke","stroke-width","stroke-linecap","stroke-linejoin","aria-hidden"];
+    var vals = ["15","15","0 0 24 24","none","currentColor","2","round","round","true"];
+    attrs.forEach(function(k,i2){ svg.setAttribute(k, vals[i2]); });
+    var p = document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute("d", primary ? "M7 17 17 7M9 7h8v8" : "M5 12h14M13 6l6 6-6 6");
+    svg.appendChild(p);
+    a.appendChild(svg);
+    links.appendChild(a);
+  }
+  var isSite = w.demo && w.demo.indexOf("github.com/") === -1;
+  if(isSite) addLink(w.demo, w.demoLabel, true);
+  addLink(w.repoUrl, "仓库源码", !isSite);
+
+  /* 信息表 */
+  var meta = get("dMeta");
+  [
+    ["分类", w.catLabel],
+    ["年份", w.year],
+    ["技术栈", w.tech.length + " 项"],
+    ["在线体验", isSite ? "有" : "—"],
+  ].forEach(function(pair){
+    var row = el("div","about__fact");
+    row.appendChild(el("dt", null, pair[0]));
+    row.appendChild(el("dd", null, pair[1]));
+    meta.appendChild(row);
+  });
+
+  /* 上 / 下一个项目 */
+  var nav = get("dNav");
+  function navItem(step, label, cls){
+    var j = idx + step;
+    if(j < 0 || j >= WORKS.length) return;
+    var a = el("a", cls || "");
+    a.href = "project.html?id=" + encodeURIComponent(WORKS[j].id);
+    a.appendChild(el("span", null, label));
+    a.appendChild(el("b", null, WORKS[j].title));
+    nav.appendChild(a);
+  }
+  navItem(-1, "上一个");
+  navItem(1, "下一个", "is-next");
+
+  /* 导航滚动态 + 汉堡 */
+  var navEl = get("nav");
+  var navToggle = get("navToggle");
+  var navMenu = get("navMenu");
+  function onScroll(){ navEl.classList.toggle("is-stuck", window.scrollY > 8); }
+  onScroll();
+  window.addEventListener("scroll", onScroll, {passive:true});
+  if(navToggle && navMenu){
+    navToggle.addEventListener("click", function(){
+      var open = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!open));
+      navMenu.classList.toggle("is-open", !open);
+    });
+    navMenu.addEventListener("click", function(e){
+      if(e.target.closest("a")){
+        navToggle.setAttribute("aria-expanded","false");
+        navMenu.classList.remove("is-open");
+      }
+    });
+  }
+
+  /* 入场动效（与主页同一套） */
+  var revealEls = Array.prototype.slice.call(
+    document.querySelectorAll(".detail__head, .detail__hero, .detail__grid > *, .detail__nav"));
+  revealEls.forEach(function(e, i){
+    e.classList.add("reveal");
+    e.style.setProperty("--delay", (i % 4) * 90 + "ms");
+  });
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      });
+    }, {threshold:0.08, rootMargin:"0px 0px -40px 0px"});
+    revealEls.forEach(function(e){ io.observe(e); });
+  }else{
+    revealEls.forEach(function(e){ e.classList.add("is-in"); });
+  }
+
+  get("year").textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>
