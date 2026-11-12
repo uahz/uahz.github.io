@@ -41,7 +41,6 @@
   --c-body-glow-2:rgba(198,118,72,.032);
   --c-body-glow-3:rgba(22,93,255,.05);
   --c-body-veil:rgba(255,255,255,.55);
-  --c-grain-opacity:.045;
   --c-nav-bg:rgba(250,250,250,.72);
   --c-nav-bg-solid:rgba(250,250,250,.96);
   --c-hairline:rgba(29,29,31,.02);
@@ -150,7 +149,6 @@ html[data-theme="dark"]{
   --c-body-glow-2:rgba(44,96,168,.075);
   --c-body-glow-3:rgba(76,141,255,.07);
   --c-body-veil:rgba(120,160,255,.035);
-  --c-grain-opacity:.055;
   --c-nav-bg:rgba(12,12,14,.72);
   --c-nav-bg-solid:rgba(12,12,14,.97);
   --c-hairline:rgba(255,255,255,.035);
@@ -204,12 +202,12 @@ body::before{
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27160%27%20height%3D%27160%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.86%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27160%27%20height%3D%27160%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27160%27%20height%3D%27160%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.86%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27160%27%20height%3D%27160%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%270.055%27%2F%3E%3C%2Fsvg%3E");
   background-repeat:repeat;
   background-size:160px 160px;
-  opacity:var(--c-grain-opacity);
-  /* soft-light 让颗粒只在高光与暗部起作用，中间调几乎不动 —— 不会显脏 */
-  mix-blend-mode:soft-light;
+  /* 透明度已烘焙进 SVG 内部，元素不用 opacity ——
+     全屏固定层一旦有 opacity<1，滚动时每帧都要重新合成，实测掉到 33fps。
+     也不用 mix-blend-mode，同样要读下层像素。 */
 }
 h1,h2,h3,h4{
   font-family:var(--font-display);
