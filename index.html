@@ -161,7 +161,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .brand:hover .brand__dot{transform:scale(1.6)}
 .nav__menu{display:flex;align-items:center;gap:.35rem}
 .nav__link{
-  position:relative;padding:.5rem .8rem;border-radius:var(--r-sm);
+  position:relative;padding:.5rem .8rem;
+  /* 底部两角保持直角：否则 border-bottom 会沿着圆角向上弯成 U 形 */
+  border-radius:var(--r-sm) var(--r-sm) 0 0;
   font-size:var(--fs-sm);font-weight:500;color:var(--c-text-2);
   transition:color .24s var(--ease),background .24s var(--ease);
 }

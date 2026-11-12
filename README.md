@@ -27,13 +27,23 @@
 | 项 | 规范 |
 |---|---|
 | 配色 | 主色 `#165DFF`、背景 `#FAFAFA`、正文 `#1D1D1F`、次要文字 `#86868B`，全部收敛 `:root` |
-| 字体 | 标题 `Sora`（避开 Inter / Space Grotesk），正文 `Noto Sans SC`；系统 fallback，不加载字体文件 |
+| 字体 | **苹方（PingFang SC）优先，标题 700 粗体**。Windows 上按 `Noto Sans SC`（思源黑体 Bold）→ `HarmonyOS Sans SC` → `Microsoft YaHei` 回退；不加载任何字体文件 |
 | 布局 | 12 列栅格；Hero 7/5 分栏、主按钮在右下角；画廊 Bento 19 卡按 `6n+N` 循环跨度 7/5/8/4 + 垂直偏移 |
 | 圆角 | 统一 12px（`--r`），大容器 20px |
 | 阴影 | 低透明度柔和阴影 `--sh-1/2/3` |
 | 断点 | 375 / 768 / 1200；768 平板档两列、767 以下单列 + 汉堡 |
 | 背景 | 三层极淡径向渐变，无光斑 / 粒子 / 网格 |
 | 动效 | 全站唯一一套入场（`.reveal` + `--delay` 错峰）；hover 仅卡片上浮 4px + 封面 1.06 倍；纯 CSS |
+
+### 关于「苹方粗体」
+
+`--font-display` 第一位是 `"PingFang SC"`，所以 **macOS / iOS 上就是原生苹方 Bold**。
+Windows 没有苹方（Apple 系统字体，不可分发），按字体栈回退到 **Noto Sans SC Bold**
+—— 思源黑体，和苹方同属现代几何无衬线，字重 700 是真实 Bold 而非合成粗体。
+
+已用 CDP `CSS.getPlatformFontsForNode` 实测：Windows 上实际渲染字体为
+`Noto Sans SC`，字重 700。如果要在 Windows 上也显示苹方本身，
+只能内嵌字体文件（约 3–5 MB），会破坏「零外部依赖」，因此没有采用。
 
 ## 源码结构
 
