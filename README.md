@@ -62,12 +62,21 @@
 **无障碍**：`prefers-reduced-motion` 下所有动效关闭、粒子画布隐藏、进场内容直接显示。
 移动端 860px 以下汉堡菜单，粒子密度自动降低。
 
-## 本地预览
+## 预览与验收：直接看线上
+
+**不要起本地服务**（`python -m http.server` 那套已废弃）。这个仓库是归档站，
+线上地址就是唯一验收环境：
+
+- 主入口（一页全量 + 二级详情）→ <https://uahz.github.io/>
+- 归档页（暗色多页站，非入口）→ <https://uahz.github.io/work.html>
 
 ```bash
-python -m http.server 8900
-# 打开 http://127.0.0.1:8900/index.html
+node scripts/browser-check.cjs https://uahz.github.io   # 22 项，CDP 驱动 Edge
+node scripts/verify-live-bytes.cjs                      # 线上与本地字节级比对
+node scripts/check-not-base64.cjs https://uahz.github.io # 编码完整性
 ```
+
+`browser-check.cjs` 的第二个参数就是目标地址，直接传线上域名即可。
 
 ## 增删项目
 

@@ -2,14 +2,16 @@
  * CDP 浏览器验收：真实渲染 + 关键交互链路 + 运行时异常捕获。
  * 不装 playwright，用 Node 内置 WebSocket + Edge headless。
  *
- * 用法：node scripts/browser-check.cjs http://127.0.0.1:8910
+ * 默认直接验线上，不需要本地服务。
+ * 用法：node scripts/browser-check.cjs [baseUrl]
  */
 const { spawn } = require("child_process");
 const os = require("os");
 const path = require("path");
 const fs = require("fs");
 
-const BASE = process.argv[2] || "http://127.0.0.1:8910";
+// 去掉尾部斜杠，避免拼出 //work.html
+const BASE = (process.argv[2] || "https://uahz.github.io").replace(/\/+$/, "");
 const EDGE = [
   "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
   "C:/Program Files/Microsoft/Edge/Application/msedge.exe",
@@ -100,37 +102,11 @@ async function getWsUrl() {
       console.log("  " + (ok ? "✓" : "✗") + " " + name + (detail && !ok ? "  → " + detail : ""));
     };
 
-    /* ============ 首页 ============ */
-    console.log("\n=== 首页 ===");
-    await goto(BASE + "/index.html");
-
-    const title = await evalJS("document.title");
-    check("标题渲染", /个人项目站/.test(title || ""), title);
-
-    const projects = await evalJS("window.PROJECTS && window.PROJECTS.length");
-    check("数据源加载", projects === 19, "实际 " + projects);
-
-    const cards = await evalJS("document.querySelectorAll('.pcard').length");
-    check("精选卡片渲染", cards === 4, "实际 " + cards);
-
-    const stats = await evalJS("Array.from(document.querySelectorAll('[data-stats] [data-count]')).map(e=>e.dataset.count).join(',')");
-    check("统计数字自动填入", stats === "19,7,11,6", "实际 " + stats);
-
-    // 分类标签在 work.html（首页没有这个元素）
-    const homeCatTags = await evalJS("document.querySelectorAll('[data-cat-tags] .tag').length");
-    check("首页无分类标签容器（预期 0）", homeCatTags === 0, "实际 " + homeCatTags);
-
-    const canvasOn = await evalJS("document.getElementById('flow') && document.getElementById('flow').classList.contains('is-on')");
-    check("粒子画布已激活", canvasOn === true, String(canvasOn));
-
-    // 拆字：span 在 [data-split] 元素内部
-    const splitSpans = await evalJS("document.querySelectorAll('[data-split] span').length");
-    check("标题已拆字", splitSpans >= 8, "实际 " + splitSpans);
-
-    // 点击精选卡片链接应指向 GitHub
-    const href = await evalJS("(document.querySelector('.pcard__repo')||{}).getAttribute ? document.querySelector('.pcard__repo').getAttribute('href') : ''");
-    check("卡片仓库链接正确", /^https:\/\/github\.com\/uahz\//.test(href || ""), href);
-
+    /* ============ 归档页说明 ============
+       主入口 https://uahz.github.io/ 已改为「一页全量 + 二级详情」的新站，
+       验收脚本是 ../作品集单页/check.cjs。
+       本脚本只负责归档页（暗色多页站的 work.html / 404.html）。
+       首页断言已移除，避免对着新站误判。 */
     /* ============ 项目页 + 筛选 ============ */
     console.log("\n=== 项目页 ===");
     await goto(BASE + "/work.html");
@@ -169,7 +145,7 @@ async function getWsUrl() {
 
     /* ============ 导航跳转 ============ */
     console.log("\n=== 导航 ===");
-    await goto(BASE + "/index.html");
+    await goto(BASE + "/work.html");
     await evalJS("document.querySelector('a[href=\"work.html\"].btn').click()");
     await sleep(1400);
     const afterNav = await evalJS("location.pathname + location.search");
